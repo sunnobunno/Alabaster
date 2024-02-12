@@ -1,6 +1,6 @@
 using Articy.Unity.Interfaces;
 using Articy.Unity;
-using Assets.Dialogue_System.Controllers;
+using Alabaster.DialogueSystem.Controllers;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,122 +8,125 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.EventSystems;
 using System;
-using Assets.DialogueSystem;
-using Assets.Dialogue_System.Utilities;
-using DialogueSystem.Utilities;
+using Alabaster.DialogueSystem;
+using Alabaster.DialogueSystem.Utilities;
 
-public class ResponseChoiceBoxController02 : MonoBehaviour, IDialogueElementController<Branch>, IDialogueElementClickable
+namespace Alabaster.DialogueSystem.Controllers
 {
-    
-    public static event Action SendClickedSignal;
-
-    [Header("Content")]
-    [SerializeField] protected string content;
-
-    [Header("Child Objects")]
-    [SerializeField] protected GameObject contentObject;
-    
-    protected RectTransform rectTransform;
-    protected RectTransform contentRectTransform;
-    protected TextMeshProUGUI contentTextMesh;
-    private IDialogueElementControllerWithContent contentObjectController;
-
-    protected Branch branch;
-    protected bool componentReferencesSet = false;
-
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        SetElementComponentReferences();
-    }
-
-    // Update is called once per frame
-    void Update()
+    public class ResponseChoiceBoxController02 : MonoBehaviour, IDialogueElementController<Branch>, IDialogueElementClickable
     {
 
-    }
+        public static event Action SendClickedSignal;
 
-    #region Initialize Element
+        [Header("Content")]
+        [SerializeField] protected string content;
 
-    public void InitializeElement(Branch branch)
-    {
-        SetElementContent(branch);
-    }
+        [Header("Child Objects")]
+        [SerializeField] protected GameObject contentObject;
 
-    #endregion
+        protected RectTransform rectTransform;
+        protected RectTransform contentRectTransform;
+        protected TextMeshProUGUI contentTextMesh;
+        private IDialogueElementControllerWithContent contentObjectController;
 
+        protected Branch branch;
+        protected bool componentReferencesSet = false;
 
-    public void SetElementContent(Branch branch)
-    {
-        //Debug.Log(branch.BranchId);
+        // Start is called before the first frame update
+        private void Awake()
+        {
+            SetElementComponentReferences();
+        }
 
-        this.branch = branch;
+        // Update is called once per frame
+        void Update()
+        {
 
-        var branchTarget = branch.Target;
+        }
 
-        Debug.Log(ArticyConversions.IFlowObjectToText((ArticyObject)branchTarget));
+        #region Initialize Element
 
-        var objectWithText = branchTarget as IObjectWithText;
-        var text = objectWithText.Text;
+        public void InitializeElement(Branch branch)
+        {
+            SetElementContent(branch);
+        }
 
-        contentTextMesh.text = text;
-        content = text;
-
-        ResizeElement();
-    }
-
-
-    protected void SetElementComponentReferences()
-    {
-        rectTransform = gameObject.GetComponent<RectTransform>();
-        contentRectTransform = contentObject.GetComponent<RectTransform>();
-        contentTextMesh = contentObject.GetComponentInChildren<TextMeshProUGUI>();
-
-        contentObjectController = contentObject.GetComponent<IDialogueElementControllerWithContent>();
-
-        componentReferencesSet = true;
-    }
-
-    protected void SetElementSizeDelta()
-    {
-        contentObjectController.ResizeElement();
-        rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
-    }
+        #endregion
 
 
+        public void SetElementContent(Branch branch)
+        {
+            //Debug.Log(branch.BranchId);
+
+            this.branch = branch;
+
+            var branchTarget = branch.Target;
+
+            Debug.Log(ArticyConversions.IFlowObjectToText((ArticyObject)branchTarget));
+
+            var objectWithText = branchTarget as IObjectWithText;
+            var text = objectWithText.Text;
+
+            contentTextMesh.text = text;
+            content = text;
+
+            ResizeElement();
+        }
+
+
+        protected void SetElementComponentReferences()
+        {
+            rectTransform = gameObject.GetComponent<RectTransform>();
+            contentRectTransform = contentObject.GetComponent<RectTransform>();
+            contentTextMesh = contentObject.GetComponentInChildren<TextMeshProUGUI>();
+
+            contentObjectController = contentObject.GetComponent<IDialogueElementControllerWithContent>();
+
+            componentReferencesSet = true;
+        }
+
+        protected void SetElementSizeDelta()
+        {
+            contentObjectController.ResizeElement();
+            rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+        }
 
 
 
-    protected void InvokeSendClickedSignal()
-    {
-        SendClickedSignal?.Invoke();
-    }
 
-    public virtual void OnPointerEnter(PointerEventData eventData)
-    {
-        contentTextMesh.color = Color.yellow;
-    }
 
-    public virtual void OnPointerExit(PointerEventData eventData)
-    {
-        contentTextMesh.color = Color.gray;
-    }
+        protected void InvokeSendClickedSignal()
+        {
+            SendClickedSignal?.Invoke();
+        }
 
-    public virtual void OnPointerClick(PointerEventData eventData)
-    {
-        InvokeSendClickedSignal();
-    }
+        public virtual void OnPointerEnter(PointerEventData eventData)
+        {
+            contentTextMesh.color = Color.yellow;
+        }
 
-    public void ResizeElement()
-    {
-        SetElementSizeDelta();
-    }
+        public virtual void OnPointerExit(PointerEventData eventData)
+        {
+            contentTextMesh.color = Color.gray;
+        }
 
-    public void GreyOutElement(bool isGrey)
-    {
-        
+        public virtual void OnPointerClick(PointerEventData eventData)
+        {
+            InvokeSendClickedSignal();
+        }
+
+        public void ResizeElement()
+        {
+            SetElementSizeDelta();
+        }
+
+        public void GreyOutElement(bool isGrey)
+        {
+
+        }
     }
 }
+
 
 [CustomEditor(typeof(ResponseChoiceBoxController02))]
 public class ResponseChoiceBoxController02Editor : Editor

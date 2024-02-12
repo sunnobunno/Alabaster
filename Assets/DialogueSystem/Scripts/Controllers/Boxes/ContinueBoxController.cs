@@ -1,11 +1,9 @@
 using Articy.Unity;
-using Assets.DialogueSystem;
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.Dialogue_System.Controllers
+namespace Alabaster.DialogueSystem.Controllers
 {
     public class ContinueBoxController : MonoBehaviour, IDialogueElementClickable, IDialogueElementController<IFlowObject>
     {
@@ -14,8 +12,7 @@ namespace Assets.Dialogue_System.Controllers
 
         [Header("Content")]
         [SerializeField] private string content;
-
-        [Header("Child Element References")]
+        [Header("Child Objects")]
         [SerializeField] private GameObject contentObject;
 
         private RectTransform rectTransform;
@@ -31,7 +28,7 @@ namespace Assets.Dialogue_System.Controllers
 
         private void Start()
         {
-            contentObjectController.TextColor = Color.grey;
+            SetFields();
         }
 
         public void InitializeElement(IFlowObject aObject)
@@ -39,28 +36,22 @@ namespace Assets.Dialogue_System.Controllers
             SetContent(aObject);
         }
 
-
-
-        public void SetElementContent(string content)
-        {
-            //contentObjectController.Content = content;
-            //this.content = content;
-        }
+        
 
         public void SetContent(IFlowObject aObject)
         {
             //
         }
 
-        protected void SetReferences()
+        private void SetReferences()
         {
             rectTransform = gameObject.GetComponent<RectTransform>();
             contentObjectController = contentObject.GetComponent<IDialogueElementControllerWithContent>();
         }
 
-        protected void SetElementSizeDelta()
+        private void SetFields()
         {
-
+            contentObjectController.TextColor = Color.grey;
         }
 
 

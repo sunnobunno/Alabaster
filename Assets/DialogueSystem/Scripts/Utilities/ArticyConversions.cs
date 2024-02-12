@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DialogueSystem.Utilities
+namespace Alabaster.DialogueSystem.Utilities
 {
     public static class ArticyConversions
     {

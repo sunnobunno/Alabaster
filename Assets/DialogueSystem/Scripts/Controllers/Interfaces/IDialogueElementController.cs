@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.DialogueSystem
+namespace Alabaster.DialogueSystem
 {
     public interface IDialogueElementController<T>
     {

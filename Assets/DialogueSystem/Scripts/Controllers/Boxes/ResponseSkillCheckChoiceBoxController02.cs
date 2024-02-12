@@ -1,7 +1,7 @@
 using Articy.Unity;
 using Articy.Unity.Interfaces;
-using Assets.Dialogue_System.Controllers;
-using Assets.DialogueSystem;
+using Alabaster.DialogueSystem.Controllers;
+using Alabaster.DialogueSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,40 +11,44 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ResponseSkillCheckChoiceBoxController02 : ResponseChoiceBoxController02
+namespace Alabaster.DialogueSystem.Controllers
 {
-
-
-
-    public override void OnPointerEnter(PointerEventData eventData)
+    public class ResponseSkillCheckChoiceBoxController02 : ResponseChoiceBoxController02
     {
-        contentTextMesh.color = Color.white;
-        gameObject.GetComponent<Image>().color = Color.black;
-    }
 
-    public override void OnPointerExit(PointerEventData eventData)
-    {
-        contentTextMesh.color = Color.gray;
-        gameObject.GetComponent<Image>().color = Color.white;
-    }
 
-    public override void OnPointerClick(PointerEventData eventData)
-    {
-        InvokeSendClickedSignal();
-    }
 
-}
-
-[CustomEditor(typeof(ResponseSkillCheckChoiceBoxController02))]
-public class ResponseSkillCheckChoiceBoxController02Editor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        if (GUILayout.Button("Resize Box"))
+        public override void OnPointerEnter(PointerEventData eventData)
         {
-            Selection.activeGameObject.GetComponent<ResponseSkillCheckChoiceBoxController02>().ResizeElement();
+            contentTextMesh.color = Color.white;
+            gameObject.GetComponent<Image>().color = Color.black;
+        }
+
+        public override void OnPointerExit(PointerEventData eventData)
+        {
+            contentTextMesh.color = Color.gray;
+            gameObject.GetComponent<Image>().color = Color.white;
+        }
+
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            InvokeSendClickedSignal();
+        }
+
+    }
+
+    [CustomEditor(typeof(ResponseSkillCheckChoiceBoxController02))]
+    public class ResponseSkillCheckChoiceBoxController02Editor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+
+            if (GUILayout.Button("Resize Box"))
+            {
+                Selection.activeGameObject.GetComponent<ResponseSkillCheckChoiceBoxController02>().ResizeElement();
+            }
         }
     }
 }
+

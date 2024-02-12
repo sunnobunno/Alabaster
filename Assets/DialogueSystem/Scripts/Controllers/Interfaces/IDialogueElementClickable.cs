@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.EventSystems;
 
-namespace Assets.DialogueSystem
+namespace Alabaster.DialogueSystem
 {
     public interface IDialogueElementClickable : IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {

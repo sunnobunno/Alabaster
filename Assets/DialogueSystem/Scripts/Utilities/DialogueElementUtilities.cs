@@ -1,5 +1,4 @@
-﻿using Assets.Dialogue_System.Controllers;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Dialogue_System.Utilities
+namespace Alabaster.DialogueSystem.Utilities
 {
     
     
@@ -26,11 +25,11 @@ namespace Assets.Dialogue_System.Utilities
 
         public static void SetElementOffScreen(GameObject gameObject)
         {
-            //float screenHeight = DialogueUIController02.Instance.ScreenHeight;
+            float screenHeight = DialogueUIController.Instance.ScreenHeight;
             Vector3 elementLocalPosition = gameObject.GetComponent<RectTransform>().localPosition;
-            //Vector3 offScreenPosition = new(elementLocalPosition.x, elementLocalPosition.y - screenHeight);
+            Vector3 offScreenPosition = new(elementLocalPosition.x, elementLocalPosition.y - screenHeight);
 
-            //gameObject.GetComponent<RectTransform>().localPosition = offScreenPosition;
+            gameObject.GetComponent<RectTransform>().localPosition = offScreenPosition;
         }
 
         public static void EaseInElement(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
@@ -54,9 +53,9 @@ namespace Assets.Dialogue_System.Utilities
         {
             var childObject = GetChildElement(gameObject);
             var rectTransform = gameObject.GetComponent<RectTransform>();
-            //var elementWidth = DialogueUIController02.Instance.DialogueWidth;
+            var elementWidth = DialogueUIController.Instance.DialogueWidth;
             var elementHeight = GetObjectSizeDeltaY(childObject);
-            //rectTransform.sizeDelta = new Vector2(elementWidth, elementHeight);
+            rectTransform.sizeDelta = new Vector2(elementWidth, elementHeight);
         }
 
         public static float GetPreferredHeightOfElement(GameObject gameObject)
