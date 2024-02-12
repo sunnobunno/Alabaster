@@ -34,6 +34,11 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private Vector2 contentObjectInitialLocalPosition;
 
+        public TextBoxLargeImageAssets TextBoxImageAssets {
+            get => ((TextBoxLargeController)contentObjectController).TextBoxImageAssets;
+            set => ((TextBoxLargeController)contentObjectController).TextBoxImageAssets = value;
+        }
+
         public string Content
         {
             get => contentObjectController.Content;

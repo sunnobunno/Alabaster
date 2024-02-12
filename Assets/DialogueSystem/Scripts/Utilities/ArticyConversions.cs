@@ -26,5 +26,22 @@ namespace Alabaster.DialogueSystem.Utilities
 
             return title;
         }
+
+        public static string BranchToText(Branch branch)
+        {
+            var branchTarget = branch.Target;
+            var text = IFlowObjectToText((ArticyObject)branchTarget);
+
+            return text;
+        }
+
+        public static IFlowObject ArticyRefToIFlowObject(ArticyRef aRef)
+        {
+            var aObject = aRef.GetObject();
+
+            return aObject;
+        }
+
+
     }
 }

@@ -34,12 +34,12 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private void OnEnable()
         {
-            ResponseChoiceBoxController02.SendClickedSignal += ListenResponseSignal;
+            ChoiceBoxController.SendClickedSignal += ListenResponseSignal;
         }
 
         private void OnDisable()
         {
-            ResponseChoiceBoxController02.SendClickedSignal -= ListenResponseSignal;
+            ChoiceBoxController.SendClickedSignal -= ListenResponseSignal;
         }
 
         private void ListenResponseSignal()
@@ -97,7 +97,7 @@ namespace Alabaster.DialogueSystem.Controllers
             GameObject newResponseChoiceBox = InstantiateResponseChoiceBox();
             ParentDialogueElementToSelf(newResponseChoiceBox);
 
-            newResponseChoiceBox.GetComponent<ResponseChoiceBoxController02>().InitializeElement(branch);
+            newResponseChoiceBox.GetComponent<ChoiceBoxController>().InitializeElement(branch);
         }
 
         private GameObject InstantiateResponseChoiceBox()

@@ -48,6 +48,13 @@ namespace Alabaster.DialogueSystem.Controllers
         private Image bottomLeftObjectImage;
         private Image bottomRightObjectImage;
 
+        public TextBoxLargeImageAssets TextBoxImageAssets { get => textBoxImageAssets;
+            set
+                {
+                    textBoxImageAssets = value;
+                    SetTextBoxImageAssets();
+                }
+        }
 
         public string Content
         {

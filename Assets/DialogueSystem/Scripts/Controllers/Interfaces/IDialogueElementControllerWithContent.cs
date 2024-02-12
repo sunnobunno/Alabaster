@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Alabaster.DialogueSystem
 {
-    interface IDialogueElementControllerWithContent : IDialogueElementController<string>
+    public interface IDialogueElementControllerWithContent : IDialogueElementController<string>
     {
         public string Content { get; set; }
 

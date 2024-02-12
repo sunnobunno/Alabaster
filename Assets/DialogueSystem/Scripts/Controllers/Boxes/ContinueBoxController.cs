@@ -19,7 +19,6 @@ namespace Alabaster.DialogueSystem.Controllers
         private IDialogueElementControllerWithContent contentObjectController;
 
         private IFlowObject aObject;
-        private bool componentReferencesSet = false;
 
         private void Awake()
         {
@@ -67,7 +66,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Destroy(gameObject.transform.parent.gameObject);
+            //Destroy(gameObject.transform.parent.gameObject);
             SendClickedSignal?.Invoke();
         }
 

@@ -13,20 +13,20 @@ using UnityEngine.UI;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class ResponseSkillCheckChoiceBoxController02 : ResponseChoiceBoxController02
+    public class ResponseSkillCheckChoiceBoxController02 : ChoiceBoxController
     {
 
 
 
         public override void OnPointerEnter(PointerEventData eventData)
         {
-            contentTextMesh.color = Color.white;
+            contentObjectController.TextColor = Color.white;
             gameObject.GetComponent<Image>().color = Color.black;
         }
 
         public override void OnPointerExit(PointerEventData eventData)
         {
-            contentTextMesh.color = Color.gray;
+            contentObjectController.TextColor = Color.gray;
             gameObject.GetComponent<Image>().color = Color.white;
         }
 
