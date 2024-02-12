@@ -75,8 +75,8 @@ namespace Alabaster.DialogueSystem.Controllers
         private void SetElementContent(IFlowObject aObject)
         {
             var branches = DialogueLogicController.Instance.FlowPlayer.AvailableBranches;
-            Debug.Log(branches.Count);
-            Debug.Log(((ArticyObject)branches[0].Target).Id);
+            //Debug.Log(branches.Count);
+            //Debug.Log(((ArticyObject)branches[0].Target).Id);
             PopulateResponseChoiceList(branches);
         }
 
