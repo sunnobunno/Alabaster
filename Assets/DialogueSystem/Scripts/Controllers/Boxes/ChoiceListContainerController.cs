@@ -13,23 +13,26 @@ using UnityEngine;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class ResponseListContainerController02 : MonoBehaviour, IDialogueElementController<IFlowObject>
+    public class ChoiceListContainerController : MonoBehaviour, IDialogueElementController<IFlowObject>
     {
 
         public static event Action SendClickedSignal;
 
-        [SerializeField] private GameObject ResponseChoiceBoxPrefab;
+        [Header("Choice Box Prefab")]
+        [SerializeField] private GameObject ChoiceBoxPrefab;
+        [Header("Articy Object")]
+        [SerializeField] private ArticyRef testArticyRef;
+        
+        private RectTransform rectTransform;
+        private List<GameObject> choiceBoxObjects;
+        private List<IDialogueElementController<Branch>> choiceBoxControllers;
+        private List<Branch> branchList;
 
-        [HideInInspector] public RectTransform rectTransform;
-
-        [HideInInspector] public List<GameObject> responseBoxList;
-        [HideInInspector] public List<Branch> branchList;
-
-        private List<string> testResponses;
+        public ArticyRef TestArticyRef { get => testArticyRef; }
 
         void Awake()
         {
-            SetElementComponentReferences();
+            SetReferences();
         }
 
         private void OnEnable()
@@ -49,20 +52,18 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void InitializeElement(IFlowObject aObject)
         {
-            //testResponses = new List<string>
-            //{
-            //    "Hiiiiii.",
-            //    "This is a test.",
-            //    "Wow!!!"
-            //};
-
             SetElementContent(aObject);
             SetElementProperties();
         }
 
-        private void SetElementComponentReferences()
+        private void SetReferences()
         {
             rectTransform = gameObject.GetComponent<RectTransform>();
+        }
+
+        private void SetFields()
+        {
+
         }
 
         private void SetElementProperties()
@@ -73,10 +74,10 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private void SetElementContent(IFlowObject aObject)
         {
-            //var branches = DialogueLogicController02.Instance.FlowPlayer.AvailableBranches;
-            //Debug.Log(branches.Count);
-            //Debug.Log(((ArticyObject)branches[0].Target).Id);
-            //PopulateResponseChoiceList(branches);
+            var branches = DialogueLogicController.Instance.FlowPlayer.AvailableBranches;
+            Debug.Log(branches.Count);
+            Debug.Log(((ArticyObject)branches[0].Target).Id);
+            PopulateResponseChoiceList(branches);
         }
 
         public void ResizeElement()
@@ -102,7 +103,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private GameObject InstantiateResponseChoiceBox()
         {
-            GameObject newDialogueElement = GameObject.Instantiate(ResponseChoiceBoxPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            GameObject newDialogueElement = GameObject.Instantiate(ChoiceBoxPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
             //ParentDialogueElementToSelf(newDialogueElement);
             return newDialogueElement;
         }
@@ -118,7 +119,7 @@ namespace Alabaster.DialogueSystem.Controllers
         }
     }
 
-    [CustomEditor(typeof(ResponseListContainerController02))]
+    [CustomEditor(typeof(ChoiceListContainerController))]
     public class ResponseListContainerController02Editor : Editor
     {
         public override void OnInspectorGUI()
@@ -127,7 +128,11 @@ namespace Alabaster.DialogueSystem.Controllers
 
             if (GUILayout.Button("Resize Box"))
             {
-                Selection.activeGameObject.GetComponent<ResponseListContainerController02>().ResizeElement();
+                Selection.activeGameObject.GetComponent<ChoiceListContainerController>().ResizeElement();
+            }
+            if (GUILayout.Button("Initialize Element"))
+            {
+                Selection.activeGameObject.GetComponent<ChoiceListContainerController>().InitializeElement(Selection.activeGameObject.GetComponent<ChoiceListContainerController>().TestArticyRef.GetObject());
             }
         }
     }
