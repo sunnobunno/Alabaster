@@ -21,7 +21,7 @@ public class DialogueBoxController : MonoBehaviour, IDialogueElementController<I
     [SerializeField] private GameObject titleObject;
     [Header("Articy Object")]
     [SerializeField] private IFlowObject aObject;
-    [SerializeField] public ArticyRef aRef;
+    [SerializeField] public ArticyRef TestArticyRef;
 
     private RectTransform rectTransform;
 
@@ -145,7 +145,7 @@ public class DialogueBoxControllerEditor : Editor
         }
         if (GUILayout.Button("Initialize Box"))
         {
-            Selection.activeGameObject.GetComponent<DialogueBoxController>().InitializeElement(Selection.activeGameObject.GetComponent<DialogueBoxController>().aRef.GetObject());
+            Selection.activeGameObject.GetComponent<DialogueBoxController>().InitializeElement(Selection.activeGameObject.GetComponent<DialogueBoxController>().TestArticyRef.GetObject());
         }
         if (GUILayout.Button("Toggle Title Off"))
         {

@@ -46,15 +46,16 @@ public class TextBoxLargeController : MonoBehaviour, IDialogueElementControllerW
     private Image bottomRightObjectImage;
 
 
-    public string Content {
-        get
-        {
-            return textObjectController.Content;
-        }
-        set
-        {
-            textObjectController.Content = value;
-        }
+    public string Content
+    {
+        get => textObjectController.Content;
+        set => textObjectController.Content = value;
+    }
+
+    public UnityEngine.Color TextColor
+    {
+        get => textObjectController.TextColor;
+        set => textObjectController.TextColor = value;
     }
 
     private void Awake()

@@ -21,14 +21,15 @@ public class TextBoxSmallController : MonoBehaviour, IDialogueElementControllerW
 
     public string Content
     {
-        get
-        {
-            return contentObjectController.Content;
-        }
-        set
-        {
-            contentObjectController.Content = value;
-        }
+        get => contentObjectController.Content;
+        set => contentObjectController.Content = value;
+    }
+
+    public UnityEngine.Color TextColor
+    {
+        get => contentObjectController.TextColor;
+        set => contentObjectController.TextColor = value;
+
     }
 
     private void Awake()

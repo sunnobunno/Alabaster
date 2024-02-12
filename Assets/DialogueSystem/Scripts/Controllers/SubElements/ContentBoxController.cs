@@ -15,16 +15,15 @@ public class ContentBoxController : MonoBehaviour, IDialogueElementControllerWit
 
     public string Content
     {
-        get
-        {
-            return contentTextMesh.text;
-        }
-        set
-        {
-            //Debug.Log(value);
-            contentTextMesh.text = value;
-            //content = value;
-        }
+        get => contentTextMesh.text;
+        set => contentTextMesh.text = value;
+    }
+
+    public UnityEngine.Color TextColor
+    {
+        get => contentTextMesh.color;
+        set => contentTextMesh.color = value;
+
     }
 
     private void Awake()
