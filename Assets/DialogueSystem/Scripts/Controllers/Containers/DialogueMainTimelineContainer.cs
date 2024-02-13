@@ -117,14 +117,14 @@ namespace Alabaster.DialogueSystem.Controllers
             AddDialogueElement(DialogueBoxPrefab, aObject);
         }
 
-        public void AddContinueBox()
+        public void AddContinueBox(IFlowObject aObject)
         {
-
+            AddDialogueElement(ContinueBoxPrefab, aObject);
         }
 
-        public void AddChoiceList()
+        public void AddChoiceList(IFlowObject aObject)
         {
-
+            AddDialogueElement(ResponseListContainerPrefab, aObject);
         }
 
         // The goal of this class is to create an interface to perform all the requirements

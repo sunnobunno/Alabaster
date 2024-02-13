@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using Alabaster.DialogueSystem.Utilities;
 //using UnityEngine.Animations.Rigging;
 
 namespace Alabaster.DialogueSystem.Controllers
@@ -53,7 +54,6 @@ namespace Alabaster.DialogueSystem.Controllers
         public void InitializeElement(IFlowObject aObject)
         {
             SetElementContent(aObject);
-            SetElementProperties();
         }
 
         private void SetReferences()
@@ -66,23 +66,18 @@ namespace Alabaster.DialogueSystem.Controllers
 
         }
 
-        private void SetElementProperties()
-        {
-            //Debug.Log($"Dialogue Width: {DialogueUIController02.Instance.DialogueWidth}");
-            //rectTransform.sizeDelta = new Vector2(DialogueUIController02.Instance.DialogueWidth, rectTransform.sizeDelta.y);
-        }
-
         private void SetElementContent(IFlowObject aObject)
         {
             var branches = DialogueLogicController.Instance.FlowPlayer.AvailableBranches;
             //Debug.Log(branches.Count);
             //Debug.Log(((ArticyObject)branches[0].Target).Id);
             PopulateResponseChoiceList(branches);
+            ResizeElement();
         }
 
         public void ResizeElement()
         {
-            SetElementProperties();
+            rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
         }
 
         private void PopulateResponseChoiceList(IList<Branch> branches)

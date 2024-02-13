@@ -23,11 +23,12 @@ namespace Alabaster.DialogueSystem.Controllers
 
         void Awake()
         {
-            SetReferences();
+            
         }
 
         public void InitializeElement()
         {
+            SetReferences();
             ResizeContainer();
         }
 
