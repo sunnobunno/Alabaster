@@ -13,10 +13,10 @@ using Alabaster.DialogueSystem.Utilities;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class ChoiceBoxController : MonoBehaviour, IDialogueElementController<Branch>, IDialogueElementClickable
+    public class ChoiceBoxController : MonoBehaviour, IDialogueElementController<Branch>, IDialogueElementClickable<Branch>
     {
 
-        public static event Action SendClickedSignal;
+        public static event Action<Branch> SendClickedSignal;
 
         [Header("Content")]
         [SerializeField] protected string content;
@@ -102,7 +102,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         protected void InvokeSendClickedSignal()
         {
-            SendClickedSignal?.Invoke();
+            SendClickedSignal?.Invoke(branch);
         }
 
         

@@ -16,7 +16,7 @@ namespace Alabaster.DialogueSystem.Controllers
     public class ChoiceListContainerController : MonoBehaviour, IDialogueElementController<IFlowObject>
     {
 
-        public static event Action SendClickedSignal;
+        public static event Action<Branch> SendClickedSignal;
 
         [Header("Choice Box Prefab")]
         [SerializeField] private GameObject ChoiceBoxPrefab;
@@ -45,9 +45,9 @@ namespace Alabaster.DialogueSystem.Controllers
             ChoiceBoxController.SendClickedSignal -= ListenResponseSignal;
         }
 
-        private void ListenResponseSignal()
+        private void ListenResponseSignal(Branch branch)
         {
-            SendClickedSignal?.Invoke();
+            SendClickedSignal?.Invoke(branch);
         }
 
         public void InitializeElement(IFlowObject aObject)
