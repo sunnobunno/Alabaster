@@ -5,10 +5,10 @@ using UnityEngine.EventSystems;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class ContinueBoxController : MonoBehaviour, IDialogueElementClickable, IDialogueElementController<IFlowObject>
+    public class ContinueBoxController : MonoBehaviour, IDialogueElementClickable<IFlowObject>, IDialogueElementController<IFlowObject>
     {
         
-        public static event Action SendClickedSignal;
+        public static event Action<IFlowObject> SendClickedSignal;
 
         [Header("Content")]
         [SerializeField] private string content;
@@ -39,7 +39,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void SetContent(IFlowObject aObject)
         {
-            //
+            this.aObject = aObject;
         }
 
         private void SetReferences()
@@ -67,7 +67,8 @@ namespace Alabaster.DialogueSystem.Controllers
         public void OnPointerClick(PointerEventData eventData)
         {
             //Destroy(gameObject.transform.parent.gameObject);
-            SendClickedSignal?.Invoke();
+            SendClickedSignal?.Invoke(aObject);
+            DestroySelf();
         }
 
         public void ResizeElement()
@@ -78,6 +79,19 @@ namespace Alabaster.DialogueSystem.Controllers
         public void GreyOutElement(bool isGrey)
         {
             //throw new NotImplementedException();
+        }
+
+        public void DestroySelf()
+        {
+            if (transform.parent.GetComponent<BoxContainer>() != null)
+            {
+                transform.parent.GetComponent<BoxContainer>().DestroySelf();
+            }
+            else
+            {
+                Debug.Log($"{gameObject.name}: no BoxContainer parent.");
+                Destroy(gameObject);
+            }
         }
     }
 }

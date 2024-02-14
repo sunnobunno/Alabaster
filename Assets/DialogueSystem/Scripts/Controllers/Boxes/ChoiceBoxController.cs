@@ -13,10 +13,10 @@ using Alabaster.DialogueSystem.Utilities;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class ChoiceBoxController : MonoBehaviour, IDialogueElementController<Branch>, IDialogueElementClickable
+    public class ChoiceBoxController : MonoBehaviour, IDialogueElementController<Branch>, IDialogueElementClickable<Branch>
     {
 
-        public static event Action SendClickedSignal;
+        public static event Action<Branch> SendClickedSignal;
 
         [Header("Content")]
         [SerializeField] protected string content;
@@ -74,6 +74,8 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void SetContent(Branch branch)
         {
+            this.branch = branch;
+            
             var content = ArticyConversions.BranchToText(branch);
             contentObjectController.Content = content;
 
@@ -100,10 +102,10 @@ namespace Alabaster.DialogueSystem.Controllers
         }
 
 
-        protected void InvokeSendClickedSignal()
-        {
-            SendClickedSignal?.Invoke();
-        }
+        //protected void InvokeSendClickedSignal()
+        //{
+        //    SendClickedSignal?.Invoke(branch);
+        //}
 
         
 
@@ -135,7 +137,22 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            InvokeSendClickedSignal();
+            //Debug.Log("choice clicked");
+            SendClickedSignal?.Invoke(branch);
+            DestroySelf();
+        }
+
+        public void DestroySelf()
+        {
+            if (transform.parent.parent.GetComponent<BoxContainer>() != null)
+            {
+                transform.parent.parent.GetComponent<BoxContainer>().DestroySelf();
+            }
+            else
+            {
+                Debug.Log($"{gameObject.name}: no BoxContainer parent.");
+                Destroy(gameObject);
+            }
         }
     }
 }
@@ -152,9 +169,9 @@ public class ResponseChoiceBoxController02Editor : Editor
         {
             Selection.activeGameObject.GetComponent<ChoiceBoxController>().ResizeElement();
         }
-        if (GUILayout.Button("Test Articy Ref"))
-        {
-            Selection.activeGameObject.GetComponent<ChoiceBoxController>().InitializeElement(Selection.activeGameObject.GetComponent<ChoiceBoxController>().TestArticyRef.GetObject());
-        }
+        //if (GUILayout.Button("Test Articy Ref"))
+        //{
+        //    Selection.activeGameObject.GetComponent<ChoiceBoxController>().InitializeElement(Selection.activeGameObject.GetComponent<ChoiceBoxController>().TestArticyRef.GetObject());
+        //}
     }
 }

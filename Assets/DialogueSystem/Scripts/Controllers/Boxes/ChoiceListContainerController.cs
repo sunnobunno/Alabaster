@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using Alabaster.DialogueSystem.Utilities;
+using UnityEngine.UI;
 //using UnityEngine.Animations.Rigging;
 
 namespace Alabaster.DialogueSystem.Controllers
@@ -16,7 +18,7 @@ namespace Alabaster.DialogueSystem.Controllers
     public class ChoiceListContainerController : MonoBehaviour, IDialogueElementController<IFlowObject>
     {
 
-        public static event Action SendClickedSignal;
+        public static event Action<Branch> SendClickedSignal;
 
         [Header("Choice Box Prefab")]
         [SerializeField] private GameObject ChoiceBoxPrefab;
@@ -28,6 +30,8 @@ namespace Alabaster.DialogueSystem.Controllers
         private List<IDialogueElementController<Branch>> choiceBoxControllers;
         private List<Branch> branchList;
 
+        //private bool doubleClickProtection = false;
+
         public ArticyRef TestArticyRef { get => testArticyRef; }
 
         void Awake()
@@ -38,6 +42,7 @@ namespace Alabaster.DialogueSystem.Controllers
         private void OnEnable()
         {
             ChoiceBoxController.SendClickedSignal += ListenResponseSignal;
+            Debug.Log("enabled");
         }
 
         private void OnDisable()
@@ -45,15 +50,20 @@ namespace Alabaster.DialogueSystem.Controllers
             ChoiceBoxController.SendClickedSignal -= ListenResponseSignal;
         }
 
-        private void ListenResponseSignal()
+        private void ListenResponseSignal(Branch branch)
         {
-            SendClickedSignal?.Invoke();
+            //if (doubleClickProtection) { return; }
+
+            //var debug = ArticyConversions.IFlowObjectToText((ArticyObject)branch.Target);
+
+            //Debug.Log($"Response clicked: {debug}");
+            //doubleClickProtection = true;
+            SendClickedSignal?.Invoke(branch);
         }
 
         public void InitializeElement(IFlowObject aObject)
         {
             SetElementContent(aObject);
-            SetElementProperties();
         }
 
         private void SetReferences()
@@ -66,23 +76,26 @@ namespace Alabaster.DialogueSystem.Controllers
 
         }
 
-        private void SetElementProperties()
-        {
-            //Debug.Log($"Dialogue Width: {DialogueUIController02.Instance.DialogueWidth}");
-            //rectTransform.sizeDelta = new Vector2(DialogueUIController02.Instance.DialogueWidth, rectTransform.sizeDelta.y);
-        }
-
         private void SetElementContent(IFlowObject aObject)
         {
             var branches = DialogueLogicController.Instance.FlowPlayer.AvailableBranches;
             //Debug.Log(branches.Count);
             //Debug.Log(((ArticyObject)branches[0].Target).Id);
             PopulateResponseChoiceList(branches);
+            ResizeElement();
         }
 
         public void ResizeElement()
         {
-            SetElementProperties();
+            DialogueElementUtilities.EndOfFrameResizeElementByChildrenSizeDelta(this);
+            
+            //DialogueElementUtilities.VoidCallBack callBack = ResizeCallBack;
+            //DialogueElementUtilities.CallBackAtEndOfFrame(callBack, this);
+        }
+
+        private void ResizeCallBack()
+        {
+            rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
         }
 
         private void PopulateResponseChoiceList(IList<Branch> branches)

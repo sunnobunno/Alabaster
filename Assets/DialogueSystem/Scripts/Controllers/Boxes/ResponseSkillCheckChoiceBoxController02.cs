@@ -18,22 +18,23 @@ namespace Alabaster.DialogueSystem.Controllers
 
 
 
-        public override void OnPointerEnter(PointerEventData eventData)
-        {
-            contentObjectController.TextColor = Color.white;
-            gameObject.GetComponent<Image>().color = Color.black;
-        }
+        //public override void OnPointerEnter(PointerEventData eventData)
+        //{
+        //    contentObjectController.TextColor = Color.white;
+        //    gameObject.GetComponent<Image>().color = Color.black;
+        //}
 
-        public override void OnPointerExit(PointerEventData eventData)
-        {
-            contentObjectController.TextColor = Color.gray;
-            gameObject.GetComponent<Image>().color = Color.white;
-        }
+        //public override void OnPointerExit(PointerEventData eventData)
+        //{
+        //    contentObjectController.TextColor = Color.gray;
+        //    gameObject.GetComponent<Image>().color = Color.white;
+        //}
 
-        public override void OnPointerClick(PointerEventData eventData)
-        {
-            InvokeSendClickedSignal();
-        }
+        //public override void OnPointerClick(PointerEventData eventData)
+        //{
+        //    SendClickedSignal?.Invoke(branch);
+        //    //InvokeSendClickedSignal();
+        //}
 
     }
 

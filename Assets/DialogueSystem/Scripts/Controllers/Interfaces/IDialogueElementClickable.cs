@@ -7,9 +7,9 @@ using UnityEngine.EventSystems;
 
 namespace Alabaster.DialogueSystem
 {
-    public interface IDialogueElementClickable : IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+    public interface IDialogueElementClickable<T> : IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        static event Action SendClickedSignal;
+        static event Action<T> SendClickedSignal;
 
         new void OnPointerEnter(PointerEventData eventData);
 
