@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+using Articy.Little_Guy_Syndrome;
 
 namespace Alabaster.DialogueSystem
 {
@@ -21,6 +22,7 @@ namespace Alabaster.DialogueSystem
         [SerializeField] private ArticyFlowPlayer flowPlayer;
         [SerializeField] private ArticyRef testArticyRef;
 
+        private DialogueUIController dialogueUIController;
         private bool isPaused;
 
         public bool IsPaused { get { return isPaused; } }
@@ -49,19 +51,59 @@ namespace Alabaster.DialogueSystem
                 Instance = this;
             }
 
-            
+            SetReferences();
         }
 
-        private void SetElementFields()
+        private void Start()
         {
-            flowPlayer = GetComponent<ArticyFlowPlayer>();
+            SetFields();
+        }
 
+        private void OnEnable()
+        {
+            DialogueUIController.SendContinueSignal += ListenContinueSignal;
+        }
+
+        private void OnDisable()
+        {
+            DialogueUIController.SendContinueSignal -= ListenContinueSignal;
+        }
+
+        private void ListenContinueSignal(IFlowObject aObject)
+        {
+            isPaused = false;
+            flowPlayer.Play();
+        }
+
+        private void SetReferences()
+        {
+            dialogueUIController = DialogueUIController.Instance;
+            flowPlayer = GetComponent<ArticyFlowPlayer>();
+        }
+        private void SetFields()
+        {
             isPaused = true;
         }
+
+
+
 
         public void OnFlowPlayerPaused(IFlowObject aObject)
         {
             Debug.Log(ArticyConversions.IFlowObjectToText(aObject));
+
+            //DialogueUIController.Instance.CreateDialogueEntry(aObject);
+
+            if (IsNextObjectChoice())
+            {
+                Debug.Log("Choice");
+                DialogueUIController.Instance.CreateChoiceEntry(aObject);
+            }
+            else
+            {
+                Debug.Log("Not Choice");
+                DialogueUIController.Instance.CreateDialogueEntry(aObject);
+            }
 
             isPaused = true;
         }
@@ -70,10 +112,55 @@ namespace Alabaster.DialogueSystem
         {
             
         }
+
+        private bool IsNextObjectChoice()
+        {
+            var nextObjectIsChoice = false;
+
+            var aObject = flowPlayer.CurrentObject.GetObject();
+            var firstBranch = GetFirstBranch(aObject);
+            var firstBranchProperties = GetDialogueChoiceProperties(firstBranch);
+            if (firstBranchProperties != null) nextObjectIsChoice = true;
+
+            return nextObjectIsChoice;
+        }
+
+        private Dialogue_Choice_Properties GetDialogueChoiceProperties(Branch aBranch)
+        {
+            var branchObj = aBranch.Target as ArticyObject;
+            var branchObjRef = (ArticyRef)branchObj;
+            var branchObjProperties = branchObjRef.GetObject<Dialogue_Choice_Properties>();
+
+            return branchObjProperties;
+        }
+
+        private Dialogue_Choice_Properties GetDialogueChoiceProperties(ArticyObject aObject)
+        {
+            var aObjectRef = (ArticyRef)aObject;
+            var aObjectProperties = aObjectRef.GetObject<Dialogue_Choice_Properties>();
+
+            return aObjectProperties;
+        }
+
+        private Branch GetFirstBranch()
+        {
+            var currentObject = flowPlayer.CurrentObject.GetObject();
+            var firstBranch = GetFirstBranch(currentObject);
+
+            return firstBranch;
+        }
+
+        private Branch GetFirstBranch(ArticyObject aObject)
+        {
+            var nextBranches = ArticyFlowPlayer.GetBranchesOfNode(aObject, flowPlayer);
+            var firstBranch = nextBranches[0];
+
+            return firstBranch;
+        }
     }
 
     [CustomEditor(typeof(DialogueLogicController))]
-    public class DialogueLogicController02Editor : Editor
+    public class DialogueLogicControllerEditor : Editor
     {
         public override void OnInspectorGUI()
         {
@@ -81,7 +168,7 @@ namespace Alabaster.DialogueSystem
 
             if (GUILayout.Button("Start Dialogue"))
             {
-                Selection.activeGameObject.GetComponent<DialogueLogicController>().StartDialogue(DialogueLogicController.Instance.TestArticyRef); ;
+                Selection.activeGameObject.GetComponent<DialogueLogicController>().StartDialogue(DialogueLogicController.Instance.TestArticyRef);
             }
         }
     }

@@ -1,5 +1,6 @@
 using Alabaster.DialogueSystem.Controllers;
 using Articy.Unity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,9 @@ namespace Alabaster.DialogueSystem
 {
     public class DialogueUIController : MonoBehaviour
     {
+        public static event Action<Branch> SendResponseSignal;
+        public static event Action<IFlowObject> SendContinueSignal;
+
         public static DialogueUIController Instance { get; private set; }
 
         [SerializeField] private float dialogueWidth;
@@ -33,16 +37,30 @@ namespace Alabaster.DialogueSystem
         private void OnEnable()
         {
             DialogueMainTimelineContainer.SendSlideInEndSignal += ListenSlideInEndSignal;
+            DialogueMainTimelineContainer.SendResponseSignal += ListenResponseSignal;
+            DialogueMainTimelineContainer.SendContinueSignal += ListenContinueSignal;
         }
 
         private void OnDisable()
         {
             DialogueMainTimelineContainer.SendSlideInEndSignal -= ListenSlideInEndSignal;
+            DialogueMainTimelineContainer.SendResponseSignal -= ListenResponseSignal;
+            DialogueMainTimelineContainer.SendContinueSignal -= ListenContinueSignal;
         }
 
         private void ListenSlideInEndSignal()
         {
 
+        }
+
+        private void ListenResponseSignal(Branch branch)
+        {
+            SendResponseSignal?.Invoke(branch);
+        }
+
+        private void ListenContinueSignal(IFlowObject aObject)
+        {
+            SendContinueSignal?.Invoke(aObject);
         }
 
         private void SetReferences()
@@ -85,6 +103,29 @@ namespace Alabaster.DialogueSystem
             timeLineContainer.IsElementSlideDone = false;
 
             timeLineContainer.AddContinueBox(aObject);
+        }
+
+
+
+
+        public void CreateChoiceEntry(IFlowObject aObject)
+        {
+            var createChoiceEntry = CoCreateChoiceEntry(aObject);
+            StartCoroutine(createChoiceEntry);
+        }
+
+        private IEnumerator CoCreateChoiceEntry(IFlowObject aObject)
+        {
+            timeLineContainer.AddDialogueBox(aObject);
+            timeLineContainer.ElementList.Last().SlideInElement();
+
+            while (!timeLineContainer.IsElementSlideDone)
+            {
+                yield return null;
+            }
+            timeLineContainer.IsElementSlideDone = false;
+
+            timeLineContainer.AddChoiceList(aObject);
         }
     }
 

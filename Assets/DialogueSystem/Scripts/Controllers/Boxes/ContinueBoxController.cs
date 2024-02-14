@@ -68,6 +68,7 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             //Destroy(gameObject.transform.parent.gameObject);
             SendClickedSignal?.Invoke(aObject);
+            DestroySelf();
         }
 
         public void ResizeElement()
@@ -78,6 +79,19 @@ namespace Alabaster.DialogueSystem.Controllers
         public void GreyOutElement(bool isGrey)
         {
             //throw new NotImplementedException();
+        }
+
+        public void DestroySelf()
+        {
+            if (transform.parent.GetComponent<BoxContainer>() != null)
+            {
+                transform.parent.GetComponent<BoxContainer>().DestroySelf();
+            }
+            else
+            {
+                Debug.Log($"{gameObject.name}: no BoxContainer parent.");
+                Destroy(gameObject);
+            }
         }
     }
 }

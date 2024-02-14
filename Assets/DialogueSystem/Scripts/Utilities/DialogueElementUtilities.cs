@@ -38,9 +38,12 @@ namespace Alabaster.DialogueSystem.Utilities
 
         public static IEnumerator EaseInElement(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
         {
+            callingObject.enabled = false;
+            //Debug.Log($"{gameObject.name}: disabled");
             yield return new WaitForEndOfFrame();
-
             SetElementOffScreen(gameObject);
+            callingObject.enabled = true;
+            //Debug.Log($"{gameObject.name}: enabled");
 
             IEnumerator easeInChildElementCoroutine = DialogueElementUtilities.ParabolicMoveObjectRelative(gameObject, 0.5f, gameObject.GetComponent<RectTransform>().localPosition, Vector3.zero, slideInEndCallBack);
             callingObject.StartCoroutine(easeInChildElementCoroutine);

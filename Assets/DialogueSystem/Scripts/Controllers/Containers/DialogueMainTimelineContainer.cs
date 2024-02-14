@@ -12,8 +12,8 @@ namespace Alabaster.DialogueSystem.Controllers
     public class DialogueMainTimelineContainer : MonoBehaviour
     {
 
-        public static event Action SendResponseSignal;
-        public static event Action SendContinueSignal;
+        public static event Action<Branch> SendResponseSignal;
+        public static event Action<IFlowObject> SendContinueSignal;
         public static event Action SendSlideInEndSignal;
 
         public static DialogueMainTimelineContainer Instance { get; private set; }
@@ -72,13 +72,13 @@ namespace Alabaster.DialogueSystem.Controllers
         private void ListenResponseSignal(Branch branch)
         {
             Debug.Log("Choice Clicked");
-            SendResponseSignal?.Invoke();
+            SendResponseSignal?.Invoke(branch);
         }
 
         private void ListenContinueSignal(IFlowObject aObject)
         {
             Debug.Log("Continue Clicked");
-            SendContinueSignal?.Invoke();
+            SendContinueSignal?.Invoke(aObject);
         }
 
         private void ListenSlideInEndSignal()

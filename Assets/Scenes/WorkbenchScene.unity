@@ -339,9 +339,9 @@ MonoBehaviour:
   startOn:
     instanceId: 0
     referencingMode: 0
-    lowId: 2048
-    highId: 16777216
-  pauseOn: 7
+    lowId: 0
+    highId: 0
+  pauseOn: 4
   ignoreInvalidBranches: 1
   continuouslyRecalculateBranches: 0
   continouslyRecalculateInterval: 1
@@ -361,8 +361,8 @@ MonoBehaviour:
   testArticyRef:
     instanceId: 0
     referencingMode: 0
-    lowId: 0
-    highId: 0
+    lowId: 1927
+    highId: 16777216
 --- !u!4 &750960266
 Transform:
   m_ObjectHideFlags: 0
