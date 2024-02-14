@@ -10,6 +10,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using Alabaster.DialogueSystem.Utilities;
+using UnityEngine.UI;
 //using UnityEngine.Animations.Rigging;
 
 namespace Alabaster.DialogueSystem.Controllers
@@ -76,6 +77,14 @@ namespace Alabaster.DialogueSystem.Controllers
         }
 
         public void ResizeElement()
+        {
+            DialogueElementUtilities.EndOfFrameResizeElementByChildrenSizeDelta(this);
+            
+            //DialogueElementUtilities.VoidCallBack callBack = ResizeCallBack;
+            //DialogueElementUtilities.CallBackAtEndOfFrame(callBack, this);
+        }
+
+        private void ResizeCallBack()
         {
             rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
         }

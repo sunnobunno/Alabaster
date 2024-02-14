@@ -45,7 +45,9 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void ResizeContainer()
         {
-            rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+            DialogueElementUtilities.EndOfFrameResizeElementByChildrenSizeDelta(this);
+            
+            //rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
         }
 
         public void SlideInElement()

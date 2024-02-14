@@ -15,6 +15,7 @@ namespace Alabaster.DialogueSystem.Utilities
     {
 
         public delegate void VoidCallBack();
+        public delegate void CallBackWithGameObject(GameObject gameObject);
 
 
         public static void SlideInElementOffScreen(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
@@ -155,5 +156,42 @@ namespace Alabaster.DialogueSystem.Utilities
             return y;
         }
 
+        public static void CallBackAtEndOfFrame(VoidCallBack callBack, MonoBehaviour callingObject)
+        {
+            IEnumerator callBackAtEndOfFrame = CoCallBackAtEndOfFrame(callBack);
+            callingObject.StartCoroutine(callBackAtEndOfFrame);
+        }
+
+        public static IEnumerator CoCallBackAtEndOfFrame(VoidCallBack callBack)
+        {
+            yield return new WaitForEndOfFrame();
+            callBack?.Invoke();
+        }
+
+        
+
+        // NOTE TO SELF: This coroutine does not update in play mode while in scene mode.
+        public static void EndOfFrameResizeElementByChildrenSizeDelta(MonoBehaviour callingObject)
+        {
+            var gameObject = callingObject.gameObject;
+            CallBackWithGameObject callBack = ResizeElementByChildrenSizeDelta;
+            IEnumerator callBackAtEndOfFrame = CoCallBackAtEndOfFrame(callBack, gameObject);
+            callingObject.StartCoroutine(callBackAtEndOfFrame);
+        }
+
+        public static void ResizeElementByChildrenSizeDelta(GameObject gameObject)
+        {
+            var rectTransform = gameObject.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+        }
+
+        public static IEnumerator CoCallBackAtEndOfFrame(CallBackWithGameObject callBack, GameObject gameObject)
+        {
+            yield return new WaitForEndOfFrame();
+            callBack?.Invoke(gameObject);
+        }
+
+
+        
     }
 }

@@ -109,7 +109,7 @@ namespace Alabaster.DialogueSystem.Controllers
         public void ResizeElement()
         {
             ResizeSubElements();
-            rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+            DialogueElementUtilities.EndOfFrameResizeElementByChildrenSizeDelta(this);
         }
 
         public void GreyOutElement(bool isGrey)

@@ -30,7 +30,7 @@ namespace Alabaster.DialogueSystem.Controllers
         public GameObject ResponseListContainerPrefab { get => responseListContainerPrefab; }
         public ArticyRef TestArticyRef { get => testArticyRef; }
         public float ElementCount { get => dialogueElementList.Count; }
-        public List<GameObject> ElementList { get => dialogueElementList; set => dialogueElementList = value; }
+        public List<GameObject> ElementList { get => dialogueElementList; }
         #endregion
 
 
