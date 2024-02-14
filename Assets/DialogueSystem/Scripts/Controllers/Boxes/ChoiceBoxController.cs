@@ -135,7 +135,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            InvokeSendClickedSignal();
+            SendClickedSignal?.Invoke(branch);
         }
     }
 }

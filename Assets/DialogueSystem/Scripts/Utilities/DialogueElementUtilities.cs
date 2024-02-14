@@ -20,8 +20,10 @@ namespace Alabaster.DialogueSystem.Utilities
 
         public static void SlideInElementOffScreen(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
         {
-            SetElementOffScreen(gameObject);
-            EaseInElement(gameObject, slideInEndCallBack, callingObject);
+            
+            IEnumerator coEaseInElement = EaseInElement(gameObject, slideInEndCallBack, callingObject);
+            callingObject.StartCoroutine(coEaseInElement);
+            //EaseInElement(gameObject, slideInEndCallBack, callingObject);
         }
 
         public static void SetElementOffScreen(GameObject gameObject)
@@ -31,13 +33,24 @@ namespace Alabaster.DialogueSystem.Utilities
             Vector3 offScreenPosition = new(elementLocalPosition.x, elementLocalPosition.y - screenHeight);
 
             gameObject.GetComponent<RectTransform>().localPosition = offScreenPosition;
+            Debug.Log($"{gameObject.name}: Set off screen");
         }
 
-        public static void EaseInElement(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
+        public static IEnumerator EaseInElement(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
         {
+            yield return new WaitForEndOfFrame();
+
+            SetElementOffScreen(gameObject);
+
             IEnumerator easeInChildElementCoroutine = DialogueElementUtilities.ParabolicMoveObjectRelative(gameObject, 0.5f, gameObject.GetComponent<RectTransform>().localPosition, Vector3.zero, slideInEndCallBack);
             callingObject.StartCoroutine(easeInChildElementCoroutine);
         }
+
+        //public static void EaseInElement(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
+        //{
+        //    IEnumerator easeInChildElementCoroutine = DialogueElementUtilities.ParabolicMoveObjectRelative(gameObject, 0.5f, gameObject.GetComponent<RectTransform>().localPosition, Vector3.zero, slideInEndCallBack);
+        //    callingObject.StartCoroutine(easeInChildElementCoroutine);
+        //}
 
         public static float GetObjectSizeDeltaY(GameObject gameObject)
         {
@@ -183,6 +196,7 @@ namespace Alabaster.DialogueSystem.Utilities
         {
             var rectTransform = gameObject.GetComponent<RectTransform>();
             rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+            Debug.Log($"{gameObject.name}: resized");
         }
 
         public static IEnumerator CoCallBackAtEndOfFrame(CallBackWithGameObject callBack, GameObject gameObject)

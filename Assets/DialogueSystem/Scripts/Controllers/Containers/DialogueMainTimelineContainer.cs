@@ -14,6 +14,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public static event Action SendResponseSignal;
         public static event Action SendContinueSignal;
+        public static event Action SendSlideInEndSignal;
 
         public static DialogueMainTimelineContainer Instance { get; private set; }
 
@@ -30,12 +31,13 @@ namespace Alabaster.DialogueSystem.Controllers
         public GameObject ResponseListContainerPrefab { get => responseListContainerPrefab; }
         public ArticyRef TestArticyRef { get => testArticyRef; }
         public float ElementCount { get => dialogueElementList.Count; }
-        public List<GameObject> ElementList { get => dialogueElementList; }
+        public List<BoxContainer> ElementList { get => dialogueElementList; }
+        public bool IsElementSlideDone { get => slideInEndSignalRecieved; set => slideInEndSignalRecieved = value; }
         #endregion
 
 
 
-        private List<GameObject> dialogueElementList = new();
+        private List<BoxContainer> dialogueElementList = new();
 
         private bool slideInEndSignalRecieved = false;
 
@@ -83,6 +85,7 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             Debug.Log("SlideInEndSignal Recieved");
             slideInEndSignalRecieved = true;
+            SendSlideInEndSignal?.Invoke();
         }
 
         public void InitializeElement()
@@ -139,7 +142,8 @@ namespace Alabaster.DialogueSystem.Controllers
             GameObject newDialogueElement = InstantiateDialogueElement(dialogueElementPrefab);
             ParentDialogueElementToSelf(newBoxContainer);
             ParentDialogueElementToContainer(newDialogueElement, newBoxContainer);
-            AddDialogueElementToElementList(newBoxContainer);
+            dialogueElementList.Add(newBoxContainer.GetComponent<BoxContainer>());
+            //AddDialogueElementToElementList(newBoxContainer);
 
             newDialogueElement.GetComponent<IDialogueElementController<IFlowObject>>().InitializeElement(aObject);
             newBoxContainer.GetComponent<BoxContainer>().InitializeElement();
@@ -224,7 +228,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private void AddDialogueElementToElementList(GameObject dialogueElement)
         {
-            dialogueElementList.Add(dialogueElement);
+            //dialogueElementList.Add(dialogueElement);
         }
 
         private GameObject InstantiateDialogueElement(GameObject dialogueElementPrefab)
