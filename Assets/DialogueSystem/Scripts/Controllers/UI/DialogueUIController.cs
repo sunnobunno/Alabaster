@@ -55,6 +55,9 @@ namespace Alabaster.DialogueSystem
 
         private void ListenResponseSignal(Branch branch)
         {
+            Debug.Log("Replacing choice with Dialogue Box");
+            timeLineContainer.AddDialogueBox(branch.Target as ArticyObject);
+            ToggleLastDialogueBoxTitle(false);
             SendResponseSignal?.Invoke(branch);
         }
 
@@ -126,6 +129,16 @@ namespace Alabaster.DialogueSystem
             timeLineContainer.IsElementSlideDone = false;
 
             timeLineContainer.AddChoiceList(aObject);
+        }
+
+
+
+        public void ToggleLastDialogueBoxTitle(bool toggle)
+        {
+            if (timeLineContainer.ElementList.Last().Child.GetComponent<DialogueBoxController>() != null)
+            {
+                timeLineContainer.ElementList.Last().Child.GetComponent<DialogueBoxController>().ToggleTitle(false);
+            }
         }
     }
 

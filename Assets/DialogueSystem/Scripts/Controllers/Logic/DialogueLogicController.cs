@@ -62,17 +62,27 @@ namespace Alabaster.DialogueSystem
         private void OnEnable()
         {
             DialogueUIController.SendContinueSignal += ListenContinueSignal;
+            DialogueUIController.SendResponseSignal += ListenResponseSignal;
         }
 
         private void OnDisable()
         {
             DialogueUIController.SendContinueSignal -= ListenContinueSignal;
+            DialogueUIController.SendResponseSignal -= ListenResponseSignal;
         }
 
         private void ListenContinueSignal(IFlowObject aObject)
         {
             isPaused = false;
             flowPlayer.Play();
+        }
+
+        private void ListenResponseSignal(Branch branch)
+        {
+            isPaused = true;
+            var debug = ((ArticyObject)branch.Target).Id;
+            Debug.Log(debug);
+            flowPlayer.Play(branch);
         }
 
         private void SetReferences()
@@ -92,13 +102,18 @@ namespace Alabaster.DialogueSystem
         {
             Debug.Log(ArticyConversions.IFlowObjectToText(aObject));
 
-            //DialogueUIController.Instance.CreateDialogueEntry(aObject);
+            if (IsCurrentObjectChoice())
+            {
+                // skip
+                flowPlayer.Play();
+            }
 
-            if (IsNextObjectChoice())
+            else if (IsNextObjectChoice())
             {
                 Debug.Log("Choice");
                 DialogueUIController.Instance.CreateChoiceEntry(aObject);
             }
+
             else
             {
                 Debug.Log("Not Choice");
@@ -156,6 +171,15 @@ namespace Alabaster.DialogueSystem
             var firstBranch = nextBranches[0];
 
             return firstBranch;
+        }
+
+        private bool IsCurrentObjectChoice()
+        {
+            bool currentObjectIsChoice = false;
+            var DialogueChoiceProperties = flowPlayer.CurrentObject.GetObject<Dialogue_Choice_Properties>();
+            if (DialogueChoiceProperties != null) currentObjectIsChoice = true;
+
+            return currentObjectIsChoice;
         }
     }
 

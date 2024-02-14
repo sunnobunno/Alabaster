@@ -18,6 +18,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private RectTransform rectTransform;
         private GameObject childElement;
+        private CanvasGroup canvasGroup;
 
         public GameObject Child { get => childElement; }
 
@@ -36,6 +37,7 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             rectTransform = gameObject.GetComponent<RectTransform>();
             childElement = DialogueElementUtilities.GetChildElement(gameObject);
+            canvasGroup = GetComponent<CanvasGroup>();
         }
 
         public void DestroySelf()
@@ -59,6 +61,18 @@ namespace Alabaster.DialogueSystem.Controllers
         private void InvokeSlideInEndSignal()
         {
             SendSlideInEndSignal?.Invoke();
+        }
+
+        public void Hide()
+        {
+            canvasGroup.alpha = 0f;
+            canvasGroup.blocksRaycasts = false;
+        }
+
+        public void Show()
+        {
+            canvasGroup.alpha = 1f;
+            canvasGroup.blocksRaycasts = true;
         }
     }
 

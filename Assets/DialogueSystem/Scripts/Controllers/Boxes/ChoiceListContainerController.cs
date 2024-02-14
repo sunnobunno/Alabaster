@@ -30,6 +30,8 @@ namespace Alabaster.DialogueSystem.Controllers
         private List<IDialogueElementController<Branch>> choiceBoxControllers;
         private List<Branch> branchList;
 
+        //private bool doubleClickProtection = false;
+
         public ArticyRef TestArticyRef { get => testArticyRef; }
 
         void Awake()
@@ -40,6 +42,7 @@ namespace Alabaster.DialogueSystem.Controllers
         private void OnEnable()
         {
             ChoiceBoxController.SendClickedSignal += ListenResponseSignal;
+            Debug.Log("enabled");
         }
 
         private void OnDisable()
@@ -49,6 +52,12 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private void ListenResponseSignal(Branch branch)
         {
+            //if (doubleClickProtection) { return; }
+
+            //var debug = ArticyConversions.IFlowObjectToText((ArticyObject)branch.Target);
+
+            //Debug.Log($"Response clicked: {debug}");
+            //doubleClickProtection = true;
             SendClickedSignal?.Invoke(branch);
         }
 

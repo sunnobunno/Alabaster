@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Alabaster.DialogueSystem.Controllers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,14 +39,24 @@ namespace Alabaster.DialogueSystem.Utilities
 
         public static IEnumerator EaseInElement(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
         {
-            callingObject.enabled = false;
+            //callingObject.enabled = false;
             //Debug.Log($"{gameObject.name}: disabled");
+
+            gameObject.transform.parent.GetComponent<BoxContainer>().Hide();
+
             yield return new WaitForEndOfFrame();
             SetElementOffScreen(gameObject);
-            callingObject.enabled = true;
+
+            gameObject.transform.parent.GetComponent<BoxContainer>().Show();
+
+            //callingObject.enabled = true;
             //Debug.Log($"{gameObject.name}: enabled");
 
-            IEnumerator easeInChildElementCoroutine = DialogueElementUtilities.ParabolicMoveObjectRelative(gameObject, 0.5f, gameObject.GetComponent<RectTransform>().localPosition, Vector3.zero, slideInEndCallBack);
+            IEnumerator easeInChildElementCoroutine = DialogueElementUtilities.ParabolicMoveObjectRelative(gameObject,
+                0.5f,
+                gameObject.GetComponent<RectTransform>().localPosition,
+                new Vector2(0f, -DialogueMainTimelineContainer.Instance.GetComponent<VerticalLayoutGroup>().spacing),
+                slideInEndCallBack);
             callingObject.StartCoroutine(easeInChildElementCoroutine);
         }
 
