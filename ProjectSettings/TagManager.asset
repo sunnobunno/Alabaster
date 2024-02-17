@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Parallax0
+  - Parallax1
+  - Parallax2
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: EnvironmentSystem
+    uniqueID: 2279122135
+    locked: 0
+  - name: DialogueSystem
+    uniqueID: 2157428281
     locked: 0

@@ -5,14 +5,14 @@ using UnityEngine.Rendering;
 
 namespace EnvironmentSystem
 {
-    public class EnvironmentParallaxController : MonoBehaviour
+    public class ParallaxEnvironmentController : MonoBehaviour
     {
         // In order for parallax to work
         // Need position of mouse
         // Need center position of screen
         // Alter position of environment assets by a multiplier based on mouse's distance away from center of screen
         
-        public static EnvironmentParallaxController Instance { get; private set; }
+        public static ParallaxEnvironmentController Instance { get; private set; }
 
         private Vector2 mousePosition;
         private float screenWidth;
@@ -20,10 +20,11 @@ namespace EnvironmentSystem
         private Vector2 mouseRelativeToCenter;
 
         public Vector2 MouseRelativeToCenter { get { return mouseRelativeToCenter; } }
+        public Vector2 ScreenDimensions { get { return new Vector2(screenWidth, screenHeight); } }
 
         private void Awake()
         {
-            if (!Instance)
+            if (Instance == null)
             {
                 Instance = this;
             }
@@ -46,20 +47,26 @@ namespace EnvironmentSystem
         // Update is called once per frame
         void Update()
         {
-            var mouseRelativeToCenter = GetMousePositionRelativeToCenter();
-            Debug.Log($"Screen size: {screenWidth}, {screenHeight}");
-            Debug.Log($"Mouse relative to center: {mouseRelativeToCenter}");
+            mouseRelativeToCenter = GetMousePositionRelativeToCenter();
+            //Debug.Log($"Screen size: {screenWidth}, {screenHeight}");
+            //Debug.Log($"Mouse relative to center: {mouseRelativeToCenter}");
         }
 
 
 
         private Vector2 GetMousePositionRelativeToCenter()
         {
-            UpdateScreenDimensions();
-            var screenCenter = GetCenterOfScreen();
             var mousePositionClamped = new Vector2(Mathf.Clamp(Input.mousePosition.x, 0f, screenWidth), Mathf.Clamp(Input.mousePosition.y, 0f, screenHeight));
-            var mouseRelativeToCenter = mousePositionClamped - screenCenter;
-            return this.mouseRelativeToCenter = mouseRelativeToCenter;
+            var worldPos = Camera.main.ScreenToWorldPoint(mousePositionClamped);
+            var worldPos0Z = new Vector3(worldPos.x, worldPos.y, 0f);
+
+            return worldPos0Z;
+
+            //UpdateScreenDimensions();
+            //var screenCenter = GetCenterOfScreen();
+            //var mousePositionClamped = new Vector2(Mathf.Clamp(Input.mousePosition.x, 0f, screenWidth), Mathf.Clamp(Input.mousePosition.y, 0f, screenHeight));
+            //var mouseRelativeToCenter = mousePositionClamped - screenCenter;
+            //return mouseRelativeToCenter;
         }
 
         private Vector2 GetCenterOfScreen()
