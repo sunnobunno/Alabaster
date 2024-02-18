@@ -34,6 +34,11 @@ namespace Alabaster.DialogueSystem
 
         public ArticyRef TestArticyRef { get { return testArticyRef; } }
 
+        public void StartTestDialogue()
+        {
+            StartDialogue(testArticyRef);
+        }
+
         public void StartDialogue(ArticyRef articyRef)
         {
             var articyObject = articyRef.GetObject();

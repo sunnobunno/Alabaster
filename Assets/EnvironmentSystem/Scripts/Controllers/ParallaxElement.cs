@@ -1,66 +1,73 @@
-using EnvironmentSystem;
+using Alabaster.GameState;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParallaxElement : MonoBehaviour
+namespace Alabaster.EnvironmentSystem
 {
-    [SerializeField] private Vector2 parallaxMultiplier;
-    [SerializeField] private float parallaxAcceleration;
-
-    private Vector2 mouseRelativeToCenter;
-    private Vector2 scale;
-    private Vector2 parallaxTarget;
-
-
-    private void Awake()
+    public class ParallaxElement : MonoBehaviour
     {
-        SetReferences();
-    }
+        [SerializeField] private Vector2 parallaxMultiplier;
+        [SerializeField] private float parallaxAcceleration;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        SetFields();
-    }
+        private Vector2 mouseRelativeToCenter;
+        private Vector2 scale;
+        private Vector2 parallaxTarget;
 
-    private void SetReferences()
-    {
 
-    }
+        private void Awake()
+        {
+            SetReferences();
+        }
 
-    private void SetFields()
-    {
-        mouseRelativeToCenter = ParallaxEnvironmentController.Instance.MouseRelativeToCenter;
-        scale = transform.localScale;
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            SetFields();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateTransformByParallax();
-    }
+        private void SetReferences()
+        {
 
-    private void UpdateTransformByParallax()
-    {
-        transform.localPosition = ParallaxEnvironmentController.Instance.MouseRelativeToCenter * parallaxMultiplier;
-        //parallaxTarget = ParallaxEnvironmentController.Instance.MouseRelativeToCenter * parallaxMultiplier;
-        //AccelerateToParallaxTarget();
-    }
+        }
 
-    private void AccelerateToParallaxTarget()
-    {
-        var magnitude = parallaxAcceleration;
-        var currentPosition = (Vector2)transform.localPosition;
-        var targetPosition = parallaxTarget;
-        var positionDifference = targetPosition - currentPosition;
-        var positionDifferenceAcceleration = positionDifference.normalized * magnitude;
+        private void SetFields()
+        {
+            mouseRelativeToCenter = ParallaxEnvironmentController.Instance.MouseRelativeToCenter;
+            scale = transform.localScale;
+        }
 
-        //if (positionDifference.magnitude <= magnitude)
-        //{
-        //    return;
-        //}
+        // Update is called once per frame
+        void Update()
+        {
+            if (GameStateController.GameState == EGameState.Environment)
+            {
+                UpdateTransformByParallax();
+            }
+        }
 
-        transform.localPosition += (Vector3)positionDifferenceAcceleration;
+        private void UpdateTransformByParallax()
+        {
+            transform.localPosition = ParallaxEnvironmentController.Instance.MouseRelativeToCenter * parallaxMultiplier;
+            //parallaxTarget = ParallaxEnvironmentController.Instance.MouseRelativeToCenter * parallaxMultiplier;
+            //AccelerateToParallaxTarget();
+        }
+
+        private void AccelerateToParallaxTarget()
+        {
+            var magnitude = parallaxAcceleration;
+            var currentPosition = (Vector2)transform.localPosition;
+            var targetPosition = parallaxTarget;
+            var positionDifference = targetPosition - currentPosition;
+            var positionDifferenceAcceleration = positionDifference.normalized * magnitude;
+
+            //if (positionDifference.magnitude <= magnitude)
+            //{
+            //    return;
+            //}
+
+            transform.localPosition += (Vector3)positionDifferenceAcceleration;
+        }
     }
 }
+

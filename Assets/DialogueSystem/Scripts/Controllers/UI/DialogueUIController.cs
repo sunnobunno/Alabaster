@@ -57,7 +57,7 @@ namespace Alabaster.DialogueSystem
         {
             Debug.Log("Replacing choice with Dialogue Box");
             timeLineContainer.AddDialogueBox(branch.Target as ArticyObject);
-            ToggleLastDialogueBoxTitle(false);
+            //ToggleLastDialogueBoxTitle(false);
             SendResponseSignal?.Invoke(branch);
         }
 

@@ -42,6 +42,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void DestroySelf()
         {
+            Debug.Log($"{gameObject.name}: Destroying self");
             Destroy(gameObject);
         }
 

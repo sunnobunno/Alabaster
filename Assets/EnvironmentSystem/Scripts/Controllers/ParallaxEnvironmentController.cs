@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace EnvironmentSystem
+namespace Alabaster.EnvironmentSystem
 {
     public class ParallaxEnvironmentController : MonoBehaviour
     {
-        // In order for parallax to work
-        // Need position of mouse
-        // Need center position of screen
-        // Alter position of environment assets by a multiplier based on mouse's distance away from center of screen
         
         public static ParallaxEnvironmentController Instance { get; private set; }
 

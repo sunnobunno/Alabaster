@@ -55,7 +55,7 @@ namespace Alabaster.DialogueSystem.Utilities
             IEnumerator easeInChildElementCoroutine = DialogueElementUtilities.ParabolicMoveObjectRelative(gameObject,
                 0.5f,
                 gameObject.GetComponent<RectTransform>().localPosition,
-                new Vector2(0f, -DialogueMainTimelineContainer.Instance.GetComponent<VerticalLayoutGroup>().spacing),
+                new Vector2(0f, 0f),
                 slideInEndCallBack);
             callingObject.StartCoroutine(easeInChildElementCoroutine);
         }
