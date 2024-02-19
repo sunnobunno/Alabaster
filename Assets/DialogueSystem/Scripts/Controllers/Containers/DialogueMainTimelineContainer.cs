@@ -33,6 +33,7 @@ namespace Alabaster.DialogueSystem.Controllers
         public float ElementCount { get => dialogueElementList.Count; }
         public List<BoxContainer> ElementList { get => dialogueElementList; }
         public bool IsElementSlideDone { get => slideInEndSignalRecieved; set => slideInEndSignalRecieved = value; }
+        public bool IsLastElementResized { get => resizeBuffer; set => resizeBuffer = value; }
         #endregion
 
 
@@ -40,6 +41,8 @@ namespace Alabaster.DialogueSystem.Controllers
         private List<BoxContainer> dialogueElementList = new();
 
         private bool slideInEndSignalRecieved = false;
+
+        private bool resizeBuffer = false;
 
         private void Awake()
         {
@@ -136,7 +139,14 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void AddDialogueElement(GameObject dialogueElementPrefab, IFlowObject aObject)
         {
-            Debug.Log($"----- NEW {dialogueElementPrefab.name} -----");
+            string aText = "";
+            
+            if (ArticyConversions.IFlowObjectToText(aObject) != null)
+            {
+                aText = ArticyConversions.IFlowObjectToText(aObject);
+            }
+            
+            Debug.Log($"----- NEW {dialogueElementPrefab.name}: {aText} -----");
 
             GameObject newBoxContainer = InstantiateDialogueElementContainer();
             GameObject newDialogueElement = InstantiateDialogueElement(dialogueElementPrefab);

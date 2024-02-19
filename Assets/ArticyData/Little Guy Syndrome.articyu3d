@@ -2430,6 +2430,11 @@
                 "Text": "",
                 "Id": "0x010000000000011C",
                 "Owner": "0x0100000000000119"
+              },
+              {
+                "Text": "",
+                "Id": "0x0100000000000A56",
+                "Owner": "0x0100000000000119"
               }
             ],
             "OutputPins": [
@@ -5142,24 +5147,24 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000668",
-                    "Target": "0x0100000000000665"
-                  },
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
                     },
                     "Label": "",
                     "TargetPin": "0x010000000000065D",
                     "Target": "0x010000000000065A"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000668",
+                    "Target": "0x0100000000000665"
                   }
                 ]
               }
@@ -10430,7 +10435,7 @@
               "g": 0.149959788,
               "b": 0.002731743
             },
-            "Text": "<align=left>Wait! Don't go! We have so much *nothing* to do!</align>",
+            "Text": "<align=left>Wait! Don't go! We have so much *nothing* to do! I'm making this longer for the sake of testing. I have a terrible bug in my code.</align>",
             "ExternalId": "",
             "Position": {
               "x": 375.0,

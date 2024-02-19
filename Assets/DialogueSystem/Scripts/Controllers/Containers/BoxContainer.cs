@@ -15,12 +15,15 @@ namespace Alabaster.DialogueSystem.Controllers
     {
 
         public static event Action SendSlideInEndSignal;
+        public static event Action SendResizeEndSignal;
 
         private RectTransform rectTransform;
         private GameObject childElement;
         private CanvasGroup canvasGroup;
+        private bool isResized = false;
 
         public GameObject Child { get => childElement; }
+        public bool IsResized { get { return isResized; } }
 
         void Awake()
         {
@@ -42,15 +45,23 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void DestroySelf()
         {
-            Debug.Log($"{gameObject.name}: Destroying self");
+            Debug.Log($"{gameObject.name}: Destroying self: {childElement.name}");
             Destroy(gameObject);
         }
 
         public void ResizeContainer()
         {
-            DialogueElementUtilities.EndOfFrameResizeElementByChildrenSizeDelta(this);
+            DialogueElementUtilities.CallBackWithGameObject callBack = SetResizedTrue;
+            
+            DialogueElementUtilities.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
             
             //rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+        }
+
+        private void SetResizedTrue(GameObject gameObject)
+        {
+            isResized = true;
+            //Debug.Log(isResized);
         }
 
         public void SlideInElement()
@@ -63,6 +74,8 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             SendSlideInEndSignal?.Invoke();
         }
+
+        
 
         public void Hide()
         {

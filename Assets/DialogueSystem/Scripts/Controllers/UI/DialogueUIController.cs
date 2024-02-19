@@ -55,9 +55,30 @@ namespace Alabaster.DialogueSystem
 
         private void ListenResponseSignal(Branch branch)
         {
+            //timeLineContainer.ElementList.Last().DestroySelf();
+            //Debug.Log("Destroyed choice list container");
+            //Debug.Log("Replacing choice with Dialogue Box");
+            //timeLineContainer.AddDialogueBox(branch.Target as ArticyObject);
+            ////ToggleLastDialogueBoxTitle(false);
+            //SendResponseSignal?.Invoke(branch);
+
+            var coListenResponseSignal = CoListenResponseSignal(branch);
+            StartCoroutine(coListenResponseSignal);
+        }
+
+        private IEnumerator CoListenResponseSignal(Branch branch)
+        {
+            timeLineContainer.ElementList.Last().DestroySelf();
+            Debug.Log("Destroyed choice list container");
             Debug.Log("Replacing choice with Dialogue Box");
             timeLineContainer.AddDialogueBox(branch.Target as ArticyObject);
-            //ToggleLastDialogueBoxTitle(false);
+
+            // Wait to send response signal until the last element is resized to avoid vertical layout group errors
+            while (timeLineContainer.ElementList.Last().IsResized == false)
+            {
+                yield return null;
+            }
+
             SendResponseSignal?.Invoke(branch);
         }
 
