@@ -139,7 +139,7 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             //Debug.Log("choice clicked");
             SendClickedSignal?.Invoke(branch);
-            DestroySelf();
+            //DestroySelf();
         }
 
         public void DestroySelf()

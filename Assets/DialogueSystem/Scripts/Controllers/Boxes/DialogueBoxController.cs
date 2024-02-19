@@ -79,6 +79,8 @@ namespace Alabaster.DialogueSystem.Controllers
             //var dialogueSpeaker = aObject as IObjectWithSpeaker;
             //var dialogueEntity = dialogueSpeaker.Speaker as Entity;
 
+            this.aObject = aObject;
+
             content = ArticyConversions.IFlowObjectToText(aObject);
             title = ArticyConversions.IFlowObjectToTitle(aObject);
 

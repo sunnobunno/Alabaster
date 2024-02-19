@@ -34,6 +34,11 @@ namespace Alabaster.DialogueSystem
 
         public ArticyRef TestArticyRef { get { return testArticyRef; } }
 
+        public void StartTestDialogue()
+        {
+            StartDialogue(testArticyRef);
+        }
+
         public void StartDialogue(ArticyRef articyRef)
         {
             var articyObject = articyRef.GetObject();
@@ -81,7 +86,7 @@ namespace Alabaster.DialogueSystem
         {
             isPaused = true;
             var debug = ((ArticyObject)branch.Target).Id;
-            Debug.Log(debug);
+            //Debug.Log(debug);
             flowPlayer.Play(branch);
         }
 
@@ -100,7 +105,7 @@ namespace Alabaster.DialogueSystem
 
         public void OnFlowPlayerPaused(IFlowObject aObject)
         {
-            Debug.Log(ArticyConversions.IFlowObjectToText(aObject));
+            //Debug.Log(ArticyConversions.IFlowObjectToText(aObject));
 
             if (IsCurrentObjectChoice())
             {
@@ -110,13 +115,13 @@ namespace Alabaster.DialogueSystem
 
             else if (IsNextObjectChoice())
             {
-                Debug.Log("Choice");
+                //Debug.Log("Choice");
                 DialogueUIController.Instance.CreateChoiceEntry(aObject);
             }
 
             else
             {
-                Debug.Log("Not Choice");
+                //Debug.Log("Not Choice");
                 DialogueUIController.Instance.CreateDialogueEntry(aObject);
             }
 

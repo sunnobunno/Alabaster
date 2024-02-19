@@ -34,7 +34,7 @@ namespace Alabaster.DialogueSystem.Utilities
             Vector3 offScreenPosition = new(elementLocalPosition.x, elementLocalPosition.y - screenHeight);
 
             gameObject.GetComponent<RectTransform>().localPosition = offScreenPosition;
-            Debug.Log($"{gameObject.name}: Set off screen");
+            //Debug.Log($"{gameObject.name}: Set off screen");
         }
 
         public static IEnumerator EaseInElement(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
@@ -53,9 +53,9 @@ namespace Alabaster.DialogueSystem.Utilities
             //Debug.Log($"{gameObject.name}: enabled");
 
             IEnumerator easeInChildElementCoroutine = DialogueElementUtilities.ParabolicMoveObjectRelative(gameObject,
-                0.5f,
+                2.0f,
                 gameObject.GetComponent<RectTransform>().localPosition,
-                new Vector2(0f, -DialogueMainTimelineContainer.Instance.GetComponent<VerticalLayoutGroup>().spacing),
+                new Vector2(0f, 0f),
                 slideInEndCallBack);
             callingObject.StartCoroutine(easeInChildElementCoroutine);
         }
@@ -206,11 +206,36 @@ namespace Alabaster.DialogueSystem.Utilities
             callingObject.StartCoroutine(callBackAtEndOfFrame);
         }
 
+        public static void EndOfFrameResizeElementByChildrenSizeDelta(MonoBehaviour callingObject, CallBackWithGameObject additionalCallback)
+        {
+            var gameObject = callingObject.gameObject;
+            CallBackWithGameObject callBack = ResizeElementByChildrenSizeDelta;
+            callBack += additionalCallback;
+            IEnumerator callBackAtEndOfFrame = CoCallBackAtEndOfFrame(callBack, gameObject);
+            callingObject.StartCoroutine(callBackAtEndOfFrame);
+        }
+
         public static void ResizeElementByChildrenSizeDelta(GameObject gameObject)
         {
             var rectTransform = gameObject.GetComponent<RectTransform>();
             rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
-            Debug.Log($"{gameObject.name}: resized");
+
+            string debugText = "";
+            if (gameObject.GetComponent<DialogueBoxController>() != null)
+            {
+                debugText = gameObject.GetComponent<DialogueBoxController>().Content;
+            }
+            else
+            {
+                debugText = gameObject.name;
+            }
+
+            if (gameObject.GetComponent<BoxContainer>() != null)
+            {
+                
+            }
+
+            Debug.Log($"{gameObject.name}: resized: {debugText}");
         }
 
         public static IEnumerator CoCallBackAtEndOfFrame(CallBackWithGameObject callBack, GameObject gameObject)

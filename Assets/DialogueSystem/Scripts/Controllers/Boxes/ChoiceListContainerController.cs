@@ -37,12 +37,13 @@ namespace Alabaster.DialogueSystem.Controllers
         void Awake()
         {
             SetReferences();
+            Debug.Log($"{gameObject.name}: Element Awake");
         }
 
         private void OnEnable()
         {
             ChoiceBoxController.SendClickedSignal += ListenResponseSignal;
-            Debug.Log("enabled");
+            //Debug.Log("enabled");
         }
 
         private void OnDisable()
