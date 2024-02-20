@@ -88,7 +88,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void ResizeElement()
         {
-            DialogueElementUtilities.EndOfFrameResizeElementByChildrenSizeDelta(this);
+            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this);
             
             //DialogueElementUtilities.VoidCallBack callBack = ResizeCallBack;
             //DialogueElementUtilities.CallBackAtEndOfFrame(callBack, this);

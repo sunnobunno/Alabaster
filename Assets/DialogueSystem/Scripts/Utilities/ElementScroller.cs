@@ -8,10 +8,8 @@ namespace Alabaster.DialogueSystem.Utilities
 {
     public static class ElementScroller
     {
-        public delegate void VoidCallBack();
-        public delegate void CallBackWithGameObject(GameObject gameObject);
 
-        public static void SlideInElementOffScreen(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
+        public static void SlideInElementOffScreen(GameObject gameObject, CallBacks.VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
         {
 
             IEnumerator coEaseInElement = EaseInElement(gameObject, slideInEndCallBack, callingObject);
@@ -29,13 +27,8 @@ namespace Alabaster.DialogueSystem.Utilities
             //Debug.Log($"{gameObject.name}: Set off screen");
         }
 
-        public static IEnumerator EaseInElement(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
+        public static IEnumerator EaseInElement(GameObject gameObject, CallBacks.VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
         {
-            //callingObject.enabled = false;
-            //Debug.Log($"{gameObject.name}: disabled");
-
-            
-
             gameObject.transform.parent.GetComponent<BoxContainer>().Hide();
 
             yield return new WaitForEndOfFrame();
@@ -47,14 +40,14 @@ namespace Alabaster.DialogueSystem.Utilities
             //Debug.Log($"{gameObject.name}: enabled");
 
             IEnumerator easeInChildElementCoroutine = ParabolicMoveObjectRelative(gameObject,
-                2.0f,
+                0.75f,
                 gameObject.GetComponent<RectTransform>().localPosition,
                 new Vector2(0f, 0f),
                 slideInEndCallBack);
             callingObject.StartCoroutine(easeInChildElementCoroutine);
         }
 
-        public static IEnumerator ParabolicMoveObjectRelative(GameObject objectToMove, float durationInSeconds, Vector3 initialPosition, Vector3 targetPosition, VoidCallBack callBack)
+        public static IEnumerator ParabolicMoveObjectRelative(GameObject objectToMove, float durationInSeconds, Vector3 initialPosition, Vector3 targetPosition, CallBacks.VoidCallBack callBack)
         {
             //Debug.Log("pre-move object position: " + objectToMove.GetComponent<RectTransform>().localPosition);
 

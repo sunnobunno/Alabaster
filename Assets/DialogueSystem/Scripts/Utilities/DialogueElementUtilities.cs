@@ -15,7 +15,7 @@ namespace Alabaster.DialogueSystem.Utilities
     public static class DialogueElementUtilities
     {
 
-
+        /*
         public static void SlideInElementOffScreen(GameObject gameObject, CallBacks.VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
         {
             
@@ -62,6 +62,7 @@ namespace Alabaster.DialogueSystem.Utilities
         //    IEnumerator easeInChildElementCoroutine = DialogueElementUtilities.ParabolicMoveObjectRelative(gameObject, 0.5f, gameObject.GetComponent<RectTransform>().localPosition, Vector3.zero, slideInEndCallBack);
         //    callingObject.StartCoroutine(easeInChildElementCoroutine);
         //}
+        */
 
         public static float GetObjectSizeDeltaY(GameObject gameObject)
         {
@@ -89,6 +90,7 @@ namespace Alabaster.DialogueSystem.Utilities
             return preferredHeightOfElement;
         }
 
+        /*
         public static IEnumerator ParabolicMoveObjectRelative(GameObject objectToMove, float durationInSeconds, Vector3 initialPosition, Vector3 targetPosition, CallBacks.VoidCallBack callBack)
         {
             //Debug.Log("pre-move object position: " + objectToMove.GetComponent<RectTransform>().localPosition);
@@ -179,7 +181,9 @@ namespace Alabaster.DialogueSystem.Utilities
 
             return y;
         }
+        */
 
+        /*
         public static void CallBackAtEndOfFrame(CallBacks.VoidCallBack callBack, MonoBehaviour callingObject)
         {
             IEnumerator callBackAtEndOfFrame = CoCallBackAtEndOfFrame(callBack);
@@ -191,9 +195,9 @@ namespace Alabaster.DialogueSystem.Utilities
             yield return new WaitForEndOfFrame();
             callBack?.Invoke();
         }
-
+        */
         
-
+        /*
         // NOTE TO SELF: This coroutine does not update in play mode while in scene mode.
         public static void EndOfFrameResizeElementByChildrenSizeDelta(MonoBehaviour callingObject)
         {
@@ -240,5 +244,6 @@ namespace Alabaster.DialogueSystem.Utilities
             yield return new WaitForEndOfFrame();
             callBack?.Invoke(gameObject);
         }
+        */
     }
 }

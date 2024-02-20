@@ -111,7 +111,7 @@ namespace Alabaster.DialogueSystem.Controllers
         public void ResizeElement()
         {
             ResizeSubElements();
-            DialogueElementUtilities.EndOfFrameResizeElementByChildrenSizeDelta(this);
+            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this);
         }
 
         public void GreyOutElement(bool isGrey)
