@@ -45,7 +45,7 @@ namespace Alabaster.EnvironmentSystem
         {
             mouseRelativeToCenter = GetMousePositionRelativeToCenter();
             //Debug.Log($"Screen size: {screenWidth}, {screenHeight}");
-            //Debug.Log($"Mouse relative to center: {mouseRelativeToCenter}");
+            Debug.Log($"Mouse relative to center: {mouseRelativeToCenter}");
         }
 
 
@@ -53,7 +53,8 @@ namespace Alabaster.EnvironmentSystem
         private Vector2 GetMousePositionRelativeToCenter()
         {
             var mousePositionClamped = new Vector2(Mathf.Clamp(Input.mousePosition.x, 0f, screenWidth), Mathf.Clamp(Input.mousePosition.y, 0f, screenHeight));
-            var worldPos = Camera.main.ScreenToWorldPoint(mousePositionClamped);
+            Debug.Log($"Mouse position clamped: {mousePositionClamped}");
+            var worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePositionClamped.x, mousePositionClamped.y, Camera.main.transform.localPosition.z));
             var worldPos0Z = new Vector3(worldPos.x, worldPos.y, 0f);
 
             return worldPos0Z;
