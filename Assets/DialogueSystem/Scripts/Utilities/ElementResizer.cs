@@ -10,15 +10,15 @@ namespace Alabaster.DialogueSystem.Utilities
         public static void EndOfFrameResizeElementByChildrenSizeDelta(MonoBehaviour callingObject)
         {
             var gameObject = callingObject.gameObject;
-            CallBacks.CallBackWithGameObject callBack = ResizeElementByChildrenSizeDelta;
+            CallBacks.VoidCallBackWithGameObject callBack = ResizeElementByChildrenSizeDelta;
             IEnumerator callBackAtEndOfFrame = CallBacks.CoCallBackAtEndOfFrame(callBack, gameObject);
             callingObject.StartCoroutine(callBackAtEndOfFrame);
         }
 
-        public static void EndOfFrameResizeElementByChildrenSizeDelta(MonoBehaviour callingObject, CallBacks.CallBackWithGameObject additionalCallback)
+        public static void EndOfFrameResizeElementByChildrenSizeDelta(MonoBehaviour callingObject, CallBacks.VoidCallBackWithGameObject additionalCallback)
         {
             var gameObject = callingObject.gameObject;
-            CallBacks.CallBackWithGameObject callBack = ResizeElementByChildrenSizeDelta;
+            CallBacks.VoidCallBackWithGameObject callBack = ResizeElementByChildrenSizeDelta;
             callBack += additionalCallback;
             IEnumerator callBackAtEndOfFrame = CallBacks.CoCallBackAtEndOfFrame(callBack, gameObject);
             callingObject.StartCoroutine(callBackAtEndOfFrame);

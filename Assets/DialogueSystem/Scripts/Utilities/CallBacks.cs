@@ -7,7 +7,7 @@ namespace Alabaster.DialogueSystem.Utilities
     public static class CallBacks
     {
         public delegate void VoidCallBack();
-        public delegate void CallBackWithGameObject(GameObject gameObject);
+        public delegate void VoidCallBackWithGameObject(GameObject gameObject);
 
         public static void CallBackAtEndOfFrame(VoidCallBack callBack, MonoBehaviour callingObject)
         {
@@ -21,7 +21,7 @@ namespace Alabaster.DialogueSystem.Utilities
             callBack?.Invoke();
         }
 
-        public static IEnumerator CoCallBackAtEndOfFrame(CallBackWithGameObject callBack, GameObject gameObject)
+        public static IEnumerator CoCallBackAtEndOfFrame(VoidCallBackWithGameObject callBack, GameObject gameObject)
         {
             yield return new WaitForEndOfFrame();
             callBack?.Invoke(gameObject);

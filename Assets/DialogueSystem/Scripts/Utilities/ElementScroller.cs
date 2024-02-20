@@ -47,6 +47,14 @@ namespace Alabaster.DialogueSystem.Utilities
             callingObject.StartCoroutine(easeInChildElementCoroutine);
         }
 
+        public static void EaseElementToTargetPosition(GameObject objectToMove, Vector3 targetPosition, CallBacks.VoidCallBack callBack, MonoBehaviour callingObject)
+        {
+            Vector3 initialPosition = objectToMove.GetComponent<RectTransform>().localPosition;
+
+            IEnumerator coParabolicMoveObjectRelative = ParabolicMoveObjectRelative(objectToMove, 0.75f, initialPosition, targetPosition, callBack);
+            callingObject.StartCoroutine(coParabolicMoveObjectRelative);
+        }
+
         public static IEnumerator ParabolicMoveObjectRelative(GameObject objectToMove, float durationInSeconds, Vector3 initialPosition, Vector3 targetPosition, CallBacks.VoidCallBack callBack)
         {
             //Debug.Log("pre-move object position: " + objectToMove.GetComponent<RectTransform>().localPosition);

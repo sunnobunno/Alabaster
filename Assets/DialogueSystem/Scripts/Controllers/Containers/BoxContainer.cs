@@ -51,7 +51,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void ResizeContainer()
         {
-            CallBacks.CallBackWithGameObject callBack = SetResizedTrue;
+            CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
             
             ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
             
