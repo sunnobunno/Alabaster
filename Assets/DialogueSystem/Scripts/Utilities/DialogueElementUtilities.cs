@@ -15,11 +15,8 @@ namespace Alabaster.DialogueSystem.Utilities
     public static class DialogueElementUtilities
     {
 
-        public delegate void VoidCallBack();
-        public delegate void CallBackWithGameObject(GameObject gameObject);
 
-
-        public static void SlideInElementOffScreen(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
+        public static void SlideInElementOffScreen(GameObject gameObject, CallBacks.VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
         {
             
             IEnumerator coEaseInElement = EaseInElement(gameObject, slideInEndCallBack, callingObject);
@@ -37,7 +34,7 @@ namespace Alabaster.DialogueSystem.Utilities
             //Debug.Log($"{gameObject.name}: Set off screen");
         }
 
-        public static IEnumerator EaseInElement(GameObject gameObject, VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
+        public static IEnumerator EaseInElement(GameObject gameObject, CallBacks.VoidCallBack slideInEndCallBack, MonoBehaviour callingObject)
         {
             //callingObject.enabled = false;
             //Debug.Log($"{gameObject.name}: disabled");
@@ -92,7 +89,7 @@ namespace Alabaster.DialogueSystem.Utilities
             return preferredHeightOfElement;
         }
 
-        public static IEnumerator ParabolicMoveObjectRelative(GameObject objectToMove, float durationInSeconds, Vector3 initialPosition, Vector3 targetPosition, VoidCallBack callBack)
+        public static IEnumerator ParabolicMoveObjectRelative(GameObject objectToMove, float durationInSeconds, Vector3 initialPosition, Vector3 targetPosition, CallBacks.VoidCallBack callBack)
         {
             //Debug.Log("pre-move object position: " + objectToMove.GetComponent<RectTransform>().localPosition);
 
@@ -183,13 +180,13 @@ namespace Alabaster.DialogueSystem.Utilities
             return y;
         }
 
-        public static void CallBackAtEndOfFrame(VoidCallBack callBack, MonoBehaviour callingObject)
+        public static void CallBackAtEndOfFrame(CallBacks.VoidCallBack callBack, MonoBehaviour callingObject)
         {
             IEnumerator callBackAtEndOfFrame = CoCallBackAtEndOfFrame(callBack);
             callingObject.StartCoroutine(callBackAtEndOfFrame);
         }
 
-        public static IEnumerator CoCallBackAtEndOfFrame(VoidCallBack callBack)
+        public static IEnumerator CoCallBackAtEndOfFrame(CallBacks.VoidCallBack callBack)
         {
             yield return new WaitForEndOfFrame();
             callBack?.Invoke();
@@ -201,15 +198,15 @@ namespace Alabaster.DialogueSystem.Utilities
         public static void EndOfFrameResizeElementByChildrenSizeDelta(MonoBehaviour callingObject)
         {
             var gameObject = callingObject.gameObject;
-            CallBackWithGameObject callBack = ResizeElementByChildrenSizeDelta;
+            CallBacks.CallBackWithGameObject callBack = ResizeElementByChildrenSizeDelta;
             IEnumerator callBackAtEndOfFrame = CoCallBackAtEndOfFrame(callBack, gameObject);
             callingObject.StartCoroutine(callBackAtEndOfFrame);
         }
 
-        public static void EndOfFrameResizeElementByChildrenSizeDelta(MonoBehaviour callingObject, CallBackWithGameObject additionalCallback)
+        public static void EndOfFrameResizeElementByChildrenSizeDelta(MonoBehaviour callingObject, CallBacks.CallBackWithGameObject additionalCallback)
         {
             var gameObject = callingObject.gameObject;
-            CallBackWithGameObject callBack = ResizeElementByChildrenSizeDelta;
+            CallBacks.CallBackWithGameObject callBack = ResizeElementByChildrenSizeDelta;
             callBack += additionalCallback;
             IEnumerator callBackAtEndOfFrame = CoCallBackAtEndOfFrame(callBack, gameObject);
             callingObject.StartCoroutine(callBackAtEndOfFrame);
@@ -238,13 +235,10 @@ namespace Alabaster.DialogueSystem.Utilities
             Debug.Log($"{gameObject.name}: resized: {debugText}");
         }
 
-        public static IEnumerator CoCallBackAtEndOfFrame(CallBackWithGameObject callBack, GameObject gameObject)
+        public static IEnumerator CoCallBackAtEndOfFrame(CallBacks.CallBackWithGameObject callBack, GameObject gameObject)
         {
             yield return new WaitForEndOfFrame();
             callBack?.Invoke(gameObject);
         }
-
-
-        
     }
 }
