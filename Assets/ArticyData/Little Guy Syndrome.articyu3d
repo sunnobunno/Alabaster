@@ -5122,7 +5122,7 @@
             "Text": "<align=left>Goodbye. For now.</align>",
             "ExternalId": "",
             "Position": {
-              "x": 100.0,
+              "x": 75.0,
               "y": 325.0
             },
             "ZIndex": 2.0,
@@ -5147,9 +5147,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x010000000000065D",
@@ -5158,9 +5158,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x0100000000000668",
@@ -6372,7 +6372,20 @@
               {
                 "Text": "",
                 "Id": "0x0100000000000778",
-                "Owner": "0x0100000000000774"
+                "Owner": "0x0100000000000774",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A5C",
+                    "Target": "0x0100000000000A59"
+                  }
+                ]
               }
             ]
           }
@@ -11293,7 +11306,7 @@
               "g": 0.149959788,
               "b": 0.002731743
             },
-            "Text": "<align=left>I'm armed and dangerous. Let's do this. [Open your eyes.]</align>",
+            "Text": "<align=left>I'm armed and dangerous. Let's do this. \\[Open your eyes.\\]</align>",
             "ExternalId": "",
             "Position": {
               "x": 3950.0,
@@ -13187,6 +13200,40 @@
                 "Text": "",
                 "Id": "0x0100000000000A54",
                 "Owner": "0x0100000000000A51"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Jump",
+          "Properties": {
+            "TechnicalName": "Jmp_4434B260",
+            "Id": "0x0100000000000A59",
+            "Parent": "0x0100000000000642",
+            "Target": "0x0100000000000654",
+            "TargetPin": "0x0100000000000657",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 5075.0,
+              "y": 350.0
+            },
+            "ZIndex": 91.0,
+            "Size": {
+              "w": 175.0,
+              "h": 150.0
+            },
+            "ShortId": 1144304224,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A5C",
+                "Owner": "0x0100000000000A59"
               }
             ]
           }
@@ -16085,6 +16132,11 @@
                     "Id": "0x0100000000000764",
                     "TechnicalName": "DFr_5EEB30B3",
                     "Type": "DialogueFragment"
+                  },
+                  {
+                    "Id": "0x0100000000000A59",
+                    "TechnicalName": "Jmp_4434B260",
+                    "Type": "Jump"
                   },
                   {
                     "Id": "0x010000000000076C",

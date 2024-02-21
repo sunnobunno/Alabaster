@@ -156,9 +156,9 @@ namespace Alabaster.DialogueSystem.Controllers
             bottomRightObjectRectTransform.localPosition = new Vector2(bottomRightObjectRectTransform.localPosition.x, (topObjectRectTransform.sizeDelta.y + contentObjectSize.y) * -1f);
         }
 
-        public void GreyOutElement(bool isGrey)
+        public void GreyOut(bool isGrey)
         {
-            textObjectController.GreyOutElement(isGrey);
+            textObjectController.GreyOut(isGrey);
         }
     }
 

@@ -13,7 +13,7 @@ using Alabaster.DialogueSystem.Utilities;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class DialogueBoxController : MonoBehaviour, IDialogueElementController<IFlowObject>
+    public class DialogueBoxController : DialogueElement, IDialogueElementController<IFlowObject>
     {
 
         [Header("Content")]
@@ -45,18 +45,7 @@ namespace Alabaster.DialogueSystem.Controllers
             set => contentObjectController.Content = value;
         }
 
-        private void Awake()
-        {
-            SetReferences();
-            Debug.Log($"{gameObject.name}: Element Awake");
-        }
-
-        void Start()
-        {
-            SetFields();
-        }
-
-        private void SetReferences()
+        protected override void SetReferences()
         {
             rectTransform = GetComponent<RectTransform>();
 
@@ -64,7 +53,7 @@ namespace Alabaster.DialogueSystem.Controllers
             titleObjectController = titleObject.GetComponent<IDialogueElementControllerWithContent>();
         }
 
-        private void SetFields()
+        protected override void SetFields()
         {
             contentObjectInitialLocalPosition = contentObject.transform.localPosition;
         }
@@ -111,13 +100,13 @@ namespace Alabaster.DialogueSystem.Controllers
         public void ResizeElement()
         {
             ResizeSubElements();
-            DialogueElementUtilities.EndOfFrameResizeElementByChildrenSizeDelta(this);
+            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this);
         }
 
-        public void GreyOutElement(bool isGrey)
+        public override void GreyOut(bool isGrey)
         {
-            titleObjectController.GreyOutElement(isGrey);
-            contentObjectController.GreyOutElement(isGrey);
+            titleObjectController.GreyOut(isGrey);
+            contentObjectController.GreyOut(isGrey);
         }
 
         public void ToggleTitle(bool toggle)
@@ -164,11 +153,11 @@ public class DialogueBoxControllerEditor : Editor
         }
         if (GUILayout.Button("Grey Out Element"))
         {
-            Selection.activeGameObject.GetComponent<DialogueBoxController>().GreyOutElement(true);
+            Selection.activeGameObject.GetComponent<DialogueBoxController>().GreyOut(true);
         }
         if (GUILayout.Button("White Out Element"))
         {
-            Selection.activeGameObject.GetComponent<DialogueBoxController>().GreyOutElement(false);
+            Selection.activeGameObject.GetComponent<DialogueBoxController>().GreyOut(false);
         }
     }
 }

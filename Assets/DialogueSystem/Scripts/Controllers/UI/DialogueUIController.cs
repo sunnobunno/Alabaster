@@ -18,9 +18,13 @@ namespace Alabaster.DialogueSystem
 
         [SerializeField] private float dialogueWidth;
         [SerializeField] private float screenHeight;
+        [SerializeField] private float autoScrollBottomThreshhold = 200f;
+        [SerializeField] private float scrollSpeed = 3f;
 
         public float DialogueWidth { get => dialogueWidth; }
         public float ScreenHeight { get => screenHeight; }
+        public float AutoScrollBottomThreshhold { get => autoScrollBottomThreshhold; }
+        public float ScrollSpeed { get => scrollSpeed; }
 
         private DialogueMainTimelineContainer timeLineContainer;
 
@@ -69,9 +73,11 @@ namespace Alabaster.DialogueSystem
         private IEnumerator CoListenResponseSignal(Branch branch)
         {
             timeLineContainer.ElementList.Last().DestroySelf();
+            timeLineContainer.ElementList[timeLineContainer.ElementList.Count - 2]?.GreyOut();
             Debug.Log("Destroyed choice list container");
             Debug.Log("Replacing choice with Dialogue Box");
-            timeLineContainer.AddDialogueBox(branch.Target as ArticyObject);
+            timeLineContainer.AddChoiceBoxCopy(branch);
+            timeLineContainer.LastElement.Child.GetComponent<ChoiceBoxController>().IsActive = false;
 
             // Wait to send response signal until the last element is resized to avoid vertical layout group errors
             while (timeLineContainer.ElementList.Last().IsResized == false)
@@ -84,6 +90,7 @@ namespace Alabaster.DialogueSystem
 
         private void ListenContinueSignal(IFlowObject aObject)
         {
+            timeLineContainer.ElementList[timeLineContainer.ElementList.Count -2]?.GreyOut();
             SendContinueSignal?.Invoke(aObject);
         }
 
@@ -118,7 +125,18 @@ namespace Alabaster.DialogueSystem
         private IEnumerator CoCreateDialogueEntry(IFlowObject aObject)
         {
             timeLineContainer.AddDialogueBox(aObject);
-            timeLineContainer.ElementList.Last().SlideInElement();
+            timeLineContainer.LastElement.SlideInElement();
+
+            while (timeLineContainer.LastElement.IsResized == false)
+            {
+                yield return null;
+            }
+
+            timeLineContainer.AddContinueBox(aObject);
+            timeLineContainer.LastElement.Hide();
+
+            timeLineContainer.ResizeContainer();
+            timeLineContainer.AutoScrollContainer();
 
             while (!timeLineContainer.IsElementSlideDone)
             {
@@ -126,7 +144,7 @@ namespace Alabaster.DialogueSystem
             }
             timeLineContainer.IsElementSlideDone = false;
 
-            timeLineContainer.AddContinueBox(aObject);
+            timeLineContainer.LastElement.Show();
         }
 
 
@@ -141,7 +159,18 @@ namespace Alabaster.DialogueSystem
         private IEnumerator CoCreateChoiceEntry(IFlowObject aObject)
         {
             timeLineContainer.AddDialogueBox(aObject);
-            timeLineContainer.ElementList.Last().SlideInElement();
+            timeLineContainer.LastElement.SlideInElement();
+
+            while (timeLineContainer.LastElement.IsResized == false)
+            {
+                yield return null;
+            }
+
+            timeLineContainer.AddChoiceList(aObject);
+            timeLineContainer.LastElement.Hide();
+
+            timeLineContainer.ResizeContainer();
+            timeLineContainer.AutoScrollContainer();
 
             while (!timeLineContainer.IsElementSlideDone)
             {
@@ -149,7 +178,7 @@ namespace Alabaster.DialogueSystem
             }
             timeLineContainer.IsElementSlideDone = false;
 
-            timeLineContainer.AddChoiceList(aObject);
+            timeLineContainer.ElementList.Last().Show();
         }
 
 

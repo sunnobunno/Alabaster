@@ -51,9 +51,9 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void ResizeContainer()
         {
-            DialogueElementUtilities.CallBackWithGameObject callBack = SetResizedTrue;
+            CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
             
-            DialogueElementUtilities.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
+            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
             
             //rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
         }
@@ -66,8 +66,8 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void SlideInElement()
         {
-            DialogueElementUtilities.VoidCallBack invokeSlideInEndSignal = InvokeSlideInEndSignal;
-            DialogueElementUtilities.SlideInElementOffScreen(childElement, invokeSlideInEndSignal, this);
+            CallBacks.VoidCallBack invokeSlideInEndSignal = InvokeSlideInEndSignal;
+            ElementScroller.SlideInElementOffScreen(childElement, invokeSlideInEndSignal, this);
         }
 
         private void InvokeSlideInEndSignal()
@@ -75,7 +75,11 @@ namespace Alabaster.DialogueSystem.Controllers
             SendSlideInEndSignal?.Invoke();
         }
 
-        
+        public void GreyOut()
+        {
+            Debug.Log("Greying out");
+            childElement.GetComponent<DialogueElement>()?.GreyOut(true);
+        }
 
         public void Hide()
         {

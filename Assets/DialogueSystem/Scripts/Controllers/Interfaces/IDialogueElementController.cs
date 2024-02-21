@@ -11,6 +11,6 @@ namespace Alabaster.DialogueSystem
 
         public void ResizeElement();
 
-        public void GreyOutElement(bool isGrey);
+        public void GreyOut(bool isGrey);
     }
 }

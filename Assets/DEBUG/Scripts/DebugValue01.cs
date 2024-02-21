@@ -27,6 +27,6 @@ public class DebugValue01 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_TextMeshPro.text = ParallaxEnvironmentController.Instance.ScreenDimensions.ToString();
+        m_TextMeshPro.text = ParallaxEnvironmentController.Instance.MouseRelativeToCenter.ToString();
     }
 }

@@ -114,7 +114,7 @@ namespace Alabaster.DialogueSystem.Controllers
             throw new System.NotImplementedException();
         }
 
-        public void GreyOutElement(bool isGrey)
+        public void GreyOut(bool isGrey)
         {
             throw new System.NotImplementedException();
         }

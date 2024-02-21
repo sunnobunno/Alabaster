@@ -7,7 +7,8 @@ namespace Alabaster.EnvironmentSystem
 {
     public class ParallaxElement : MonoBehaviour
     {
-        [SerializeField] private Vector2 parallaxMultiplier;
+        [SerializeField] private Vector2 parallaxPositionMultiplier;
+        [SerializeField] private Vector2 parallaxRotationMultiplier;
         [SerializeField] private float parallaxAcceleration;
 
         private Vector2 mouseRelativeToCenter;
@@ -48,9 +49,17 @@ namespace Alabaster.EnvironmentSystem
 
         private void UpdateTransformByParallax()
         {
-            transform.localPosition = ParallaxEnvironmentController.Instance.MouseRelativeToCenter * parallaxMultiplier;
+            transform.localPosition = ParallaxEnvironmentController.Instance.MouseRelativeToCenter * parallaxPositionMultiplier;
             //parallaxTarget = ParallaxEnvironmentController.Instance.MouseRelativeToCenter * parallaxMultiplier;
             //AccelerateToParallaxTarget();
+
+            float x = ParallaxEnvironmentController.Instance.MouseRelativeToCenter.x;
+            float y = -ParallaxEnvironmentController.Instance.MouseRelativeToCenter.y;
+
+            var eulerAngle = new Vector3(y, x, 0f);
+            var multiplier = new Vector2(parallaxRotationMultiplier.y, parallaxRotationMultiplier.x);
+
+            transform.eulerAngles = eulerAngle * multiplier;
         }
 
         private void AccelerateToParallaxTarget()
