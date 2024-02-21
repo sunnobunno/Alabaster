@@ -9,6 +9,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.Experimental.AI;
+using System.Runtime.CompilerServices;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
@@ -25,7 +26,9 @@ namespace Alabaster.DialogueSystem.Controllers
         [SerializeField] private GameObject dialougeBoxPrefab;
         [SerializeField] private GameObject continueBoxPrefab;
         [SerializeField] private GameObject responseListContainerPrefab;
+        [SerializeField] private GameObject choiceBoxPrefab;
         [SerializeField] private ArticyRef testArticyRef;
+
 
         #region Properties
         public GameObject DialogueElementContainerPrefab { get => dialogueElementContainerPrefab; }
@@ -38,6 +41,8 @@ namespace Alabaster.DialogueSystem.Controllers
         public bool IsElementSlideDone { get => slideInEndSignalRecieved; set => slideInEndSignalRecieved = value; }
         public bool IsLastElementResized { get => resizeBuffer; set => resizeBuffer = value; }
         public BoxContainer LastElement { get => dialogueElementList.Last(); }
+        public float EaseInSpeed { get => easeInSpeed; }
+        public float AutoScrollSpeed { get => autoScrollSpeed; }
         #endregion
 
 
@@ -48,7 +53,9 @@ namespace Alabaster.DialogueSystem.Controllers
         private RectTransform rectTransform;
         private VerticalLayoutGroup verticalLayoutGroup;
         private bool isTimeLineResized = false;
-        private float autoScrollTargetPositionFromBottomOfScreen;
+        private float easeInSpeed = 0.5f;
+        private float autoScrollSpeed = 0.5f;
+        private string lastTitle = "";
 
         private void Awake()
         {
@@ -62,7 +69,12 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private void Start()
         {
-            autoScrollTargetPositionFromBottomOfScreen = 100f;
+            
+        }
+
+        private void Update()
+        {
+            ManualScroll();
         }
 
         private void SetReferences()
@@ -99,7 +111,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private void ListenSlideInEndSignal()
         {
-            Debug.Log("SlideInEndSignal Recieved");
+            //Debug.Log("SlideInEndSignal Recieved");
             slideInEndSignalRecieved = true;
             SendSlideInEndSignal?.Invoke();
         }
@@ -112,7 +124,16 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void AddDialogueBox(IFlowObject aObject)
         {
+            var currentTitle = ArticyConversions.IFlowObjectToTitle(aObject);
+            
             AddDialogueElement(DialogueBoxPrefab, aObject);
+
+            if (currentTitle == lastTitle)
+            {
+                LastElement.Child.GetComponent<DialogueBoxController>().ToggleTitle(false);
+            }
+            
+            lastTitle = currentTitle;
         }
 
         public void AddContinueBox(IFlowObject aObject)
@@ -123,6 +144,11 @@ namespace Alabaster.DialogueSystem.Controllers
         public void AddChoiceList(IFlowObject aObject)
         {
             AddDialogueElement(ResponseListContainerPrefab, aObject);
+        }
+
+        public void AddChoiceBoxCopy(Branch branch)
+        {
+            AddDialogueElement(choiceBoxPrefab, branch);
         }
 
         // The goal of this class is to create an interface to perform all the requirements
@@ -155,6 +181,32 @@ namespace Alabaster.DialogueSystem.Controllers
             //DialogueElementController controller = dialogueElementPrefab.GetComponent<DialogueElementController>();
         }
 
+        public void AddDialogueElement(GameObject dialogueElementPrefab, Branch branch)
+        {
+            isTimeLineResized = false;
+
+            string aText = "";
+
+            if (ArticyConversions.BranchToText(branch) != null)
+            {
+                aText = ArticyConversions.BranchToText(branch);
+            }
+
+            Debug.Log($"----- NEW {dialogueElementPrefab.name}: {aText} -----");
+
+            GameObject newBoxContainer = InstantiateDialogueElementContainer();
+            GameObject newDialogueElement = InstantiateDialogueElement(dialogueElementPrefab);
+            ParentDialogueElementToSelf(newBoxContainer);
+            ParentDialogueElementToContainer(newDialogueElement, newBoxContainer);
+            dialogueElementList.Add(newBoxContainer.GetComponent<BoxContainer>());
+            //AddDialogueElementToElementList(newBoxContainer);
+
+            newDialogueElement.GetComponent<IDialogueElementController<Branch>>().InitializeElement(branch);
+            newBoxContainer.GetComponent<BoxContainer>().InitializeElement();
+
+            //DialogueElementController controller = dialogueElementPrefab.GetComponent<DialogueElementController>();
+        }
+
         private void ParentDialogueElementToSelf(GameObject dialogueElement)
         {
             dialogueElement.transform.SetParent(gameObject.transform, false);
@@ -172,7 +224,11 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private GameObject InstantiateDialogueElement(GameObject dialogueElementPrefab)
         {
-            GameObject newDialogueElement = GameObject.Instantiate(dialogueElementPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            var prefaxY = 0f;
+            var prefabX = dialogueElementPrefab.GetComponent<RectTransform>().localPosition.x;
+            var prefabStartingPosition = new Vector3(prefabX, prefaxY, 0f);
+            
+            GameObject newDialogueElement = GameObject.Instantiate(dialogueElementPrefab, prefabStartingPosition, Quaternion.identity);
             return newDialogueElement;
         }
 
@@ -200,7 +256,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
             rectTransform.sizeDelta = new Vector2(verticalLayoutGroup.preferredWidth, verticalLayoutGroup.preferredHeight);
-            Debug.Log($"TimeLine Resized: {verticalLayoutGroup.preferredHeight}");
+            //Debug.Log($"TimeLine Resized: {verticalLayoutGroup.preferredHeight}");
 
             isTimeLineResized = true;
         }
@@ -209,9 +265,9 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             float bottomOfContainer = rectTransform.localPosition.y - rectTransform.sizeDelta.y;
             float x = rectTransform.localPosition.x;
-            float y = rectTransform.sizeDelta.y + autoScrollTargetPositionFromBottomOfScreen;
+            float y = rectTransform.sizeDelta.y + DialogueUIController.Instance.AutoScrollBottomThreshhold;
 
-            if (bottomOfContainer > autoScrollTargetPositionFromBottomOfScreen)
+            if (bottomOfContainer > DialogueUIController.Instance.AutoScrollBottomThreshhold)
             {
                 y = rectTransform.localPosition.y;
             }
@@ -242,6 +298,14 @@ namespace Alabaster.DialogueSystem.Controllers
         private void AutoScrollEndCallBack()
         {
 
+        }
+
+        private void ManualScroll()
+        {
+            
+            Vector3 scrollDelta = new Vector3(0f, Input.mouseScrollDelta.y * DialogueUIController.Instance.ScrollSpeed * -1f);
+            //Debug.Log(scrollDelta);
+            rectTransform.localPosition += scrollDelta;
         }
     }
 

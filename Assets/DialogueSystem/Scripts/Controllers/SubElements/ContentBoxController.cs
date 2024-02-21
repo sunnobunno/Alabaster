@@ -56,7 +56,7 @@ namespace Alabaster.DialogueSystem.Controllers
             rectTransform.sizeDelta = new Vector2(DialogueUIController.Instance.DialogueWidth, textMeshPreferredSize.y);
         }
 
-        public void GreyOutElement(bool isGrey)
+        public void GreyOut(bool isGrey)
         {
             if (isGrey)
             {

@@ -19,9 +19,15 @@ namespace Alabaster.DialogueSystem.Utilities
 
         public static void SetElementOffScreen(GameObject gameObject)
         {
+            
+            
             float screenHeight = DialogueUIController.Instance.ScreenHeight;
             Vector3 elementLocalPosition = gameObject.GetComponent<RectTransform>().localPosition;
-            Vector3 offScreenPosition = new(elementLocalPosition.x, elementLocalPosition.y - screenHeight);
+            //Vector3 offScreenPosition = new(elementLocalPosition.x, elementLocalPosition.y - screenHeight);
+            var timeLinePosition = DialogueMainTimelineContainer.Instance.GetComponent<RectTransform>().localPosition;
+            var offScreenOffset = 0f;
+
+            var offScreenPosition = new Vector3(elementLocalPosition.x, -(timeLinePosition.y + offScreenOffset));
 
             gameObject.GetComponent<RectTransform>().localPosition = offScreenPosition;
             //Debug.Log($"{gameObject.name}: Set off screen");
@@ -40,7 +46,7 @@ namespace Alabaster.DialogueSystem.Utilities
             //Debug.Log($"{gameObject.name}: enabled");
 
             IEnumerator easeInChildElementCoroutine = ParabolicMoveObjectRelative(gameObject,
-                0.75f,
+                DialogueMainTimelineContainer.Instance.EaseInSpeed,
                 gameObject.GetComponent<RectTransform>().localPosition,
                 new Vector2(0f, 0f),
                 slideInEndCallBack);
@@ -51,7 +57,7 @@ namespace Alabaster.DialogueSystem.Utilities
         {
             Vector3 initialPosition = objectToMove.GetComponent<RectTransform>().localPosition;
 
-            IEnumerator coParabolicMoveObjectRelative = ParabolicMoveObjectRelative(objectToMove, 0.75f, initialPosition, targetPosition, callBack);
+            IEnumerator coParabolicMoveObjectRelative = ParabolicMoveObjectRelative(objectToMove, DialogueMainTimelineContainer.Instance.AutoScrollSpeed, initialPosition, targetPosition, callBack);
             callingObject.StartCoroutine(coParabolicMoveObjectRelative);
         }
 

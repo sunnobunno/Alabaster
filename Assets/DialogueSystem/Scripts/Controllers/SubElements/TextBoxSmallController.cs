@@ -75,9 +75,9 @@ namespace Alabaster.DialogueSystem.Controllers
             ResizeElement();
         }
 
-        public void GreyOutElement(bool isGrey)
+        public void GreyOut(bool isGrey)
         {
-            contentObjectController.GreyOutElement(isGrey);
+            contentObjectController.GreyOut(isGrey);
         }
     }
 }

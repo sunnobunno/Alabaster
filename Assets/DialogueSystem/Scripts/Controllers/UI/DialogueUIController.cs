@@ -18,9 +18,13 @@ namespace Alabaster.DialogueSystem
 
         [SerializeField] private float dialogueWidth;
         [SerializeField] private float screenHeight;
+        [SerializeField] private float autoScrollBottomThreshhold = 200f;
+        [SerializeField] private float scrollSpeed = 3f;
 
         public float DialogueWidth { get => dialogueWidth; }
         public float ScreenHeight { get => screenHeight; }
+        public float AutoScrollBottomThreshhold { get => autoScrollBottomThreshhold; }
+        public float ScrollSpeed { get => scrollSpeed; }
 
         private DialogueMainTimelineContainer timeLineContainer;
 
@@ -69,9 +73,11 @@ namespace Alabaster.DialogueSystem
         private IEnumerator CoListenResponseSignal(Branch branch)
         {
             timeLineContainer.ElementList.Last().DestroySelf();
+            timeLineContainer.ElementList[timeLineContainer.ElementList.Count - 2]?.GreyOut();
             Debug.Log("Destroyed choice list container");
             Debug.Log("Replacing choice with Dialogue Box");
-            timeLineContainer.AddDialogueBox(branch.Target as ArticyObject);
+            timeLineContainer.AddChoiceBoxCopy(branch);
+            timeLineContainer.LastElement.Child.GetComponent<ChoiceBoxController>().IsActive = false;
 
             // Wait to send response signal until the last element is resized to avoid vertical layout group errors
             while (timeLineContainer.ElementList.Last().IsResized == false)
@@ -84,6 +90,7 @@ namespace Alabaster.DialogueSystem
 
         private void ListenContinueSignal(IFlowObject aObject)
         {
+            timeLineContainer.ElementList[timeLineContainer.ElementList.Count -2]?.GreyOut();
             SendContinueSignal?.Invoke(aObject);
         }
 

@@ -29,6 +29,7 @@ namespace Alabaster.DialogueSystem.Controllers
         protected IDialogueElementControllerWithContent contentObjectController;
 
         protected Branch branch;
+        protected bool isActive = true;
 
         public TextBoxLargeImageAssets TextBoxImageAssets
         {
@@ -40,6 +41,18 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             get => contentObjectController.Content;
             set => contentObjectController.Content = value;
+        }
+
+        public bool IsActive { get => isActive;
+            set
+            {
+                if (value == true) { isActive = value; }
+                if (value == false)
+                {
+                    isActive = value;
+                    SetInactive();
+                }
+            }
         }
 
         public Branch Branch { get => branch; private set => branch = value; }
@@ -120,23 +133,34 @@ namespace Alabaster.DialogueSystem.Controllers
             contentObjectController.ResizeElement();
         }
 
-        public void GreyOutElement(bool isGrey)
+        public void GreyOut(bool isGrey)
         {
 
         }
 
+        private void SetInactive()
+        {
+            contentObjectController.TextColor = Color.white;
+        }
+
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
+            if (!isActive) return;
+            
             contentObjectController.TextColor = Color.yellow;
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
+            if (!isActive) return;
+
             contentObjectController.TextColor = Color.gray;
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
+            if (!isActive) return;
+
             //Debug.Log("choice clicked");
             SendClickedSignal?.Invoke(branch);
             //DestroySelf();

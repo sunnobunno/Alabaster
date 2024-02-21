@@ -44,7 +44,7 @@ namespace Alabaster.DialogueSystem.Utilities
 
             }
 
-            Debug.Log($"{gameObject.name}: resized: {debugText}");
+            //Debug.Log($"{gameObject.name}: resized: {debugText}");
         }
     }
 }

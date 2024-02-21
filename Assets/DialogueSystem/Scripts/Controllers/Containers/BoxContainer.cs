@@ -75,7 +75,11 @@ namespace Alabaster.DialogueSystem.Controllers
             SendSlideInEndSignal?.Invoke();
         }
 
-        
+        public void GreyOut()
+        {
+            Debug.Log("Greying out");
+            childElement.GetComponent<DialogueElement>()?.GreyOut(true);
+        }
 
         public void Hide()
         {

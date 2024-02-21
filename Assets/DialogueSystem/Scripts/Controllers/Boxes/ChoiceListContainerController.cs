@@ -127,7 +127,7 @@ namespace Alabaster.DialogueSystem.Controllers
             dialogueElement.transform.SetParent(gameObject.transform, false);
         }
 
-        public void GreyOutElement(bool isGrey)
+        public void GreyOut(bool isGrey)
         {
             //throw new NotImplementedException();
         }
