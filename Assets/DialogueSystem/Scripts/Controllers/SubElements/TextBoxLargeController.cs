@@ -10,7 +10,7 @@ using Alabaster.DialogueSystem.Utilities;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class TextBoxLargeController : MonoBehaviour, IDialogueElementControllerWithContent
+    public class TextBoxLargeController : DialogueElement, IDialogueElementControllerWithContent
     {
 
         [SerializeField] private TextBoxLargeImageAssets textBoxImageAssets;
@@ -68,14 +68,14 @@ namespace Alabaster.DialogueSystem.Controllers
             set => textObjectController.TextColor = value;
         }
 
-        private void Awake()
+        protected override void Awake()
         {
-            SetElementComponentReferences();
+            SetReferences();
         }
 
-        private void Start()
+        protected override void Start()
         {
-            SetTextBoxImageAssets();
+            SetFields();
         }
 
         public void InitializeElement(string content)
@@ -86,7 +86,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
 
 
-        private void SetElementComponentReferences()
+        protected override void SetReferences()
         {
             contentTextMesh = contentObject.GetComponent<TextMeshProUGUI>();
             textObjectController = contentObject.GetComponent<IDialogueElementControllerWithContent>();
@@ -113,6 +113,11 @@ namespace Alabaster.DialogueSystem.Controllers
             bottomRightObjectImage = bottomRightObject.GetComponent<Image>();
         }
 
+        protected override void SetFields()
+        {
+            SetTextBoxImageAssets();
+        }
+
         private void SetTextBoxImageAssets()
         {
             //Debug.Log(textBoxImageAssets.center.name);
@@ -134,13 +139,14 @@ namespace Alabaster.DialogueSystem.Controllers
             ResizeElement();
         }
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
-            ResizeGraphicalElements();
+            ResizeSubElements();
             GetComponent<RectTransform>().sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(this.gameObject);
+            isResized = true;
         }
 
-        public void ResizeGraphicalElements()
+        public void ResizeSubElements()
         {
             contentObject.GetComponent<ContentBoxController>().ResizeElement();
             Vector2 contentObjectSize = contentObject.GetComponent<RectTransform>().sizeDelta;
@@ -156,7 +162,7 @@ namespace Alabaster.DialogueSystem.Controllers
             bottomRightObjectRectTransform.localPosition = new Vector2(bottomRightObjectRectTransform.localPosition.x, (topObjectRectTransform.sizeDelta.y + contentObjectSize.y) * -1f);
         }
 
-        public void GreyOut(bool isGrey)
+        public override void GreyOut(bool isGrey)
         {
             textObjectController.GreyOut(isGrey);
         }

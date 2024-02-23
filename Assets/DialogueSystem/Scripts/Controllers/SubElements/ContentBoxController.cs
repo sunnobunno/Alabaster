@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class ContentBoxController : MonoBehaviour, IDialogueElementControllerWithContent
+    public class ContentBoxController : DialogueElement, IDialogueElementControllerWithContent
     {
         //[SerializeField] private string content;
 
@@ -28,21 +28,28 @@ namespace Alabaster.DialogueSystem.Controllers
 
         }
 
-        private void Awake()
+        protected override void Awake()
         {
-            SetElementComponentReferences();
+            SetReferences();
         }
 
 
         public void InitializeElement(string content)
         {
 
+            SetContent(content);
+            ResizeElement();
         }
 
-        private void SetElementComponentReferences()
+        protected override void SetReferences()
         {
             contentTextMesh = GetComponent<TextMeshProUGUI>();
             rectTransform = GetComponent<RectTransform>();
+        }
+
+        protected override void SetFields()
+        {
+            
         }
 
         public void SetContent(string content)
@@ -50,13 +57,14 @@ namespace Alabaster.DialogueSystem.Controllers
             Content = content;
         }
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
             Vector2 textMeshPreferredSize = contentTextMesh.GetPreferredValues();
             rectTransform.sizeDelta = new Vector2(DialogueUIController.Instance.DialogueWidth, textMeshPreferredSize.y);
+            isResized = true;
         }
 
-        public void GreyOut(bool isGrey)
+        public override void GreyOut(bool isGrey)
         {
             if (isGrey)
             {

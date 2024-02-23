@@ -39,7 +39,6 @@ namespace Alabaster.DialogueSystem.Controllers
         public float ElementCount { get => dialogueElementList.Count; }
         public List<BoxContainer> ElementList { get => dialogueElementList; }
         public bool IsElementSlideDone { get => slideInEndSignalRecieved; set => slideInEndSignalRecieved = value; }
-        public bool IsLastElementResized { get => resizeBuffer; set => resizeBuffer = value; }
         public BoxContainer LastElement { get => dialogueElementList.Last(); }
         public float EaseInSpeed { get => easeInSpeed; }
         public float AutoScrollSpeed { get => autoScrollSpeed; }

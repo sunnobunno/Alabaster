@@ -8,7 +8,7 @@ using Alabaster.DialogueSystem.Utilities;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class TextBoxSmallController : MonoBehaviour, IDialogueElementControllerWithContent
+    public class TextBoxSmallController : DialogueElement, IDialogueElementControllerWithContent
     {
         [SerializeField] private GameObject contentObject;
         [SerializeField] private GameObject centerObject;
@@ -35,9 +35,14 @@ namespace Alabaster.DialogueSystem.Controllers
 
         }
 
-        private void Awake()
+        protected override void Awake()
         {
-            SetElementComponentReferences();
+            SetReferences();
+        }
+
+        protected override void SetFields()
+        {
+            
         }
 
         public void InitializeElement(string initializeData)
@@ -45,7 +50,7 @@ namespace Alabaster.DialogueSystem.Controllers
             SetContent(initializeData);
         }
 
-        private void SetElementComponentReferences()
+        protected override void SetReferences()
         {
             contentTextMesh = contentObject.GetComponent<TextMeshProUGUI>();
             contentObjectController = contentObject.GetComponent<IDialogueElementControllerWithContent>();
@@ -56,7 +61,7 @@ namespace Alabaster.DialogueSystem.Controllers
             //contentMarginRight = contentObjectRectTransform.transform.localPosition.x;
         }
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
             float contentPreferredWidth = contentTextMesh.preferredWidth;
 
@@ -75,7 +80,7 @@ namespace Alabaster.DialogueSystem.Controllers
             ResizeElement();
         }
 
-        public void GreyOut(bool isGrey)
+        public override void GreyOut(bool isGrey)
         {
             contentObjectController.GreyOut(isGrey);
         }

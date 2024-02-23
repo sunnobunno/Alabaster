@@ -24,6 +24,16 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public GameObject Child { get => childElement; }
 
+        protected override void Awake()
+        {
+            
+        }
+
+        protected override void Start()
+        {
+            
+        }
+
         public void InitializeElement()
         {
             SetReferences();
@@ -60,7 +70,7 @@ namespace Alabaster.DialogueSystem.Controllers
         private void SetResizedTrue(GameObject gameObject)
         {
             isResized = true;
-            //Debug.Log(isResized);
+            Debug.Log($"{gameObject.name}: resized callback complete");
         }
 
         public void SlideInElement()

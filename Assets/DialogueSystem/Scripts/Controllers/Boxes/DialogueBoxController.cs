@@ -76,7 +76,7 @@ namespace Alabaster.DialogueSystem.Controllers
             //Debug.Log(content);
 
             SetContent(content);
-            InitializeTitleObject(title);
+            SetTitle(title);
 
             ResizeElement();
         }
@@ -86,7 +86,7 @@ namespace Alabaster.DialogueSystem.Controllers
             contentObjectController.InitializeElement(content);
         }
 
-        public void InitializeTitleObject(string title)
+        public void SetTitle(string title)
         {
             titleObjectController.InitializeElement(title);
         }
