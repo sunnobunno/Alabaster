@@ -97,7 +97,7 @@ namespace Alabaster.DialogueSystem.Controllers
             contentObjectController.ResizeElement();
         }
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
             ResizeSubElements();
             ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this);

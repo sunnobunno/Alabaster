@@ -80,7 +80,7 @@ namespace Alabaster.DialogueSystem.Controllers
             ResizeElement();
         }
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
             ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this);
             

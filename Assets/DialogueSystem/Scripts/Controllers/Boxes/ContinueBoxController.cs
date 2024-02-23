@@ -61,7 +61,7 @@ namespace Alabaster.DialogueSystem.Controllers
             DestroySelf();
         }
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
 
         }

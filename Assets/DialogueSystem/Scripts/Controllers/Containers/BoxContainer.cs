@@ -21,15 +21,13 @@ namespace Alabaster.DialogueSystem.Controllers
         private GameObject childElement;
         private DialogueElement childDialogueElementController;
         private CanvasGroup canvasGroup;
-        private bool isResized = false;
 
         public GameObject Child { get => childElement; }
-        public bool IsResized { get { return isResized; } }
 
         public void InitializeElement()
         {
             SetReferences();
-            ResizeContainer();
+            ResizeElement();
         }
 
         protected override void SetReferences()
@@ -52,13 +50,11 @@ namespace Alabaster.DialogueSystem.Controllers
             Destroy(gameObject);
         }
 
-        public void ResizeContainer()
+        public override void ResizeElement()
         {
             CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
             
             ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
-            
-            //rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
         }
 
         private void SetResizedTrue(GameObject gameObject)
@@ -108,7 +104,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
             if (GUILayout.Button("Resize Container"))
             {
-                Selection.activeGameObject.GetComponent<BoxContainer>().ResizeContainer();
+                Selection.activeGameObject.GetComponent<BoxContainer>().ResizeElement();
             }
             if (GUILayout.Button("Slide In Element"))
             {

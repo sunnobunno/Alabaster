@@ -111,7 +111,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
             ResizeSubElements();
             rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
