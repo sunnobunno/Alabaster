@@ -72,6 +72,8 @@ namespace Alabaster.DialogueSystem.Controllers
             //Debug.Log(centerObjectRectTransform.sizeDelta);
 
             GetComponent<RectTransform>().sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(this.gameObject);
+
+            isResized = true;
         }
 
         public void SetContent(string content)
