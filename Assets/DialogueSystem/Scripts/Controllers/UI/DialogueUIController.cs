@@ -73,7 +73,7 @@ namespace Alabaster.DialogueSystem
         private IEnumerator CoListenResponseSignal(Branch branch)
         {
             timeLineContainer.ElementList.Last().DestroySelf();
-            timeLineContainer.ElementList[timeLineContainer.ElementList.Count - 2]?.GreyOut();
+            timeLineContainer.ElementList[timeLineContainer.ElementList.Count - 2]?.GreyOut(true);
             Debug.Log("Destroyed choice list container");
             Debug.Log("Replacing choice with Dialogue Box");
             timeLineContainer.AddChoiceBoxCopy(branch);
@@ -90,7 +90,7 @@ namespace Alabaster.DialogueSystem
 
         private void ListenContinueSignal(IFlowObject aObject)
         {
-            timeLineContainer.ElementList[timeLineContainer.ElementList.Count -2]?.GreyOut();
+            timeLineContainer.ElementList[timeLineContainer.ElementList.Count -2]?.GreyOut(true);
             SendContinueSignal?.Invoke(aObject);
         }
 

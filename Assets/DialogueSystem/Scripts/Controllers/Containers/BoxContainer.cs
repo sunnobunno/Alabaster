@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class BoxContainer : MonoBehaviour
+    public class BoxContainer : DialogueElement
     {
 
         public static event Action SendSlideInEndSignal;
@@ -19,16 +19,12 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private RectTransform rectTransform;
         private GameObject childElement;
+        private DialogueElement childDialogueElementController;
         private CanvasGroup canvasGroup;
         private bool isResized = false;
 
         public GameObject Child { get => childElement; }
         public bool IsResized { get { return isResized; } }
-
-        void Awake()
-        {
-            
-        }
 
         public void InitializeElement()
         {
@@ -36,11 +32,18 @@ namespace Alabaster.DialogueSystem.Controllers
             ResizeContainer();
         }
 
-        private void SetReferences()
+        protected override void SetReferences()
         {
             rectTransform = gameObject.GetComponent<RectTransform>();
             childElement = DialogueElementUtilities.GetChildElement(gameObject);
             canvasGroup = GetComponent<CanvasGroup>();
+            childDialogueElementController = DialogueElementUtilities.GetChildDialogueElementController(gameObject);
+            //Debug.Log($"{childDialogueElementController?.gameObject.name} hi");
+        }
+
+        protected override void SetFields()
+        {
+            
         }
 
         public void DestroySelf()
@@ -75,7 +78,7 @@ namespace Alabaster.DialogueSystem.Controllers
             SendSlideInEndSignal?.Invoke();
         }
 
-        public void GreyOut()
+        public override void GreyOut(bool isGrey)
         {
             Debug.Log("Greying out");
             childElement.GetComponent<DialogueElement>()?.GreyOut(true);
