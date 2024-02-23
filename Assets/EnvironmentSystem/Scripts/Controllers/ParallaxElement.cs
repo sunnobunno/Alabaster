@@ -34,7 +34,7 @@ namespace Alabaster.EnvironmentSystem
 
         private void SetFields()
         {
-            mouseRelativeToCenter = ParallaxEnvironmentController.Instance.MouseRelativeToCenter;
+            mouseRelativeToCenter = ParallaxEnvironmentController.Instance.MouseWorldPosRelativeToCenter;
             scale = transform.localScale;
         }
 
@@ -49,12 +49,12 @@ namespace Alabaster.EnvironmentSystem
 
         private void UpdateTransformByParallax()
         {
-            transform.localPosition = ParallaxEnvironmentController.Instance.MouseRelativeToCenter * parallaxPositionMultiplier;
+            transform.localPosition = ParallaxEnvironmentController.Instance.MouseWorldPosRelativeToCenter * parallaxPositionMultiplier;
             //parallaxTarget = ParallaxEnvironmentController.Instance.MouseRelativeToCenter * parallaxMultiplier;
             //AccelerateToParallaxTarget();
 
-            float x = ParallaxEnvironmentController.Instance.MouseRelativeToCenter.x;
-            float y = -ParallaxEnvironmentController.Instance.MouseRelativeToCenter.y;
+            float x = ParallaxEnvironmentController.Instance.MouseWorldPosRelativeToCenter.x;
+            float y = -ParallaxEnvironmentController.Instance.MouseWorldPosRelativeToCenter.y;
 
             var eulerAngle = new Vector3(y, x, 0f);
             var multiplier = new Vector2(parallaxRotationMultiplier.y, parallaxRotationMultiplier.x);

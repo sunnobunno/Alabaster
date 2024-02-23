@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -9,6 +10,10 @@ namespace Alabaster.DialogueSystem.Utilities
     {
         public static Vector2 GetSizeOfChildren(GameObject parent)
         {
+            
+
+            
+
             UnityEngine.Transform transform = parent.transform;
 
             var children = new List<RectTransform>();
@@ -45,7 +50,7 @@ namespace Alabaster.DialogueSystem.Utilities
                 //Debug.Log($"temp_max_x: {temp_max_x}");
                 //Debug.Log($"temp_min_y: {temp_min_y}");
                 //Debug.Log($"temp_max_y: {temp_max_y}");
-                
+
 
                 if (temp_min_x < min_x)
                     min_x = temp_min_x;
@@ -58,15 +63,19 @@ namespace Alabaster.DialogueSystem.Utilities
                     max_y = temp_max_y;
             }
 
-            
+
             //Debug.Log("RESULTS");
             //Debug.Log($"min_x: {min_x}");
             //Debug.Log($"max_x: {max_x}");
             //Debug.Log($"min_y: {min_y}");
             //Debug.Log($"max_y: {max_y}");
+
             
 
             Vector2 sizeOfChildren = new Vector2(max_x - min_x, max_y - min_y);
+
+            
+
             return sizeOfChildren;
         }
     }

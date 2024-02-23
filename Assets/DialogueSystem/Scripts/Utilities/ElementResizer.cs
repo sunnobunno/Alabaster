@@ -26,8 +26,50 @@ namespace Alabaster.DialogueSystem.Utilities
 
         public static void ResizeElementByChildrenSizeDelta(GameObject gameObject)
         {
+            var initialPivot = gameObject.GetComponent<RectTransform>().pivot;
+            var standardPivot = new Vector2(0f, 1f);
+            gameObject.GetComponent<RectTransform>().pivot = standardPivot;
+            
+
             var rectTransform = gameObject.GetComponent<RectTransform>();
+            var standardLocalPosition = rectTransform.anchoredPosition;
+            var pivotDifference = standardPivot - initialPivot;
+            var initialSizeDelta = rectTransform.sizeDelta;
+
+            var xAdjust = initialSizeDelta.x * pivotDifference.x;
+            var yAdjust = initialSizeDelta.y * pivotDifference.y;
+            var positionAdjust = new Vector3(xAdjust, yAdjust);
+            rectTransform.localPosition += positionAdjust;
+
+            Debug.Log(positionAdjust);
+
             rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+
+            //Debug.Log($"newSizeDelta: {rectTransform.sizeDelta}");
+
+            gameObject.GetComponent<RectTransform>().pivot = initialPivot;
+            xAdjust = -rectTransform.sizeDelta.x * pivotDifference.x;
+            yAdjust = -rectTransform.sizeDelta.y * pivotDifference.y;
+            positionAdjust = new Vector3(xAdjust, yAdjust);
+            rectTransform.localPosition += positionAdjust;
+
+            //var newPivotX = standardLocalPosition.x + (rectTransform.sizeDelta.x * pivotDifference.x);
+            //var newPivotY = standardLocalPosition.y + (rectTransform.sizeDelta.y * pivotDifference.y);
+            //var newLocalPosition = new Vector3(newPivotX, newPivotY);
+
+
+            //rectTransform.localPosition = newLocalPosition;
+            //gameObject.GetComponent<RectTransform>().pivot = initialPivot;
+
+            Debug.Log(standardLocalPosition);
+            Debug.Log(rectTransform.localPosition);
+
+            //var pivotDifference = initialPivot - standardPivot;
+            //gameObject.GetComponent<RectTransform>().localPosition += new Vector3(sizeOfChildren.x * pivotDifference.x, sizeOfChildren.y * pivotDifference.y);
+
+            //Debug.Log(parent.GetComponent<RectTransform>().localPosition);
+            //Debug.Log(initialPivot);
+            //Debug.Log(pivotDifference);
 
             string debugText = "";
             if (gameObject.GetComponent<DialogueBoxController>() != null)
