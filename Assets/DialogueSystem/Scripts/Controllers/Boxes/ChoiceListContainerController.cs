@@ -82,7 +82,11 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public override void ResizeElement()
         {
-            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this);
+            if (isResized) { return; }
+
+
+            CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
+            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
             
             //DialogueElementUtilities.VoidCallBack callBack = ResizeCallBack;
             //DialogueElementUtilities.CallBackAtEndOfFrame(callBack, this);

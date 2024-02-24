@@ -40,7 +40,7 @@ namespace Alabaster.DialogueSystem.Utilities
             }
             //RectTransform children = transform.GetComponentInChildren<RectTransform>();
 
-            Debug.Log($"{parent.name} Child Count: {children.Count}");
+            //Debug.Log($"{parent.name} Child Count: {children.Count}");
 
             float min_x, max_x, min_y, max_y;
             min_x = max_x = 0f;
@@ -63,11 +63,11 @@ namespace Alabaster.DialogueSystem.Utilities
                 temp_min_y = Mathf.Abs(childTopLeftLocalPosition.y);
                 temp_max_y = Mathf.Abs(childTopLeftLocalPosition.y) + childRectTransform.sizeDelta.y;
 
-                Debug.Log($"localPosition.y: {child.localPosition.y}");
-                Debug.Log($"temp_min_x: {temp_min_x}");
-                Debug.Log($"temp_max_x: {temp_max_x}");
-                Debug.Log($"temp_min_y: {temp_min_y}");
-                Debug.Log($"temp_max_y: {temp_max_y}");
+                //Debug.Log($"localPosition.y: {child.localPosition.y}");
+                //Debug.Log($"temp_min_x: {temp_min_x}");
+                //Debug.Log($"temp_max_x: {temp_max_x}");
+                //Debug.Log($"temp_min_y: {temp_min_y}");
+                //Debug.Log($"temp_max_y: {temp_max_y}");
 
 
                 if (temp_min_x < min_x)
@@ -82,11 +82,11 @@ namespace Alabaster.DialogueSystem.Utilities
             }
 
 
-            Debug.Log("RESULTS");
-            Debug.Log($"min_x: {min_x}");
-            Debug.Log($"max_x: {max_x}");
-            Debug.Log($"min_y: {min_y}");
-            Debug.Log($"max_y: {max_y}");
+            //Debug.Log("RESULTS");
+            //Debug.Log($"min_x: {min_x}");
+            //Debug.Log($"max_x: {max_x}");
+            //Debug.Log($"min_y: {min_y}");
+            //Debug.Log($"max_y: {max_y}");
 
 
 

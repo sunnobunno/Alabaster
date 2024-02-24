@@ -145,7 +145,7 @@ namespace Alabaster.DialogueSystem.Controllers
             GetComponent<RectTransform>().sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(this.gameObject);
             isResized = true;
 
-            Debug.Log($"{gameObject.name}: resized");
+            //Debug.Log($"{gameObject.name}: resized");
         }
 
         public void ResizeSubElements()

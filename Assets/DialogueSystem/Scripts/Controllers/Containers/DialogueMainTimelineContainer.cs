@@ -174,8 +174,8 @@ namespace Alabaster.DialogueSystem.Controllers
             dialogueElementList.Add(newBoxContainer.GetComponent<BoxContainer>());
             //AddDialogueElementToElementList(newBoxContainer);
 
-            newDialogueElement.GetComponent<IDialogueElementController<IFlowObject>>().InitializeElement(aObject);
-            newBoxContainer.GetComponent<BoxContainer>().InitializeElement();
+            //newDialogueElement.GetComponent<IDialogueElementController<IFlowObject>>().InitializeElement(aObject);
+            newBoxContainer.GetComponent<BoxContainer>().InitializeElement<IFlowObject>(aObject);
 
             //DialogueElementController controller = dialogueElementPrefab.GetComponent<DialogueElementController>();
         }

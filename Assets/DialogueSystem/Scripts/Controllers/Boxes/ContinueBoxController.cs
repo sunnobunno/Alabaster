@@ -30,6 +30,7 @@ namespace Alabaster.DialogueSystem.Controllers
         public void SetContent(IFlowObject aObject)
         {
             this.aObject = aObject;
+            ResizeElement();
         }
 
         protected override void SetReferences()
@@ -63,7 +64,9 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public override void ResizeElement()
         {
-
+            if (isResized) { return; }
+            
+            SetResizedTrue(gameObject);
         }
 
         public override void GreyOut(bool isGrey)

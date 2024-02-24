@@ -1,3 +1,4 @@
+using Alabaster.DialogueSystem;
 using Alabaster.DialogueSystem.Controllers;
 using Alabaster.DialogueSystem.Utilities;
 using Alabaster.GameState;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace Alabaster.EnvironmentSystem
 {
-    public class ParallaxElementUI : MonoBehaviour
+    public class ParallaxElementUI : DialogueElement
     {
         [SerializeField] private Vector2 parallaxPositionMultiplier;
         [SerializeField] private Vector2 parallaxRotationMultiplier;
@@ -27,23 +28,23 @@ namespace Alabaster.EnvironmentSystem
         public bool Active { get { return active; } set { active = value; } }
 
 
-        private void Awake()
+        protected override void Awake()
         {
             SetReferences();
         }
 
         // Start is called before the first frame update
-        void Start()
+        protected override void Start()
         {
             SetFields();
         }
 
-        private void SetReferences()
+        protected override void SetReferences()
         {
             rectTransform = GetComponent<RectTransform>();
         }
 
-        private void SetFields()
+        protected override void SetFields()
         {
             mouseRelativeToCenter = ParallaxEnvironmentController.Instance.MouseWorldPosRelativeToCenter;
             scale = transform.localScale;
@@ -55,6 +56,11 @@ namespace Alabaster.EnvironmentSystem
         private void UpdateFields()
         {
             mouseRelativeToCenter = ParallaxEnvironmentController.Instance.MouseScreenPosRelativeToCenter;
+        }
+
+        public override void GreyOut(bool isGrey)
+        {
+
         }
 
         // Update is called once per frame
@@ -94,16 +100,18 @@ namespace Alabaster.EnvironmentSystem
             //rectTransform.pivot = initialPivot;
         }
 
-        public void Resize()
+        public override void ResizeElement()
         {
+            if (isResized) return;
+            
             CallBacks.VoidCallBackWithGameObject callBack = ResizeEnd;
-            //rectTransform.pivot = new Vector2(0f, 1f);
             ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
         }
 
         private void ResizeEnd(GameObject gameObject)
         {
             positionOffset = rectTransform.localPosition;
+            isResized = true;
             Debug.Log("resize end");
         }
 
@@ -133,7 +141,7 @@ namespace Alabaster.EnvironmentSystem
 
             if (GUILayout.Button("Resize"))
             {
-                Selection.activeGameObject.GetComponent<ParallaxElementUI>().Resize();
+                Selection.activeGameObject.GetComponent<ParallaxElementUI>().ResizeElement();
             }
         }
     }

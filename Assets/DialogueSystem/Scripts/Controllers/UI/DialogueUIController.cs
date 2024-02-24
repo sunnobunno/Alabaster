@@ -73,7 +73,7 @@ namespace Alabaster.DialogueSystem
         private IEnumerator CoListenResponseSignal(Branch branch)
         {
             timeLineContainer.ElementList.Last().DestroySelf();
-            timeLineContainer.ElementList[timeLineContainer.ElementList.Count - 2]?.GreyOut(true);
+            timeLineContainer.ElementList[^2]?.GreyOut(true);
             Debug.Log("Destroyed choice list container");
             Debug.Log("Replacing choice with Dialogue Box");
             timeLineContainer.AddChoiceBoxCopy(branch);
@@ -125,12 +125,16 @@ namespace Alabaster.DialogueSystem
         private IEnumerator CoCreateDialogueEntry(IFlowObject aObject)
         {
             timeLineContainer.AddDialogueBox(aObject);
-            timeLineContainer.LastElement.SlideInElement();
+            //timeLineContainer.LastElement.Hide();
+            //Debug.Log($"{timeLineContainer.LastElement.IsResized} hiiiii");
+            //timeLineContainer.LastElement.SlideInElement();
 
             while (timeLineContainer.LastElement.IsResized == false)
             {
                 yield return null;
             }
+
+            timeLineContainer.LastElement.SlideInElement();
 
             timeLineContainer.AddContinueBox(aObject);
             timeLineContainer.LastElement.Hide();
@@ -159,12 +163,15 @@ namespace Alabaster.DialogueSystem
         private IEnumerator CoCreateChoiceEntry(IFlowObject aObject)
         {
             timeLineContainer.AddDialogueBox(aObject);
-            timeLineContainer.LastElement.SlideInElement();
+            //Debug.Log($"{timeLineContainer.LastElement.IsResized} hiiiii");
+            //timeLineContainer.LastElement.SlideInElement();
 
             while (timeLineContainer.LastElement.IsResized == false)
             {
                 yield return null;
             }
+
+            timeLineContainer.LastElement.SlideInElement();
 
             timeLineContainer.AddChoiceList(aObject);
             timeLineContainer.LastElement.Hide();
@@ -178,7 +185,7 @@ namespace Alabaster.DialogueSystem
             }
             timeLineContainer.IsElementSlideDone = false;
 
-            timeLineContainer.ElementList.Last().Show();
+            timeLineContainer.LastElement.Show();
         }
 
 

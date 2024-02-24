@@ -79,7 +79,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
             isResized = true;
 
-            Debug.Log($"{gameObject.name}: resized: {GetComponent<RectTransform>().sizeDelta}");
+            //Debug.Log($"{gameObject.name}: resized: {GetComponent<RectTransform>().sizeDelta}");
         }
 
         public void SetContent(string content)

@@ -22,6 +22,12 @@ namespace Alabaster.DialogueSystem
             SetFields();
         }
 
+        protected virtual void SetResizedTrue(GameObject gameObject)
+        {
+            isResized = true;
+            //Debug.Log($"{gameObject.name}: resized callback complete");
+        }
+
         protected abstract void SetReferences();
 
         protected abstract void SetFields();

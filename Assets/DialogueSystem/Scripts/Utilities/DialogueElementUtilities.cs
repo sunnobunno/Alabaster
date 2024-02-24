@@ -42,7 +42,7 @@ namespace Alabaster.DialogueSystem.Utilities
 
         public static DialogueElement? GetChildDialogueElementController(GameObject gameObject)
         {
-            Debug.Log("Finding child");
+            //Debug.Log("Finding child");
             DialogueElement childDialogueElementController;
 
             if (gameObject.transform.childCount == 0)

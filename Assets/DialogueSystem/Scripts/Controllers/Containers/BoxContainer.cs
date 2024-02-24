@@ -13,6 +13,7 @@ namespace Alabaster.DialogueSystem.Controllers
 {
     public class BoxContainer : DialogueElement
     {
+        [SerializeField] public ArticyRef testArticyRef;
 
         public static event Action SendSlideInEndSignal;
         public static event Action SendResizeEndSignal;
@@ -40,13 +41,25 @@ namespace Alabaster.DialogueSystem.Controllers
             ResizeElement();
         }
 
+        public void InitializeElement<T>(T data)
+        {
+            SetReferences();
+            InitializeChildElement<T>(data);
+            ResizeElement();
+        }
+
         protected override void SetReferences()
         {
             rectTransform = gameObject.GetComponent<RectTransform>();
             childElement = DialogueElementUtilities.GetChildElement(gameObject);
             canvasGroup = GetComponent<CanvasGroup>();
             childDialogueElementController = DialogueElementUtilities.GetChildDialogueElementController(gameObject);
-            //Debug.Log($"{childDialogueElementController?.gameObject.name} hi");
+            //Debug.Log($"{gameObject.name}: child: {childDialogueElementController?.gameObject.name}");
+        }
+
+        private void InitializeChildElement<T>(T data)
+        {
+            (childDialogueElementController as IDialogueElementController<T>).InitializeElement(data);
         }
 
         protected override void SetFields()
@@ -62,15 +75,36 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public override void ResizeElement()
         {
-            CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
+            if (isResized) return;
+
+            //childDialogueElementController.ResizeElement();
+            //CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
+            //ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
+
+            IEnumerator coResizeElement = CoResizeElement();
+            StartCoroutine( coResizeElement );
+        }
+
+        private IEnumerator CoResizeElement()
+        {
+            Hide();
             
+            childDialogueElementController.ResizeElement();
+
+            while (childDialogueElementController.IsResized == false)
+            {
+                yield return null;
+            }
+            //Debug.Log(childDialogueElementController.IsResized);
+
+            CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
             ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
         }
 
-        private void SetResizedTrue(GameObject gameObject)
+        protected override void SetResizedTrue(GameObject gameObject)
         {
-            isResized = true;
-            Debug.Log($"{gameObject.name}: resized callback complete");
+            base.SetResizedTrue(gameObject);
+            Show();
         }
 
         public void SlideInElement()
@@ -92,12 +126,14 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void Hide()
         {
+            Debug.Log($"{Child.name}: hiding");
             canvasGroup.alpha = 0f;
             canvasGroup.blocksRaycasts = false;
         }
 
         public void Show()
         {
+            Debug.Log($"{Child.name}: showing");
             canvasGroup.alpha = 1f;
             canvasGroup.blocksRaycasts = true;
         }
@@ -123,6 +159,10 @@ namespace Alabaster.DialogueSystem.Controllers
             if (GUILayout.Button("Destroy"))
             {
                 Selection.activeGameObject.GetComponent<BoxContainer>().DestroySelf();
+            }
+            if (GUILayout.Button("Initialize"))
+            {
+                Selection.activeGameObject.GetComponent<BoxContainer>().InitializeElement<IFlowObject>(Selection.activeGameObject.GetComponent<BoxContainer>().testArticyRef.GetObject());
             }
         }
     }
