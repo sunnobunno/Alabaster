@@ -62,6 +62,8 @@ namespace Alabaster.DialogueSystem.Controllers
             Vector2 textMeshPreferredSize = contentTextMesh.GetPreferredValues();
             rectTransform.sizeDelta = new Vector2(DialogueUIController.Instance.DialogueWidth, textMeshPreferredSize.y);
             isResized = true;
+
+            Debug.Log($"{gameObject.name}: resized");
         }
 
         public override void GreyOut(bool isGrey)

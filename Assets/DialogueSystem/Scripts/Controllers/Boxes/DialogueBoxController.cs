@@ -91,16 +91,35 @@ namespace Alabaster.DialogueSystem.Controllers
             titleObjectController.InitializeElement(title);
         }
 
+        
+
+        public override void ResizeElement()
+        {
+            ResizeSubElements();
+            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this);
+        }
+
         private void ResizeSubElements()
         {
             titleObjectController.ResizeElement();
             contentObjectController.ResizeElement();
         }
 
-        public override void ResizeElement()
+        private IEnumerator CoResizeElement()
         {
             ResizeSubElements();
+
+            DialogueElement titleController = (DialogueElement)titleObjectController;
+            DialogueElement contentController = (DialogueElement)contentObjectController;
+
+            while (titleController.IsResized == false && contentController == false)
+            {
+                yield return null;
+            }
+
             ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this);
+
+            Debug.Log($"{gameObject.name}: resized");
         }
 
         public override void GreyOut(bool isGrey)

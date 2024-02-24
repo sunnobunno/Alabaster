@@ -29,9 +29,16 @@ namespace Alabaster.DialogueSystem.Utilities
             var initialPivot = gameObject.GetComponent<RectTransform>().pivot;
             var standardPivot = new Vector2(0f, 1f);
             gameObject.GetComponent<RectTransform>().pivot = standardPivot;
-            
 
             var rectTransform = gameObject.GetComponent<RectTransform>();
+
+            if (initialPivot == standardPivot)
+            {
+                rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+                return;
+            }
+
+            
             var standardLocalPosition = rectTransform.anchoredPosition;
             var pivotDifference = standardPivot - initialPivot;
             var initialSizeDelta = rectTransform.sizeDelta;

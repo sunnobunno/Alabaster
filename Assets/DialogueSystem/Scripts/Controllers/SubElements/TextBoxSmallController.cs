@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Alabaster.DialogueSystem.Utilities;
+using UnityEditor.Build.Content;
+using Unity.VisualScripting;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
@@ -18,6 +20,7 @@ namespace Alabaster.DialogueSystem.Controllers
         private IDialogueElementControllerWithContent contentObjectController;
         private RectTransform contentObjectRectTransform;
         private RectTransform centerObjectRectTransform;
+        private RectTransform rectTransform;
 
         //private float contentMarginLeft;
         //private float contentMarginRight;
@@ -56,6 +59,7 @@ namespace Alabaster.DialogueSystem.Controllers
             contentObjectController = contentObject.GetComponent<IDialogueElementControllerWithContent>();
             contentObjectRectTransform = contentObject.GetComponent<RectTransform>();
             centerObjectRectTransform = centerObject.GetComponent<RectTransform>();
+            rectTransform = GetComponent<RectTransform>();
 
             //contentMarginLeft = contentObjectRectTransform.transform.localPosition.x;
             //contentMarginRight = contentObjectRectTransform.transform.localPosition.x;
@@ -71,9 +75,11 @@ namespace Alabaster.DialogueSystem.Controllers
             //Debug.Log(contentObjectRectTransform.sizeDelta);
             //Debug.Log(centerObjectRectTransform.sizeDelta);
 
-            GetComponent<RectTransform>().sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(this.gameObject);
+            GetComponent<RectTransform>().sizeDelta = new Vector2(contentPreferredWidth, rectTransform.sizeDelta.y);
 
             isResized = true;
+
+            Debug.Log($"{gameObject.name}: resized: {GetComponent<RectTransform>().sizeDelta}");
         }
 
         public void SetContent(string content)
