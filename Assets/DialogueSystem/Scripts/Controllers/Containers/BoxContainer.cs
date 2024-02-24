@@ -87,7 +87,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private IEnumerator CoResizeElement()
         {
-            Hide();
+            if (!Child.TryGetComponent<ChoiceListContainerController>(out _)) Hide();
             
             childDialogueElementController.ResizeElement();
 
@@ -104,7 +104,7 @@ namespace Alabaster.DialogueSystem.Controllers
         protected override void SetResizedTrue(GameObject gameObject)
         {
             base.SetResizedTrue(gameObject);
-            Show();
+            if (!Child.TryGetComponent<ChoiceListContainerController>(out _)) Show();
         }
 
         public void SlideInElement()
