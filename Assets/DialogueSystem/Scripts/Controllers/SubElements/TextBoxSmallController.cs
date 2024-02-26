@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Alabaster.DialogueSystem.Utilities;
+using UnityEditor.Build.Content;
+using Unity.VisualScripting;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class TextBoxSmallController : MonoBehaviour, IDialogueElementControllerWithContent
+    public class TextBoxSmallController : DialogueElement, IDialogueElementControllerWithContent
     {
         [SerializeField] private GameObject contentObject;
         [SerializeField] private GameObject centerObject;
@@ -18,6 +20,7 @@ namespace Alabaster.DialogueSystem.Controllers
         private IDialogueElementControllerWithContent contentObjectController;
         private RectTransform contentObjectRectTransform;
         private RectTransform centerObjectRectTransform;
+        private RectTransform rectTransform;
 
         //private float contentMarginLeft;
         //private float contentMarginRight;
@@ -35,9 +38,14 @@ namespace Alabaster.DialogueSystem.Controllers
 
         }
 
-        private void Awake()
+        protected override void Awake()
         {
-            SetElementComponentReferences();
+            SetReferences();
+        }
+
+        protected override void SetFields()
+        {
+            
         }
 
         public void InitializeElement(string initializeData)
@@ -45,18 +53,19 @@ namespace Alabaster.DialogueSystem.Controllers
             SetContent(initializeData);
         }
 
-        private void SetElementComponentReferences()
+        protected override void SetReferences()
         {
             contentTextMesh = contentObject.GetComponent<TextMeshProUGUI>();
             contentObjectController = contentObject.GetComponent<IDialogueElementControllerWithContent>();
             contentObjectRectTransform = contentObject.GetComponent<RectTransform>();
             centerObjectRectTransform = centerObject.GetComponent<RectTransform>();
+            rectTransform = GetComponent<RectTransform>();
 
             //contentMarginLeft = contentObjectRectTransform.transform.localPosition.x;
             //contentMarginRight = contentObjectRectTransform.transform.localPosition.x;
         }
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
             float contentPreferredWidth = contentTextMesh.preferredWidth;
 
@@ -66,7 +75,11 @@ namespace Alabaster.DialogueSystem.Controllers
             //Debug.Log(contentObjectRectTransform.sizeDelta);
             //Debug.Log(centerObjectRectTransform.sizeDelta);
 
-            GetComponent<RectTransform>().sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(this.gameObject);
+            GetComponent<RectTransform>().sizeDelta = new Vector2(contentPreferredWidth, rectTransform.sizeDelta.y);
+
+            isResized = true;
+
+            //Debug.Log($"{gameObject.name}: resized: {GetComponent<RectTransform>().sizeDelta}");
         }
 
         public void SetContent(string content)
@@ -75,7 +88,7 @@ namespace Alabaster.DialogueSystem.Controllers
             ResizeElement();
         }
 
-        public void GreyOut(bool isGrey)
+        public override void GreyOut(bool isGrey)
         {
             contentObjectController.GreyOut(isGrey);
         }

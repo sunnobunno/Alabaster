@@ -71,12 +71,14 @@ namespace Alabaster.DialogueSystem.Controllers
             this.aObject = aObject;
 
             content = ArticyConversions.IFlowObjectToText(aObject);
+            Debug.Log(content);
             title = ArticyConversions.IFlowObjectToTitle(aObject);
+            Debug.Log(title);
 
             //Debug.Log(content);
 
             SetContent(content);
-            InitializeTitleObject(title);
+            SetTitle(title);
 
             ResizeElement();
         }
@@ -86,9 +88,20 @@ namespace Alabaster.DialogueSystem.Controllers
             contentObjectController.InitializeElement(content);
         }
 
-        public void InitializeTitleObject(string title)
+        public void SetTitle(string title)
         {
             titleObjectController.InitializeElement(title);
+        }
+
+        
+
+        public override void ResizeElement()
+        {
+            if (isResized) return;
+            
+            ResizeSubElements();
+            CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
+            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
         }
 
         private void ResizeSubElements()
@@ -97,10 +110,22 @@ namespace Alabaster.DialogueSystem.Controllers
             contentObjectController.ResizeElement();
         }
 
-        public void ResizeElement()
+        private IEnumerator CoResizeElement()
         {
             ResizeSubElements();
-            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this);
+
+            DialogueElement titleController = (DialogueElement)titleObjectController;
+            DialogueElement contentController = (DialogueElement)contentObjectController;
+
+            while (titleController.IsResized == false && contentController == false)
+            {
+                yield return null;
+            }
+
+            CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
+            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
+
+            Debug.Log($"{gameObject.name}: resized");
         }
 
         public override void GreyOut(bool isGrey)

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class ContinueBoxController : MonoBehaviour, IDialogueElementClickable<IFlowObject>, IDialogueElementController<IFlowObject>
+    public class ContinueBoxController : DialogueElement, IDialogueElementClickable<IFlowObject>, IDialogueElementController<IFlowObject>
     {
         
         public static event Action<IFlowObject> SendClickedSignal;
@@ -20,16 +20,6 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private IFlowObject aObject;
 
-        private void Awake()
-        {
-            SetReferences();
-        }
-
-        private void Start()
-        {
-            SetFields();
-        }
-
         public void InitializeElement(IFlowObject aObject)
         {
             SetContent(aObject);
@@ -40,15 +30,16 @@ namespace Alabaster.DialogueSystem.Controllers
         public void SetContent(IFlowObject aObject)
         {
             this.aObject = aObject;
+            ResizeElement();
         }
 
-        private void SetReferences()
+        protected override void SetReferences()
         {
             rectTransform = gameObject.GetComponent<RectTransform>();
             contentObjectController = contentObject.GetComponent<IDialogueElementControllerWithContent>();
         }
 
-        private void SetFields()
+        protected override void SetFields()
         {
             contentObjectController.TextColor = Color.grey;
         }
@@ -71,12 +62,14 @@ namespace Alabaster.DialogueSystem.Controllers
             DestroySelf();
         }
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
-
+            if (isResized) { return; }
+            
+            SetResizedTrue(gameObject);
         }
 
-        public void GreyOut(bool isGrey)
+        public override void GreyOut(bool isGrey)
         {
             //throw new NotImplementedException();
         }

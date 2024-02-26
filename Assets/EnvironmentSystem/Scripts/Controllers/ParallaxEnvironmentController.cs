@@ -1,5 +1,7 @@
+using Alabaster.DialogueSystem.Controllers;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -13,9 +15,11 @@ namespace Alabaster.EnvironmentSystem
         private Vector2 mousePosition;
         private float screenWidth;
         private float screenHeight;
-        private Vector2 mouseRelativeToCenter;
+        private Vector2 mouseWorldPosRelativeToCenter;
+        private Vector2 mouseScreenPosRelativeToCenter;
 
-        public Vector2 MouseRelativeToCenter { get { return mouseRelativeToCenter; } }
+        public Vector2 MouseWorldPosRelativeToCenter { get { return mouseWorldPosRelativeToCenter; } }
+        public Vector2 MouseScreenPosRelativeToCenter { get { return mouseScreenPosRelativeToCenter; } }
         public Vector2 ScreenDimensions { get { return new Vector2(screenWidth, screenHeight); } }
 
         private void Awake()
@@ -35,7 +39,7 @@ namespace Alabaster.EnvironmentSystem
         private void SetFields()
         {
             mousePosition = Input.mousePosition;
-            mouseRelativeToCenter = GetMousePositionRelativeToCenter();
+            mouseWorldPosRelativeToCenter = GetMouseWorldPosRelativeToCenter();
             screenWidth = Screen.width;
             screenHeight = Screen.height;
         }
@@ -43,14 +47,23 @@ namespace Alabaster.EnvironmentSystem
         // Update is called once per frame
         void Update()
         {
-            mouseRelativeToCenter = GetMousePositionRelativeToCenter();
+            mouseWorldPosRelativeToCenter = GetMouseWorldPosRelativeToCenter();
+            mouseScreenPosRelativeToCenter = GetMouseScreenPosRelativeToCenter();
             //Debug.Log($"Screen size: {screenWidth}, {screenHeight}");
             //Debug.Log($"Mouse relative to center: {mouseRelativeToCenter}");
         }
 
+        private Vector2 GetMouseScreenPosRelativeToCenter()
+        {
+            var mousePositionClamped = new Vector2(Mathf.Clamp(Input.mousePosition.x, 0f, screenWidth), Mathf.Clamp(Input.mousePosition.y, 0f, screenHeight));
+            var screenCenter = GetCenterOfScreen();
 
+            var mouseScreenPosRelativeToCenter = mousePositionClamped - screenCenter;
 
-        private Vector2 GetMousePositionRelativeToCenter()
+            return mouseScreenPosRelativeToCenter;
+        }
+
+        private Vector2 GetMouseWorldPosRelativeToCenter()
         {
             var mousePositionClamped = new Vector2(Mathf.Clamp(Input.mousePosition.x, 0f, screenWidth), Mathf.Clamp(Input.mousePosition.y, 0f, screenHeight));
             //Debug.Log($"Mouse position clamped: {mousePositionClamped}");
@@ -78,5 +91,7 @@ namespace Alabaster.EnvironmentSystem
             screenHeight = Screen.height;
         }
     }
+
+    
 }
 

@@ -39,5 +39,25 @@ namespace Alabaster.DialogueSystem.Utilities
             float preferredHeightOfElement = LayoutUtility.GetPreferredHeight(gameObject.GetComponent<RectTransform>());
             return preferredHeightOfElement;
         }
+
+        public static DialogueElement? GetChildDialogueElementController(GameObject gameObject)
+        {
+            //Debug.Log("Finding child");
+            DialogueElement childDialogueElementController;
+
+            if (gameObject.transform.childCount == 0)
+            {
+                Debug.LogWarning($"{gameObject.name}: No children with DialogueElement controller");
+                return null;
+            }
+
+            GameObject child = gameObject.transform.GetChild(0).gameObject;
+            if (!child.TryGetComponent<DialogueElement>(out childDialogueElementController))
+            {
+                return GetChildDialogueElementController(child);
+            }
+
+            return childDialogueElementController;
+        }
     }
 }

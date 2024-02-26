@@ -15,7 +15,7 @@ using UnityEngine.UI;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class ChoiceListContainerController : MonoBehaviour, IDialogueElementController<IFlowObject>
+    public class ChoiceListContainerController : DialogueElement, IDialogueElementController<IFlowObject>
     {
 
         public static event Action<Branch> SendClickedSignal;
@@ -33,12 +33,6 @@ namespace Alabaster.DialogueSystem.Controllers
         //private bool doubleClickProtection = false;
 
         public ArticyRef TestArticyRef { get => testArticyRef; }
-
-        void Awake()
-        {
-            SetReferences();
-            Debug.Log($"{gameObject.name}: Element Awake");
-        }
 
         private void OnEnable()
         {
@@ -67,12 +61,12 @@ namespace Alabaster.DialogueSystem.Controllers
             SetElementContent(aObject);
         }
 
-        private void SetReferences()
+        protected override void SetReferences()
         {
             rectTransform = gameObject.GetComponent<RectTransform>();
         }
 
-        private void SetFields()
+        protected override void SetFields()
         {
 
         }
@@ -86,9 +80,13 @@ namespace Alabaster.DialogueSystem.Controllers
             ResizeElement();
         }
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
-            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this);
+            if (isResized) { return; }
+
+
+            CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
+            ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
             
             //DialogueElementUtilities.VoidCallBack callBack = ResizeCallBack;
             //DialogueElementUtilities.CallBackAtEndOfFrame(callBack, this);
@@ -127,7 +125,7 @@ namespace Alabaster.DialogueSystem.Controllers
             dialogueElement.transform.SetParent(gameObject.transform, false);
         }
 
-        public void GreyOut(bool isGrey)
+        public override void GreyOut(bool isGrey)
         {
             //throw new NotImplementedException();
         }

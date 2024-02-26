@@ -39,7 +39,6 @@ namespace Alabaster.DialogueSystem.Controllers
         public float ElementCount { get => dialogueElementList.Count; }
         public List<BoxContainer> ElementList { get => dialogueElementList; }
         public bool IsElementSlideDone { get => slideInEndSignalRecieved; set => slideInEndSignalRecieved = value; }
-        public bool IsLastElementResized { get => resizeBuffer; set => resizeBuffer = value; }
         public BoxContainer LastElement { get => dialogueElementList.Last(); }
         public float EaseInSpeed { get => easeInSpeed; }
         public float AutoScrollSpeed { get => autoScrollSpeed; }
@@ -175,8 +174,8 @@ namespace Alabaster.DialogueSystem.Controllers
             dialogueElementList.Add(newBoxContainer.GetComponent<BoxContainer>());
             //AddDialogueElementToElementList(newBoxContainer);
 
-            newDialogueElement.GetComponent<IDialogueElementController<IFlowObject>>().InitializeElement(aObject);
-            newBoxContainer.GetComponent<BoxContainer>().InitializeElement();
+            //newDialogueElement.GetComponent<IDialogueElementController<IFlowObject>>().InitializeElement(aObject);
+            newBoxContainer.GetComponent<BoxContainer>().InitializeElement<IFlowObject>(aObject);
 
             //DialogueElementController controller = dialogueElementPrefab.GetComponent<DialogueElementController>();
         }

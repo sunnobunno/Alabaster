@@ -13,7 +13,7 @@ using Alabaster.DialogueSystem.Utilities;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class ChoiceBoxController : MonoBehaviour, IDialogueElementController<Branch>, IDialogueElementClickable<Branch>
+    public class ChoiceBoxController : DialogueElement, IDialogueElementController<Branch>, IDialogueElementClickable<Branch>
     {
 
         public static event Action<Branch> SendClickedSignal;
@@ -58,17 +58,6 @@ namespace Alabaster.DialogueSystem.Controllers
         public Branch Branch { get => branch; private set => branch = value; }
         public ArticyRef TestArticyRef { get => testArticyRef; }
 
-        // Start is called before the first frame update
-        void Awake()
-        {
-            SetReferences();
-        }
-
-        void Start()
-        {
-            SetFields();
-        }
-
         // Update is called once per frame
         void Update()
         {
@@ -103,13 +92,13 @@ namespace Alabaster.DialogueSystem.Controllers
         }
 
 
-        protected void SetReferences()
+        protected override void SetReferences()
         {
             rectTransform = gameObject.GetComponent<RectTransform>();
             contentObjectController = contentObject.GetComponent<IDialogueElementControllerWithContent>();
         }
 
-        protected void SetFields()
+        protected override void SetFields()
         {
             contentObjectController.TextColor = Color.gray;
         }
@@ -122,10 +111,16 @@ namespace Alabaster.DialogueSystem.Controllers
 
         
 
-        public void ResizeElement()
+        public override void ResizeElement()
         {
+            if (isResized)
+            {
+                return;
+            }
+            
             ResizeSubElements();
             rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+            SetResizedTrue(gameObject);
         }
 
         protected void ResizeSubElements()
@@ -133,7 +128,7 @@ namespace Alabaster.DialogueSystem.Controllers
             contentObjectController.ResizeElement();
         }
 
-        public void GreyOut(bool isGrey)
+        public override void GreyOut(bool isGrey)
         {
 
         }
