@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 442643432}
   - component: {fileID: 442643434}
   - component: {fileID: 442643433}
+  - component: {fileID: 442643435}
   m_Layer: 5
   m_Name: DiceController
   m_TagString: Untagged
@@ -439,6 +440,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442643431}
   m_CullTransparentMesh: 1
+--- !u!114 &442643435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442643431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205fa2898255c4b4581f6ad4f54071a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dice1: {fileID: 1189466964}
 --- !u!1 &452450850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,6 +1424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2092214752}
+  - component: {fileID: 2092214753}
   m_Layer: 5
   m_Name: SkillCheckInfo
   m_TagString: Untagged
@@ -1435,9 +1450,22 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 990, y: -766}
-  m_SizeDelta: {x: 319.1, y: 337.05}
+  m_AnchoredPosition: {x: 990, y: -754.33}
+  m_SizeDelta: {x: 319.1, y: 348.72}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &2092214753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092214751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3915535f23e81694ca3cbfd62a963216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceController: {fileID: 442643435}
 --- !u!1 &2143861829
 GameObject:
   m_ObjectHideFlags: 0
