@@ -5,8 +5,8 @@
     "set_IncludedNodes": "Settings, Project, GlobalVariables, ObjectDefinitions, Packages, ScriptMethods, Hierarchy, Assets",
     "set_UseScriptSupport": "True",
     "ExportVersion": "1.2",
-    "ObjectDefinitionsHash": "BDA982545018319F99DC81431A18381CE21E138E3F575D422BF1A8507DAC44D9",
-    "ScriptFragmentsHash": "1571373497"
+    "ObjectDefinitionsHash": "87331E57E633DE74DF507C98E3E78B1B68DF23F69EB20C98AEA2EA9F23408A7D",
+    "ScriptFragmentsHash": "2046497401"
   },
   "Project": {
     "Name": "Little Guy Syndrome",
@@ -53,6 +53,24 @@
           "Variable": "Dialogue",
           "Type": "Boolean",
           "Value": "False",
+          "Description": ""
+        }
+      ]
+    },
+    {
+      "Namespace": "SkillLevels",
+      "Description": "",
+      "Variables": [
+        {
+          "Variable": "SkillLevelVoid",
+          "Type": "Integer",
+          "Value": "1",
+          "Description": ""
+        },
+        {
+          "Variable": "SkillLevelDetermination",
+          "Type": "Integer",
+          "Value": "1",
           "Description": ""
         }
       ]
@@ -297,6 +315,19 @@
         "Male": "Male",
         "Female": "Female",
         "Unknown": "Unknown"
+      }
+    },
+    {
+      "Type": "SkillEnum",
+      "Class": "Enum",
+      "DisplayName": "Skill",
+      "Values": {
+        "VOID": 1,
+        "DETERMINATION": 2
+      },
+      "DisplayNames": {
+        "VOID": "VOID",
+        "DETERMINATION": "DETERMINATION"
       }
     },
     {
@@ -675,6 +706,11 @@
                 "Property": "SetGlobalSkillCheckVariable",
                 "Type": "Script_Instruction",
                 "DisplayName": "Set Global Skill Check Variable"
+              },
+              {
+                "Property": "SkillEnum",
+                "Type": "SkillEnum",
+                "DisplayName": "Skill"
               }
             ],
             "Constraints": [
@@ -698,6 +734,12 @@
                 "Type": "Script",
                 "ScriptType": "Outcome",
                 "PlaceholderValue": ""
+              },
+              {
+                "Property": "SkillEnum",
+                "Type": "Enum",
+                "IsLocalized": "False",
+                "SortMode": "BySortIndex"
               }
             ]
           }
@@ -3125,6 +3167,70 @@
                 "Text": "",
                 "Id": "0x010000000000078B",
                 "Owner": "0x0100000000000787"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Dialogue",
+          "Properties": {
+            "TechnicalName": "Dlg_D95425E8",
+            "Id": "0x0100000000000A5E",
+            "Parent": "0x0100000000000580",
+            "Attachments": [],
+            "DisplayName": "TESTING: SkillCheck",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 367.0,
+              "y": 400.0
+            },
+            "ZIndex": 0.0,
+            "Size": {
+              "w": 291.0,
+              "h": 200.0
+            },
+            "ShortId": 3646170600,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A61",
+                "Owner": "0x0100000000000A5E",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A67",
+                    "Target": "0x0100000000000A64"
+                  }
+                ]
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A62",
+                "Owner": "0x0100000000000A5E"
               }
             ]
           }
@@ -6377,9 +6483,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x0100000000000A5C",
@@ -8822,6 +8928,241 @@
           }
         },
         {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_F5E53306",
+            "Id": "0x0100000000000A64",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000618",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "<align=left>Hello, welcome to the skill check test. I will be your guide.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 325.0,
+              "y": 350.0
+            },
+            "ZIndex": 0.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 4125438726,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A67",
+                "Owner": "0x0100000000000A64"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A68",
+                "Owner": "0x0100000000000A64",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A6E",
+                    "Target": "0x0100000000000A6B"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A74",
+                    "Target": "0x0100000000000A71"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_9C776497",
+            "Id": "0x0100000000000A79",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000618",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "<align=left>You have passed the skill check.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 975.0,
+              "y": 0.0
+            },
+            "ZIndex": 6.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2625070231,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A7C",
+                "Owner": "0x0100000000000A79"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A7D",
+                "Owner": "0x0100000000000A79",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A8A",
+                    "Target": "0x0100000000000A87"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_343C88D9",
+            "Id": "0x0100000000000A80",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000618",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "<align=left>You have failed the skill check.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 975.0,
+              "y": 225.0
+            },
+            "ZIndex": 8.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 876382425,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A83",
+                "Owner": "0x0100000000000A80"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A84",
+                "Owner": "0x0100000000000A80",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A8A",
+                    "Target": "0x0100000000000A87"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_A1926A43",
+            "Id": "0x0100000000000A8D",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000618",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "<align=left>Ok.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 975.0,
+              "y": 475.0
+            },
+            "ZIndex": 13.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2710727235,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A90",
+                "Owner": "0x0100000000000A8D"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A91",
+                "Owner": "0x0100000000000A8D",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A8A",
+                    "Target": "0x0100000000000A87"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
           "Type": "Dialogue_Choice_Properties",
           "Properties": {
             "TechnicalName": "DFr_497EF722",
@@ -8883,7 +9224,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -8949,7 +9291,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9015,7 +9358,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": true,
               "SkillCheckRequirement": 8.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9081,7 +9425,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9147,7 +9492,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9213,7 +9559,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9266,7 +9613,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9332,7 +9680,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9398,7 +9747,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9451,7 +9801,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9517,7 +9868,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9583,7 +9935,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9649,7 +10002,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9715,7 +10069,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9781,7 +10136,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9847,7 +10203,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9900,7 +10257,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -9953,7 +10311,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10019,7 +10378,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10072,7 +10432,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10125,7 +10486,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10191,7 +10553,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10257,7 +10620,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10323,7 +10687,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10376,7 +10741,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10429,7 +10795,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10495,7 +10862,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10561,7 +10929,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10627,7 +10996,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10693,7 +11063,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10759,7 +11130,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10825,7 +11197,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10891,7 +11264,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -10957,7 +11331,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11023,7 +11398,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11089,7 +11465,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11155,7 +11532,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11221,7 +11599,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11287,7 +11666,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11353,7 +11733,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11419,7 +11800,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11485,7 +11867,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11551,7 +11934,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11617,7 +12001,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11683,7 +12068,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11749,7 +12135,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11815,7 +12202,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11881,7 +12269,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -11958,7 +12347,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12024,7 +12414,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12090,7 +12481,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12156,7 +12548,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12222,7 +12615,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12288,7 +12682,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12354,7 +12749,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12420,7 +12816,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12486,7 +12883,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12552,7 +12950,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12618,7 +13017,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12684,7 +13084,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12750,7 +13151,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12816,7 +13218,8 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -12869,7 +13272,153 @@
             "SkillCheckFeature": {
               "IsSkillCheck": null,
               "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")"
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
+            }
+          }
+        },
+        {
+          "Type": "Dialogue_Choice_Properties",
+          "Properties": {
+            "TechnicalName": "DFr_0221F96C",
+            "Id": "0x0100000000000A6B",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000010F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.768151164,
+              "g": 0.149959788,
+              "b": 0.002731743
+            },
+            "Text": "<align=left>I am a skill check.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 650.0,
+              "y": 225.0
+            },
+            "ZIndex": 2.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 35780972,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A6E",
+                "Owner": "0x0100000000000A6B"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A6F",
+                "Owner": "0x0100000000000A6B",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A7C",
+                    "Target": "0x0100000000000A79"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A83",
+                    "Target": "0x0100000000000A80"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "End_Dialougue_Properties": {
+              "IsDialogueEndPoint": false
+            },
+            "SkillCheckFeature": {
+              "IsSkillCheck": true,
+              "SkillCheckRequirement": 3.0,
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": 1
+            }
+          }
+        },
+        {
+          "Type": "Dialogue_Choice_Properties",
+          "Properties": {
+            "TechnicalName": "DFr_6275C920",
+            "Id": "0x0100000000000A71",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0000000000000000",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.768151164,
+              "g": 0.149959788,
+              "b": 0.002731743
+            },
+            "Text": "<align=left>I am not a skill check.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 650.0,
+              "y": 475.0
+            },
+            "ZIndex": 4.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 1651886368,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A74",
+                "Owner": "0x0100000000000A71"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A75",
+                "Owner": "0x0100000000000A71",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A90",
+                    "Target": "0x0100000000000A8D"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "End_Dialougue_Properties": {
+              "IsDialogueEndPoint": false
+            },
+            "SkillCheckFeature": {
+              "IsSkillCheck": null,
+              "SkillCheckRequirement": 1.0,
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null
             }
           }
         },
@@ -13173,6 +13722,40 @@
         {
           "Type": "Jump",
           "Properties": {
+            "TechnicalName": "Jmp_4434B260",
+            "Id": "0x0100000000000A59",
+            "Parent": "0x0100000000000642",
+            "Target": "0x0100000000000654",
+            "TargetPin": "0x0100000000000657",
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 5075.0,
+              "y": 350.0
+            },
+            "ZIndex": 91.0,
+            "Size": {
+              "w": 175.0,
+              "h": 150.0
+            },
+            "ShortId": 1144304224,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A5C",
+                "Owner": "0x0100000000000A59"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Jump",
+          "Properties": {
             "TechnicalName": "Jmp_B7D0630E",
             "Id": "0x0100000000000A51",
             "Parent": "0x01000000000007D4",
@@ -13207,11 +13790,11 @@
         {
           "Type": "Jump",
           "Properties": {
-            "TechnicalName": "Jmp_4434B260",
-            "Id": "0x0100000000000A59",
-            "Parent": "0x0100000000000642",
-            "Target": "0x0100000000000654",
-            "TargetPin": "0x0100000000000657",
+            "TechnicalName": "Jmp_8C61FC5E",
+            "Id": "0x0100000000000A87",
+            "Parent": "0x0100000000000A5E",
+            "Target": "0x0100000000000A64",
+            "TargetPin": "0x0100000000000A67",
             "Color": {
               "r": 0.5764706,
               "g": 0.75686276,
@@ -13220,20 +13803,20 @@
             "Text": "",
             "ExternalId": "",
             "Position": {
-              "x": 5075.0,
-              "y": 350.0
+              "x": 1350.0,
+              "y": 375.0
             },
-            "ZIndex": 91.0,
+            "ZIndex": 10.0,
             "Size": {
               "w": 175.0,
               "h": 150.0
             },
-            "ShortId": 1144304224,
+            "ShortId": 2355231838,
             "InputPins": [
               {
                 "Text": "",
-                "Id": "0x0100000000000A5C",
-                "Owner": "0x0100000000000A59"
+                "Id": "0x0100000000000A8A",
+                "Owner": "0x0100000000000A87"
               }
             ]
           }
@@ -15531,6 +16114,11 @@
             "Type": "VariableSet"
           },
           {
+            "Id": "0x0100000000000B18",
+            "TechnicalName": "",
+            "Type": "VariableSet"
+          },
+          {
             "Id": "0x010000000000024E",
             "TechnicalName": "",
             "Type": "VariableSet"
@@ -15815,7 +16403,51 @@
           {
             "Id": "0x0100000000000580",
             "TechnicalName": "Dlg_21F17F6D",
-            "Type": "Dialogue"
+            "Type": "Dialogue",
+            "Children": [
+              {
+                "Id": "0x0100000000000A5E",
+                "TechnicalName": "Dlg_D95425E8",
+                "Type": "Dialogue",
+                "Children": [
+                  {
+                    "Id": "0x0100000000000A64",
+                    "TechnicalName": "DFr_F5E53306",
+                    "Type": "DialogueFragment"
+                  },
+                  {
+                    "Id": "0x0100000000000A6B",
+                    "TechnicalName": "DFr_0221F96C",
+                    "Type": "DialogueFragment"
+                  },
+                  {
+                    "Id": "0x0100000000000A71",
+                    "TechnicalName": "DFr_6275C920",
+                    "Type": "DialogueFragment"
+                  },
+                  {
+                    "Id": "0x0100000000000A79",
+                    "TechnicalName": "DFr_9C776497",
+                    "Type": "DialogueFragment"
+                  },
+                  {
+                    "Id": "0x0100000000000A80",
+                    "TechnicalName": "DFr_343C88D9",
+                    "Type": "DialogueFragment"
+                  },
+                  {
+                    "Id": "0x0100000000000A8D",
+                    "TechnicalName": "DFr_A1926A43",
+                    "Type": "DialogueFragment"
+                  },
+                  {
+                    "Id": "0x0100000000000A87",
+                    "TechnicalName": "Jmp_8C61FC5E",
+                    "Type": "Jump"
+                  }
+                ]
+              }
+            ]
           },
           {
             "Id": "0x0100000000000482",

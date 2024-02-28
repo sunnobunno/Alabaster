@@ -59,5 +59,23 @@ namespace Alabaster.DialogueSystem.Utilities
 
             return childDialogueElementController;
         }
+
+        public static void CallBackAfterChildResize(DialogueElement child, MonoBehaviour callingObject, CallBacks.VoidCallBack callBack)
+        {
+            IEnumerator coCallBackAfterChildResize = CoCallBackAfterChildResize(child, callBack);
+            callingObject.StartCoroutine(coCallBackAfterChildResize);
+        }
+
+        private static IEnumerator CoCallBackAfterChildResize(DialogueElement child, CallBacks.VoidCallBack callBack)
+        {
+            child.ResizeElement();
+
+            while (child.IsResized == false)
+            {
+                yield return null;
+            }
+
+            callBack?.Invoke();
+        }
     }
 }
