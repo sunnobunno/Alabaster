@@ -23,6 +23,7 @@ namespace Alabaster.DialogueSystem
 
         private GameObject diceControllerObject;
 
+        private IFlowObject aObject;
         private SkillEnum skillName;
         private int skillLevel;
         private string odds;
@@ -32,13 +33,7 @@ namespace Alabaster.DialogueSystem
 
         public void InitializeElement(IFlowObject aObject)
         {
-            skillName = ArticyConversions.GetSkillEnum(aObject);
-            skillLevel = ArticyConversions.GetSkillLevel(aObject);
-            
-            Debug.Log($"Skill {skillName}: {skillLevel}");
-
-            skillNameUI.InitializeElement(skillName.ToString());
-            skillLevelUI.InitializeElement(skillLevel.ToString());
+            SetContent(aObject);
             ResizeElement();
         }
 
@@ -50,6 +45,18 @@ namespace Alabaster.DialogueSystem
         protected override void SetFields()
         {
             
+        }
+
+        public void SetContent(IFlowObject aObject)
+        {
+            this.aObject = aObject;
+            skillName = ArticyConversions.GetSkillEnum(aObject);
+            skillLevel = ArticyConversions.GetSkillLevel(aObject);
+
+            Debug.Log($"Skill {skillName}: {skillLevel}");
+
+            skillNameUI.InitializeElement(skillName.ToString());
+            skillLevelUI.InitializeElement(skillLevel.ToString());
         }
 
         public override void GreyOut(bool isGrey)

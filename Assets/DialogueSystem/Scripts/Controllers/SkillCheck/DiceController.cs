@@ -11,7 +11,16 @@ namespace Alabaster.DialogueSystem
     {
         [SerializeField] private GameObject dice1;
 
-        private Animator dice1Animator;
+        [SerializeField] private Animator dice1Animator;
+        [SerializeField] private Animator dice2Animator;
+
+        protected override void Start()
+        {
+            base.Start();
+
+            dice1Animator.Play("Dice01Idle", 0, 0f);
+            dice1Animator.Play("Dice01Idle", 0, 0.1f);
+        }
 
         protected override void SetReferences()
         {
