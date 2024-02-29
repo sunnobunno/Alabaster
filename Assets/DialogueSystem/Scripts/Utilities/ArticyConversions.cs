@@ -53,6 +53,15 @@ namespace Alabaster.DialogueSystem.Utilities
             return aObjectProperties;
         }
 
+        public static bool GetIsSkillCheck(IFlowObject aObject)
+        {
+            var aObjectProperties = GetDialogueChoiceProperties(aObject);
+
+            var isSkillCheck = aObjectProperties.Template.SkillCheckFeature.IsSkillCheck;
+
+            return isSkillCheck;
+        }
+
         public static SkillEnum GetSkillEnum(IFlowObject aObject)
         {
             var aObjectProperties = GetDialogueChoiceProperties(aObject);

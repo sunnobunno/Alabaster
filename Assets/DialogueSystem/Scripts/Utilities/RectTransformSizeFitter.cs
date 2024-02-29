@@ -36,7 +36,10 @@ namespace Alabaster.DialogueSystem.Utilities
             var children = new List<RectTransform>();
             foreach (UnityEngine.Transform child in transform)
             {
-                children.Add(child.GetComponent<RectTransform>());
+                if (child.gameObject.activeSelf && !child.TryGetComponent<DoNotIncludeInResize>(out _))
+                {
+                    children.Add(child.GetComponent<RectTransform>());
+                }
             }
             //RectTransform children = transform.GetComponentInChildren<RectTransform>();
 

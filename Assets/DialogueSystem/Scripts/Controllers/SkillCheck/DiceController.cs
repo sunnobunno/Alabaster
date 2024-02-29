@@ -1,7 +1,10 @@
 using Alabaster.DialogueSystem;
+using Alabaster.DialogueSystem.Controllers;
+using Alabaster.DialogueSystem.Utilities;
 using Articy.Unity;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,13 +16,15 @@ namespace Alabaster.DialogueSystem
 
         [SerializeField] private Animator dice1Animator;
         [SerializeField] private Animator dice2Animator;
+        [SerializeField] private SimpleTextBoxController dice1Value;
+        [SerializeField] private SimpleTextBoxController dice2Value;
 
         protected override void Start()
         {
             base.Start();
 
             dice1Animator.Play("Dice01Idle", 0, 0f);
-            dice1Animator.Play("Dice01Idle", 0, 0.1f);
+            dice2Animator.Play("Dice01Idle", 0, 0.1f);
         }
 
         protected override void SetReferences()
@@ -42,11 +47,13 @@ namespace Alabaster.DialogueSystem
 
         }
 
-        public void RollDice()
+        public void RollDice(int[] diceValues)
         {
+            dice1Value.Content = diceValues[0].ToString();
+            dice2Value.Content = diceValues[1].ToString();
 
-            dice1Animator.ResetTrigger("StartTrigger");
-            dice1Animator.SetTrigger("StartTrigger");
+            dice1Animator.SetBool("Rolling", true);
+            dice2Animator.SetBool("Rolling", true);
         }
 
         private void DisableDice1()
@@ -61,8 +68,11 @@ namespace Alabaster.DialogueSystem
 
         public void ResetDice()
         {
-            dice1Animator.ResetTrigger("ResetTrigger");
-            dice1Animator.SetTrigger("ResetTrigger");
+            dice1Animator.SetBool("Rolling", false);
+            dice2Animator.SetBool("Rolling", false);
+
+            dice1Animator.Play("Dice01Idle", 0, 0f);
+            dice2Animator.Play("Dice01Idle", 0, 0.1f);
         }
 
 
@@ -77,7 +87,7 @@ namespace Alabaster.DialogueSystem
 
             if (GUILayout.Button("Roll Dice"))
             {
-                Selection.activeGameObject.GetComponent<DiceController>().RollDice();
+                Selection.activeGameObject.GetComponent<DiceController>().RollDice(DiceRoller.Roll2D6());
             }
             if (GUILayout.Button("Reset Dice"))
             {

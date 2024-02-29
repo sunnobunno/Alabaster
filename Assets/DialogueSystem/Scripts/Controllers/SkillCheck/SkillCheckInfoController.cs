@@ -13,6 +13,8 @@ namespace Alabaster.DialogueSystem
 {
     public class SkillCheckInfoController : DialogueElement, IDialogueElementController<IFlowObject>
     {
+        public static SkillCheckInfoController Instance { get; private set; }
+        
         [SerializeField] private SimpleTextBoxController skillNameUI;
         [SerializeField] private SimpleTextBoxController skillLevelUI;
         [SerializeField] private DiceController diceController;
@@ -28,8 +30,16 @@ namespace Alabaster.DialogueSystem
         private int skillLevel;
         private string odds;
         private string oddsDescription;
-        
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if (Instance == null )
+            {
+                Instance = this;
+            }
+        }
 
         public void InitializeElement(IFlowObject aObject)
         {
@@ -71,7 +81,9 @@ namespace Alabaster.DialogueSystem
 
         public void RollDice()
         {
-            diceController.RollDice();
+            var diceValues = DiceRoller.Roll2D6();
+            
+            diceController.RollDice(diceValues);
         }
 
         
