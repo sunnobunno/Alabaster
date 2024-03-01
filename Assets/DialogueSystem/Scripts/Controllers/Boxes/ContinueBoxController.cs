@@ -14,11 +14,20 @@ namespace Alabaster.DialogueSystem.Controllers
         [SerializeField] private string content;
         [Header("Child Objects")]
         [SerializeField] private GameObject contentObject;
+        [SerializeField] private Animator animator;
+        [SerializeField] private ContinueBoxBackground background;
 
         private RectTransform rectTransform;
         private IDialogueElementControllerWithContent contentObjectController;
+        private bool hover = false;
+
 
         private IFlowObject aObject;
+
+        private void Update()
+        {
+            HandleHover();
+        }
 
         public void InitializeElement(IFlowObject aObject)
         {
@@ -47,12 +56,14 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            contentObjectController.TextColor = Color.yellow;
+            hover = true;
+            //contentObjectController.TextColor = Color.yellow;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            contentObjectController.TextColor = Color.grey;
+            hover = false;
+            //contentObjectController.TextColor = Color.grey;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -60,6 +71,22 @@ namespace Alabaster.DialogueSystem.Controllers
             //Destroy(gameObject.transform.parent.gameObject);
             SendClickedSignal?.Invoke(aObject);
             DestroySelf();
+        }
+
+        private void HandleHover()
+        {
+            if (hover || background.Hover)
+            {
+                animator.SetBool("Hover", true);
+                contentObjectController.TextColor = Color.yellow;
+            }
+            else
+            {
+                animator.SetBool("Hover", false);
+                contentObjectController.TextColor = Color.grey;
+            }
+
+            Debug.Log($"hover: {hover}. background.Hover: {background.Hover}");
         }
 
         public override void ResizeElement()

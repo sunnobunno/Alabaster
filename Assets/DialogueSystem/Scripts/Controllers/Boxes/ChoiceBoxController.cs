@@ -17,19 +17,28 @@ namespace Alabaster.DialogueSystem.Controllers
     {
 
         public static event Action<Branch> SendClickedSignal;
+        public static event Action<IFlowObject> SendHoverSignal;
+        public static event Action SendExitSignal;
 
         [Header("Content")]
         [SerializeField] protected string content;
         [Header("Child Objects")]
         [SerializeField] protected GameObject contentObject;
-        [Header("Articy Objects")]
+        [SerializeField] private Animator diceAnimator;
+        [SerializeField] private GameObject diceContainer;
+        [Header("Testing")]
         [SerializeField] protected ArticyRef testArticyRef;
+        [SerializeField] private bool debug;
+
 
         protected RectTransform rectTransform;
         protected IDialogueElementControllerWithContent contentObjectController;
+        
 
         protected Branch branch;
+        private IFlowObject aObject;
         protected bool isActive = true;
+        private bool isSkillCheck = false;
 
         public TextBoxLargeImageAssets TextBoxImageAssets
         {
@@ -77,16 +86,30 @@ namespace Alabaster.DialogueSystem.Controllers
         public void SetContent(Branch branch)
         {
             this.branch = branch;
-            
+            aObject = branch.Target;
+
+            isSkillCheck = ArticyConversions.GetIsSkillCheck(aObject);
+
             var content = ArticyConversions.BranchToText(branch);
             contentObjectController.Content = content;
+
+            if (!isSkillCheck) diceContainer.gameObject.SetActive(false);
+
+            //Debug.Log(diceContainer.gameObject.activeSelf);
 
             ResizeElement();
         }
 
         public void SetContent(IFlowObject aObject)
         {
+            this.aObject = aObject;
+            isSkillCheck = ArticyConversions.GetIsSkillCheck(aObject);
+
             contentObjectController.Content = ArticyConversions.IFlowObjectToText(aObject);
+
+            if (!isSkillCheck) diceContainer.gameObject.SetActive(false);
+
+            Debug.Log(diceContainer.gameObject.activeSelf);
 
             ResizeElement();
         }
@@ -104,22 +127,15 @@ namespace Alabaster.DialogueSystem.Controllers
         }
 
 
-        //protected void InvokeSendClickedSignal()
-        //{
-        //    SendClickedSignal?.Invoke(branch);
-        //}
-
-        
-
         public override void ResizeElement()
         {
-            if (isResized)
-            {
-                return;
-            }
+            //if (isResized)
+            //{
+            //    return;
+            //}
             
             ResizeSubElements();
-            rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+            ElementResizer.ResizeElementByChildrenSizeDelta(gameObject);
             SetResizedTrue(gameObject);
         }
 
@@ -141,13 +157,27 @@ namespace Alabaster.DialogueSystem.Controllers
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
             if (!isActive) return;
+
+            if (isSkillCheck)
+            {
+                diceAnimator.SetBool("Hover", true);
+                SendHoverSignal?.Invoke(aObject);
+            }
+
             
+
             contentObjectController.TextColor = Color.yellow;
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
             if (!isActive) return;
+
+            if (isSkillCheck)
+            {
+                diceAnimator.SetBool("Hover", false);
+                SendExitSignal?.Invoke();
+            }
 
             contentObjectController.TextColor = Color.gray;
         }
@@ -156,9 +186,13 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             if (!isActive) return;
 
-            //Debug.Log("choice clicked");
+            if (isSkillCheck)
+            {
+                SkillCheckInfoController.Instance.RollDice();
+            }
+
+            if (debug) return;
             SendClickedSignal?.Invoke(branch);
-            //DestroySelf();
         }
 
         public void DestroySelf()
@@ -184,13 +218,15 @@ public class ResponseChoiceBoxController02Editor : Editor
     {
         DrawDefaultInspector();
 
+        var selection = Selection.activeGameObject.GetComponent<ChoiceBoxController>();
+
         if (GUILayout.Button("Resize Box"))
         {
-            Selection.activeGameObject.GetComponent<ChoiceBoxController>().ResizeElement();
+            selection.ResizeElement();
         }
-        //if (GUILayout.Button("Test Articy Ref"))
-        //{
-        //    Selection.activeGameObject.GetComponent<ChoiceBoxController>().InitializeElement(Selection.activeGameObject.GetComponent<ChoiceBoxController>().TestArticyRef.GetObject());
-        //}
+        if (GUILayout.Button("Initialize"))
+        {
+            selection.InitializeElement(selection.TestArticyRef.GetObject());
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public static DialogueMainTimelineContainer Instance { get; private set; }
 
-        [SerializeField] private GameObject dialogueElementContainerPrefab;
+        [SerializeField] private GameObject boxContainerPrefab;
         [SerializeField] private GameObject dialougeBoxPrefab;
         [SerializeField] private GameObject continueBoxPrefab;
         [SerializeField] private GameObject responseListContainerPrefab;
@@ -31,7 +31,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
 
         #region Properties
-        public GameObject DialogueElementContainerPrefab { get => dialogueElementContainerPrefab; }
+        public GameObject DialogueElementContainerPrefab { get => boxContainerPrefab; }
         public GameObject DialogueBoxPrefab { get => dialougeBoxPrefab; }
         public GameObject ContinueBoxPrefab { get => continueBoxPrefab; }
         public GameObject ResponseListContainerPrefab { get => responseListContainerPrefab; }
@@ -56,6 +56,12 @@ namespace Alabaster.DialogueSystem.Controllers
         private float autoScrollSpeed = 0.5f;
         private string lastTitle = "";
 
+
+
+
+
+
+
         private void Awake()
         {
             if (Instance == null)
@@ -64,11 +70,6 @@ namespace Alabaster.DialogueSystem.Controllers
             }
 
             SetReferences();
-        }
-
-        private void Start()
-        {
-            
         }
 
         private void Update()
@@ -81,6 +82,11 @@ namespace Alabaster.DialogueSystem.Controllers
             rectTransform = GetComponent<RectTransform>();
             verticalLayoutGroup = GetComponent<VerticalLayoutGroup>();
         }
+
+
+
+
+
 
         private void OnEnable()
         {
@@ -95,6 +101,11 @@ namespace Alabaster.DialogueSystem.Controllers
             ChoiceListContainerController.SendClickedSignal -= ListenResponseSignal;
             BoxContainer.SendSlideInEndSignal -= ListenSlideInEndSignal;
         }
+
+
+
+
+
 
         private void ListenResponseSignal(Branch branch)
         {
@@ -115,10 +126,7 @@ namespace Alabaster.DialogueSystem.Controllers
             SendSlideInEndSignal?.Invoke();
         }
 
-        public void InitializeElement()
-        {
 
-        }
 
 
         public void AddDialogueBox(IFlowObject aObject)
@@ -150,61 +158,39 @@ namespace Alabaster.DialogueSystem.Controllers
             AddDialogueElement(choiceBoxPrefab, branch);
         }
 
+
+
+
+
+
+
         // The goal of this class is to create an interface to perform all the requirements
         // You should be able to add dialogue elements
         // Control the display of their title cards, grey them out, 
 
-        public void AddDialogueElement(GameObject dialogueElementPrefab, IFlowObject aObject)
+
+        public void AddDialogueElement<T>(GameObject dialogueElementPrefab, T aObject)
         {
             isTimeLineResized = false;
-            
-            string aText = "";
-            
-            if (ArticyConversions.IFlowObjectToText(aObject) != null)
-            {
-                aText = ArticyConversions.IFlowObjectToText(aObject);
-            }
-            
+            string? aText = "";
+            aText = ArticyConversions.AnyToText(aObject);
             Debug.Log($"----- NEW {dialogueElementPrefab.name}: {aText} -----");
 
-            GameObject newBoxContainer = InstantiateDialogueElementContainer();
+
+            GameObject newBoxContainer = InstantiateBoxContainer();
             GameObject newDialogueElement = InstantiateDialogueElement(dialogueElementPrefab);
+
+
             ParentDialogueElementToSelf(newBoxContainer);
             ParentDialogueElementToContainer(newDialogueElement, newBoxContainer);
             dialogueElementList.Add(newBoxContainer.GetComponent<BoxContainer>());
-            //AddDialogueElementToElementList(newBoxContainer);
 
-            //newDialogueElement.GetComponent<IDialogueElementController<IFlowObject>>().InitializeElement(aObject);
-            newBoxContainer.GetComponent<BoxContainer>().InitializeElement<IFlowObject>(aObject);
 
-            //DialogueElementController controller = dialogueElementPrefab.GetComponent<DialogueElementController>();
+            newBoxContainer.GetComponent<BoxContainer>().InitializeElement<T>(aObject);
         }
 
-        public void AddDialogueElement(GameObject dialogueElementPrefab, Branch branch)
-        {
-            isTimeLineResized = false;
 
-            string aText = "";
 
-            if (ArticyConversions.BranchToText(branch) != null)
-            {
-                aText = ArticyConversions.BranchToText(branch);
-            }
-
-            Debug.Log($"----- NEW {dialogueElementPrefab.name}: {aText} -----");
-
-            GameObject newBoxContainer = InstantiateDialogueElementContainer();
-            GameObject newDialogueElement = InstantiateDialogueElement(dialogueElementPrefab);
-            ParentDialogueElementToSelf(newBoxContainer);
-            ParentDialogueElementToContainer(newDialogueElement, newBoxContainer);
-            dialogueElementList.Add(newBoxContainer.GetComponent<BoxContainer>());
-            //AddDialogueElementToElementList(newBoxContainer);
-
-            newDialogueElement.GetComponent<IDialogueElementController<Branch>>().InitializeElement(branch);
-            newBoxContainer.GetComponent<BoxContainer>().InitializeElement();
-
-            //DialogueElementController controller = dialogueElementPrefab.GetComponent<DialogueElementController>();
-        }
 
         private void ParentDialogueElementToSelf(GameObject dialogueElement)
         {
@@ -231,12 +217,14 @@ namespace Alabaster.DialogueSystem.Controllers
             return newDialogueElement;
         }
 
-        private GameObject InstantiateDialogueElementContainer()
+        private GameObject InstantiateBoxContainer()
         {
-            GameObject newDialogueElementContainer = GameObject.Instantiate(dialogueElementContainerPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
-            //ParentDialogueElementToSelf(newDialogueElementContainer);
+            GameObject newDialogueElementContainer = GameObject.Instantiate(boxContainerPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
             return newDialogueElementContainer;
         }
+
+
+
 
         public void ResizeContainer()
         {
@@ -259,6 +247,11 @@ namespace Alabaster.DialogueSystem.Controllers
 
             isTimeLineResized = true;
         }
+
+
+
+
+
 
         private Vector3 GetTargetPosition()
         {
@@ -316,23 +309,23 @@ namespace Alabaster.DialogueSystem.Controllers
     {
         public override void OnInspectorGUI()
         {
-
+            var selection = Selection.activeGameObject.GetComponent<DialogueMainTimelineContainer>();
 
             DrawDefaultInspector();
 
             if (GUILayout.Button("Add Dialogue Box"))
             {
-                Selection.activeGameObject.GetComponent<DialogueMainTimelineContainer>().AddDialogueElement(DialogueMainTimelineContainer.Instance.DialogueBoxPrefab, DialogueMainTimelineContainer.Instance.TestArticyRef.GetObject());
+                selection.AddDialogueElement(selection.DialogueBoxPrefab, selection.TestArticyRef.GetObject());
             }
 
             if (GUILayout.Button("Add Continue Box"))
             {
-                Selection.activeGameObject.GetComponent<DialogueMainTimelineContainer>().AddDialogueElement(DialogueMainTimelineContainer.Instance.ContinueBoxPrefab, DialogueMainTimelineContainer.Instance.TestArticyRef.GetObject());
+                selection.AddDialogueElement(selection.ContinueBoxPrefab, selection.TestArticyRef.GetObject());
             }
 
             if (GUILayout.Button("Add Response List"))
             {
-                Selection.activeGameObject.GetComponent<DialogueMainTimelineContainer>().AddDialogueElement(DialogueMainTimelineContainer.Instance.ResponseListContainerPrefab, DialogueMainTimelineContainer.Instance.TestArticyRef.GetObject());
+                selection.AddDialogueElement(selection.ResponseListContainerPrefab, selection.TestArticyRef.GetObject());
             }
 
             //if (GUILayout.Button("Test"))

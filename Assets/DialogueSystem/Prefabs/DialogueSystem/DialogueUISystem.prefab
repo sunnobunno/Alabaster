@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd798ad0b1e794043a24cfdb03557c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueElementContainerPrefab: {fileID: 2253078776650045564, guid: 31259bdff59d8954ba6c45dd4f8532ae, type: 3}
+  boxContainerPrefab: {fileID: 2253078776650045564, guid: 31259bdff59d8954ba6c45dd4f8532ae, type: 3}
   dialougeBoxPrefab: {fileID: 940463796710541257, guid: 729876f493c13b94d8067226be7c5d72, type: 3}
   continueBoxPrefab: {fileID: 726421651803203042, guid: 2ad352b7eaf5dbc44b2c9cfa96858e6b, type: 3}
   responseListContainerPrefab: {fileID: 5375311161495220665, guid: 3d85e1edb7a6e484e9e524f69f21c103, type: 3}

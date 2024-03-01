@@ -58,6 +58,17 @@ namespace Alabaster.EnvironmentSystem
             mouseRelativeToCenter = ParallaxEnvironmentController.Instance.MouseScreenPosRelativeToCenter;
         }
 
+        public void InitializeElement<T>(T initializeData)
+        {
+            InitializeChild<T>(initializeData);
+            ResizeElement();
+        }
+
+        public void InitializeChild<T>(T initializeData)
+        {
+
+        }
+
         public override void GreyOut(bool isGrey)
         {
 

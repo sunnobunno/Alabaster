@@ -11,11 +11,12 @@ using UnityEditor;
 using UnityEngine;
 using Alabaster.DialogueSystem.Utilities;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 //using UnityEngine.Animations.Rigging;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
-    public class ChoiceListContainerController : DialogueElement, IDialogueElementController<IFlowObject>
+    public class ChoiceListContainerController : DialogueElement, IDialogueElementController<IFlowObject>, IDialogueElementClickable<IFlowObject>
     {
 
         public static event Action<Branch> SendClickedSignal;
@@ -92,11 +93,6 @@ namespace Alabaster.DialogueSystem.Controllers
             //DialogueElementUtilities.CallBackAtEndOfFrame(callBack, this);
         }
 
-        private void ResizeCallBack()
-        {
-            rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
-        }
-
         private void PopulateResponseChoiceList(IList<Branch> branches)
         {
             foreach (Branch branch in branches)
@@ -128,6 +124,26 @@ namespace Alabaster.DialogueSystem.Controllers
         public override void GreyOut(bool isGrey)
         {
             //throw new NotImplementedException();
+        }
+
+
+
+
+
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            
         }
     }
 
