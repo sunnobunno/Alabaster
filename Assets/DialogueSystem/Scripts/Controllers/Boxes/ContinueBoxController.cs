@@ -14,8 +14,8 @@ namespace Alabaster.DialogueSystem.Controllers
         [SerializeField] private string content;
         [Header("Child Objects")]
         [SerializeField] private GameObject contentObject;
-        //[SerializeField] private Animator animator;
-        //[SerializeField] private ContinueBoxBackground background;
+        [SerializeField] private Animator animator;
+        [SerializeField] private ContinueBoxBackground background;
 
         private RectTransform rectTransform;
         private IDialogueElementControllerWithContent contentObjectController;
@@ -26,7 +26,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
         private void Update()
         {
-            //HandleHover();
+            HandleHover();
         }
 
         public void InitializeElement(IFlowObject aObject)
@@ -57,13 +57,13 @@ namespace Alabaster.DialogueSystem.Controllers
         public void OnPointerEnter(PointerEventData eventData)
         {
             hover = true;
-            contentObjectController.TextColor = Color.yellow;
+            //contentObjectController.TextColor = Color.yellow;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             hover = false;
-            contentObjectController.TextColor = Color.grey;
+            //contentObjectController.TextColor = Color.grey;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -73,17 +73,21 @@ namespace Alabaster.DialogueSystem.Controllers
             DestroySelf();
         }
 
-        //private void HandleHover()
-        //{
-        //    if (hover || background.Hover)
-        //    {
-        //        animator.SetBool("Hover", true);
-        //    }
-        //    else
-        //    {
-        //        animator.SetBool("Hover", false);
-        //    }
-        //}
+        private void HandleHover()
+        {
+            if (hover || background.Hover)
+            {
+                animator.SetBool("Hover", true);
+                contentObjectController.TextColor = Color.yellow;
+            }
+            else
+            {
+                animator.SetBool("Hover", false);
+                contentObjectController.TextColor = Color.grey;
+            }
+
+            Debug.Log($"hover: {hover}. background.Hover: {background.Hover}");
+        }
 
         public override void ResizeElement()
         {
