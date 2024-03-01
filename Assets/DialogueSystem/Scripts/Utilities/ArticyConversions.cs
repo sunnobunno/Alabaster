@@ -13,6 +13,19 @@ namespace Alabaster.DialogueSystem.Utilities
 {
     public static class ArticyConversions
     {
+        public static string AnyToText<T>(T aObject)
+        {
+            Type type = typeof(T);
+            if (type == typeof(Branch))
+            {
+                return BranchToText(aObject as Branch);
+            }
+            else
+            {
+                return IFlowObjectToText(aObject as IFlowObject);
+            }
+        }
+        
         public static string IFlowObjectToText(IFlowObject aObject)
         {
             var text = ((IObjectWithText)aObject).Text;

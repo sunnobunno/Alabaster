@@ -52,6 +52,19 @@ namespace Alabaster.DialogueSystem
             DialogueMainTimelineContainer.SendContinueSignal -= ListenContinueSignal;
         }
 
+        private void SetReferences()
+        {
+            timeLineContainer = DialogueMainTimelineContainer.Instance;
+        }
+
+        private void SetFields()
+        {
+
+        }
+
+
+
+
         private void ListenSlideInEndSignal()
         {
 
@@ -94,27 +107,11 @@ namespace Alabaster.DialogueSystem
             SendContinueSignal?.Invoke(aObject);
         }
 
-        private void SetReferences()
-        {
-            timeLineContainer = DialogueMainTimelineContainer.Instance;
-        }
+        
 
-        private void SetFields()
-        {
 
-        }
 
-        // Start is called before the first frame update
-        void Start()
-        {
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         public void CreateDialogueEntry(IFlowObject aObject)
         {

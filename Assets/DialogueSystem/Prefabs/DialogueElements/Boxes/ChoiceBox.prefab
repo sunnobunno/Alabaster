@@ -157,7 +157,7 @@ MonoBehaviour:
     referencingMode: 0
     lowId: 2667
     highId: 16777216
-  debug: 1
+  debug: 0
 --- !u!1 &7425088844770756892
 GameObject:
   m_ObjectHideFlags: 0
