@@ -17,6 +17,8 @@ namespace Alabaster.DialogueSystem.Controllers
     {
 
         public static event Action<Branch> SendClickedSignal;
+        public static event Action<IFlowObject> SendHoverSignal;
+        public static event Action SendExitSignal;
 
         [Header("Content")]
         [SerializeField] protected string content;
@@ -155,8 +157,14 @@ namespace Alabaster.DialogueSystem.Controllers
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
             if (!isActive) return;
+
+            if (isSkillCheck)
+            {
+                diceAnimator.SetBool("Hover", true);
+                SendHoverSignal?.Invoke(aObject);
+            }
+
             
-            if (isSkillCheck) diceAnimator.SetBool("Hover", true);
 
             contentObjectController.TextColor = Color.yellow;
         }
@@ -165,7 +173,11 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             if (!isActive) return;
 
-            if (isSkillCheck) diceAnimator.SetBool("Hover", false);
+            if (isSkillCheck)
+            {
+                diceAnimator.SetBool("Hover", false);
+                SendExitSignal?.Invoke();
+            }
 
             contentObjectController.TextColor = Color.gray;
         }

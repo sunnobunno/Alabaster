@@ -18,6 +18,7 @@ namespace Alabaster.DialogueSystem
         [SerializeField] private SimpleTextBoxController skillNameUI;
         [SerializeField] private SimpleTextBoxController skillLevelUI;
         [SerializeField] private DiceController diceController;
+        [SerializeField] private Animator animator;
 
         [Header("Testing")]
         [SerializeField] public ArticyRef ArticyRef;
@@ -30,6 +31,18 @@ namespace Alabaster.DialogueSystem
         private int skillLevel;
         private string odds;
         private string oddsDescription;
+
+        private void OnEnable()
+        {
+            ChoiceBoxController.SendHoverSignal += PeekView;
+            ChoiceBoxController.SendExitSignal += HiddenView;
+        }
+
+        private void OnDisable()
+        {
+            ChoiceBoxController.SendHoverSignal -= PeekView;
+            ChoiceBoxController.SendExitSignal -= HiddenView;
+        }
 
         protected override void Awake()
         {
@@ -86,7 +99,23 @@ namespace Alabaster.DialogueSystem
             diceController.RollDice(diceValues);
         }
 
-        
+        private void ResetAnimatorParameters()
+        {
+            animator.SetBool("Peek", false);
+            animator.SetBool("Hidden", false);
+        }
+
+        private void PeekView(IFlowObject aObject)
+        {
+            ResetAnimatorParameters();
+            animator.SetBool("Peek", true);
+        }
+
+        private void HiddenView()
+        {
+            ResetAnimatorParameters();
+            animator.SetBool("Hidden", true);
+        }
     }
 
     [CustomEditor(typeof(SkillCheckInfoController))]
