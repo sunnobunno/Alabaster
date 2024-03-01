@@ -129,8 +129,6 @@ namespace Alabaster.DialogueSystem.Controllers
 
 
 
-
-
         public void AddDialogueBox(IFlowObject aObject)
         {
             var currentTitle = ArticyConversions.IFlowObjectToTitle(aObject);
@@ -160,6 +158,12 @@ namespace Alabaster.DialogueSystem.Controllers
             AddDialogueElement(choiceBoxPrefab, branch);
         }
 
+
+
+
+
+
+
         // The goal of this class is to create an interface to perform all the requirements
         // You should be able to add dialogue elements
         // Control the display of their title cards, grey them out, 
@@ -168,77 +172,22 @@ namespace Alabaster.DialogueSystem.Controllers
         public void AddDialogueElement<T>(GameObject dialogueElementPrefab, T aObject)
         {
             isTimeLineResized = false;
-
             string? aText = "";
             aText = ArticyConversions.AnyToText(aObject);
-
             Debug.Log($"----- NEW {dialogueElementPrefab.name}: {aText} -----");
+
 
             GameObject newBoxContainer = InstantiateBoxContainer();
             GameObject newDialogueElement = InstantiateDialogueElement(dialogueElementPrefab);
+
+
             ParentDialogueElementToSelf(newBoxContainer);
             ParentDialogueElementToContainer(newDialogueElement, newBoxContainer);
             dialogueElementList.Add(newBoxContainer.GetComponent<BoxContainer>());
-            //AddDialogueElementToElementList(newBoxContainer);
 
-            //newDialogueElement.GetComponent<IDialogueElementController<IFlowObject>>().InitializeElement(aObject);
+
             newBoxContainer.GetComponent<BoxContainer>().InitializeElement<T>(aObject);
         }
-
-
-        //public void AddDialogueElement(GameObject dialogueElementPrefab, IFlowObject aObject)
-        //{
-        //    isTimeLineResized = false;
-            
-        //    string aText = "";
-            
-        //    if (ArticyConversions.IFlowObjectToText(aObject) != null)
-        //    {
-        //        aText = ArticyConversions.IFlowObjectToText(aObject);
-        //    }
-            
-        //    Debug.Log($"----- NEW {dialogueElementPrefab.name}: {aText} -----");
-
-        //    GameObject newBoxContainer = InstantiateBoxContainer();
-        //    GameObject newDialogueElement = InstantiateDialogueElement(dialogueElementPrefab);
-        //    ParentDialogueElementToSelf(newBoxContainer);
-        //    ParentDialogueElementToContainer(newDialogueElement, newBoxContainer);
-        //    dialogueElementList.Add(newBoxContainer.GetComponent<BoxContainer>());
-        //    //AddDialogueElementToElementList(newBoxContainer);
-
-        //    //newDialogueElement.GetComponent<IDialogueElementController<IFlowObject>>().InitializeElement(aObject);
-        //    newBoxContainer.GetComponent<BoxContainer>().InitializeElement<IFlowObject>(aObject);
-
-        //    //DialogueElementController controller = dialogueElementPrefab.GetComponent<DialogueElementController>();
-        //}
-
-        //public void AddDialogueElement(GameObject dialogueElementPrefab, Branch branch)
-        //{
-        //    isTimeLineResized = false;
-
-        //    string aText = "";
-
-        //    if (ArticyConversions.BranchToText(branch) != null)
-        //    {
-        //        aText = ArticyConversions.BranchToText(branch);
-        //    }
-
-        //    Debug.Log($"----- NEW {dialogueElementPrefab.name}: {aText} -----");
-
-        //    GameObject newBoxContainer = InstantiateBoxContainer();
-        //    GameObject newDialogueElement = InstantiateDialogueElement(dialogueElementPrefab);
-        //    ParentDialogueElementToSelf(newBoxContainer);
-        //    ParentDialogueElementToContainer(newDialogueElement, newBoxContainer);
-        //    dialogueElementList.Add(newBoxContainer.GetComponent<BoxContainer>());
-        //    //AddDialogueElementToElementList(newBoxContainer);
-
-        //    newDialogueElement.GetComponent<IDialogueElementController<Branch>>().InitializeElement(branch);
-        //    newBoxContainer.GetComponent<BoxContainer>().InitializeElement();
-
-        //    //DialogueElementController controller = dialogueElementPrefab.GetComponent<DialogueElementController>();
-        //}
-
-
 
 
 

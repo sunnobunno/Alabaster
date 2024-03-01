@@ -24,6 +24,8 @@ namespace Alabaster.DialogueSystem.Utilities
             callingObject.StartCoroutine(callBackAtEndOfFrame);
         }
 
+
+
         public static void ResizeElementByChildrenSizeDelta(GameObject gameObject)
         {
             var initialPivot = gameObject.GetComponent<RectTransform>().pivot;

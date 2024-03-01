@@ -14,7 +14,7 @@ namespace Alabaster.DialogueSystem
         protected virtual void Awake()
         {
             SetReferences();
-            Debug.Log($"{gameObject.name}: Element Awake");
+            //Debug.Log($"{gameObject.name}: Element Awake");
         }
 
         protected virtual void Start()

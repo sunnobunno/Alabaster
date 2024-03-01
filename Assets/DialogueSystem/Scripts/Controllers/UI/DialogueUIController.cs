@@ -72,13 +72,6 @@ namespace Alabaster.DialogueSystem
 
         private void ListenResponseSignal(Branch branch)
         {
-            //timeLineContainer.ElementList.Last().DestroySelf();
-            //Debug.Log("Destroyed choice list container");
-            //Debug.Log("Replacing choice with Dialogue Box");
-            //timeLineContainer.AddDialogueBox(branch.Target as ArticyObject);
-            ////ToggleLastDialogueBoxTitle(false);
-            //SendResponseSignal?.Invoke(branch);
-
             var coListenResponseSignal = CoListenResponseSignal(branch);
             StartCoroutine(coListenResponseSignal);
         }
@@ -122,15 +115,14 @@ namespace Alabaster.DialogueSystem
         private IEnumerator CoCreateDialogueEntry(IFlowObject aObject)
         {
             timeLineContainer.AddDialogueBox(aObject);
-            //timeLineContainer.LastElement.Hide();
-            //Debug.Log($"{timeLineContainer.LastElement.IsResized} hiiiii");
-            //timeLineContainer.LastElement.SlideInElement();
+            timeLineContainer.LastElement.Hide();
 
             while (timeLineContainer.LastElement.IsResized == false)
             {
                 yield return null;
             }
 
+            timeLineContainer.LastElement.Show();
             timeLineContainer.LastElement.SlideInElement();
 
             timeLineContainer.AddContinueBox(aObject);
@@ -160,6 +152,7 @@ namespace Alabaster.DialogueSystem
         private IEnumerator CoCreateChoiceEntry(IFlowObject aObject)
         {
             timeLineContainer.AddDialogueBox(aObject);
+            timeLineContainer.LastElement.Hide();
             //Debug.Log($"{timeLineContainer.LastElement.IsResized} hiiiii");
             //timeLineContainer.LastElement.SlideInElement();
 
@@ -168,6 +161,7 @@ namespace Alabaster.DialogueSystem
                 yield return null;
             }
 
+            timeLineContainer.LastElement.Show();
             timeLineContainer.LastElement.SlideInElement();
 
             timeLineContainer.AddChoiceList(aObject);

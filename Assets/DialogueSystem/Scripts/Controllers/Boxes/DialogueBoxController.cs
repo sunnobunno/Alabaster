@@ -71,9 +71,9 @@ namespace Alabaster.DialogueSystem.Controllers
             this.aObject = aObject;
 
             content = ArticyConversions.IFlowObjectToText(aObject);
-            Debug.Log(content);
+            //Debug.Log(content);
             title = ArticyConversions.IFlowObjectToTitle(aObject);
-            Debug.Log(title);
+            //Debug.Log(title);
 
             //Debug.Log(content);
 
@@ -97,11 +97,15 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public override void ResizeElement()
         {
-            if (isResized) return;
+            //if (isResized) return;
             
             ResizeSubElements();
             CallBacks.VoidCallBackWithGameObject callBack = SetResizedTrue;
             ElementResizer.EndOfFrameResizeElementByChildrenSizeDelta(this, callBack);
+
+            //LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+            //ElementResizer.ResizeElementByChildrenSizeDelta(gameObject);
+            //SetResizedTrue(gameObject);
         }
 
         private void ResizeSubElements()

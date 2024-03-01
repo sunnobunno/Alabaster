@@ -93,7 +93,7 @@ namespace Alabaster.DialogueSystem.Controllers
 
             if (!isSkillCheck) diceContainer.gameObject.SetActive(false);
 
-            Debug.Log(diceContainer.gameObject.activeSelf);
+            //Debug.Log(diceContainer.gameObject.activeSelf);
 
             ResizeElement();
         }
@@ -133,7 +133,7 @@ namespace Alabaster.DialogueSystem.Controllers
             //}
             
             ResizeSubElements();
-            rectTransform.sizeDelta = RectTransformSizeFitter.GetSizeOfChildren(gameObject);
+            ElementResizer.ResizeElementByChildrenSizeDelta(gameObject);
             SetResizedTrue(gameObject);
         }
 
@@ -156,22 +156,18 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             if (!isActive) return;
             
-            if (!isSkillCheck) contentObjectController.TextColor = Color.yellow;
-            else
-            {
-                diceAnimator.SetBool("Hover", true);
-            }
+            if (isSkillCheck) diceAnimator.SetBool("Hover", true);
+
+            contentObjectController.TextColor = Color.yellow;
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
             if (!isActive) return;
 
-            if (!isSkillCheck) contentObjectController.TextColor = Color.gray;
-            else
-            {
-                diceAnimator.SetBool("Hover", false);
-            }
+            if (isSkillCheck) diceAnimator.SetBool("Hover", false);
+
+            contentObjectController.TextColor = Color.gray;
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)

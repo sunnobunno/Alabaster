@@ -43,7 +43,7 @@ namespace Alabaster.DialogueSystem
         {
             var articyObject = articyRef.GetObject();
 
-            Debug.Log(articyObject.Id);
+            //Debug.Log(articyObject.Id);
 
             flowPlayer.StartOn = articyObject;
             isPaused = false;

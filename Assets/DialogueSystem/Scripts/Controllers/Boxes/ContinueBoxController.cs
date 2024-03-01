@@ -14,11 +14,20 @@ namespace Alabaster.DialogueSystem.Controllers
         [SerializeField] private string content;
         [Header("Child Objects")]
         [SerializeField] private GameObject contentObject;
+        //[SerializeField] private Animator animator;
+        //[SerializeField] private ContinueBoxBackground background;
 
         private RectTransform rectTransform;
         private IDialogueElementControllerWithContent contentObjectController;
+        private bool hover = false;
+
 
         private IFlowObject aObject;
+
+        private void Update()
+        {
+            //HandleHover();
+        }
 
         public void InitializeElement(IFlowObject aObject)
         {
@@ -47,11 +56,13 @@ namespace Alabaster.DialogueSystem.Controllers
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            hover = true;
             contentObjectController.TextColor = Color.yellow;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            hover = false;
             contentObjectController.TextColor = Color.grey;
         }
 
@@ -61,6 +72,18 @@ namespace Alabaster.DialogueSystem.Controllers
             SendClickedSignal?.Invoke(aObject);
             DestroySelf();
         }
+
+        //private void HandleHover()
+        //{
+        //    if (hover || background.Hover)
+        //    {
+        //        animator.SetBool("Hover", true);
+        //    }
+        //    else
+        //    {
+        //        animator.SetBool("Hover", false);
+        //    }
+        //}
 
         public override void ResizeElement()
         {
