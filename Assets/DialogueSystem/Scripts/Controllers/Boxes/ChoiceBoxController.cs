@@ -186,11 +186,6 @@ namespace Alabaster.DialogueSystem.Controllers
         {
             if (!isActive) return;
 
-            if (isSkillCheck)
-            {
-                SkillCheckInfoController.Instance.RollDice();
-            }
-
             if (debug) return;
             SendClickedSignal?.Invoke(branch);
         }

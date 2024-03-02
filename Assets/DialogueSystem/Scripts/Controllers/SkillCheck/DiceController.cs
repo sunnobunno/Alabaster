@@ -2,6 +2,7 @@ using Alabaster.DialogueSystem;
 using Alabaster.DialogueSystem.Controllers;
 using Alabaster.DialogueSystem.Utilities;
 using Articy.Unity;
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,6 +26,16 @@ namespace Alabaster.DialogueSystem
 
             dice1Animator.Play("Dice01Idle", 0, 0f);
             dice2Animator.Play("Dice01Idle", 0, 0.1f);
+        }
+
+        private void OnEnable()
+        {
+            SkillCheckInfoController.SendResetSignal += ResetDice;
+        }
+
+        private void OnDisable()
+        {
+            SkillCheckInfoController.SendResetSignal -= ResetDice;
         }
 
         protected override void SetReferences()

@@ -1,20 +1,27 @@
 using Alabaster.DialogueSystem.Controllers;
 using Alabaster.DialogueSystem.Utilities;
 using Articy.Little_Guy_Syndrome;
-using Articy.Little_Guy_Syndrome.GlobalVariables;
 using Articy.Unity;
-using JetBrains.Annotations;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 namespace Alabaster.DialogueSystem
 {
+    internal enum SkillCheckInfoState
+    {
+        Hidden,
+        Hover,
+        Rolling
+    }
+
     public class SkillCheckInfoController : DialogueElement, IDialogueElementController<IFlowObject>
     {
         public static SkillCheckInfoController Instance { get; private set; }
-        
+
+        public static Action SendResetSignal;
+
         [SerializeField] private SimpleTextBoxController skillNameUI;
         [SerializeField] private SimpleTextBoxController skillLevelUI;
         [SerializeField] private DiceController diceController;
@@ -31,24 +38,26 @@ namespace Alabaster.DialogueSystem
         private int skillLevel;
         private string odds;
         private string oddsDescription;
+        private SkillCheckInfoState state = SkillCheckInfoState.Hidden;
 
         private void OnEnable()
         {
-            ChoiceBoxController.SendHoverSignal += PeekView;
-            ChoiceBoxController.SendExitSignal += HiddenView;
+            ChoiceBoxController.SendHoverSignal += PeekState;
+            ChoiceBoxController.SendExitSignal += HiddenState;
+            ChoiceBoxController.SendClickedSignal += RollState;
         }
 
         private void OnDisable()
         {
-            ChoiceBoxController.SendHoverSignal -= PeekView;
-            ChoiceBoxController.SendExitSignal -= HiddenView;
+            ChoiceBoxController.SendHoverSignal -= PeekState;
+            ChoiceBoxController.SendExitSignal -= HiddenState;
         }
 
         protected override void Awake()
         {
             base.Awake();
 
-            if (Instance == null )
+            if (Instance == null)
             {
                 Instance = this;
             }
@@ -67,7 +76,7 @@ namespace Alabaster.DialogueSystem
 
         protected override void SetFields()
         {
-            
+
         }
 
         public void SetContent(IFlowObject aObject)
@@ -84,7 +93,7 @@ namespace Alabaster.DialogueSystem
 
         public override void GreyOut(bool isGrey)
         {
-            
+
         }
 
         public override void ResizeElement()
@@ -95,7 +104,7 @@ namespace Alabaster.DialogueSystem
         public void RollDice()
         {
             var diceValues = DiceRoller.Roll2D6();
-            
+
             diceController.RollDice(diceValues);
         }
 
@@ -103,18 +112,62 @@ namespace Alabaster.DialogueSystem
         {
             animator.SetBool("Peek", false);
             animator.SetBool("Hidden", false);
+            animator.SetBool("Rolling", false);
+            
         }
 
-        private void PeekView(IFlowObject aObject)
+        private void PeekState(IFlowObject aObject)
         {
-            ResetAnimatorParameters();
-            animator.SetBool("Peek", true);
+            InitializeElement(aObject);
+            
+            state = SkillCheckInfoState.Hover;
+            HandleState();
+            SendResetSignal?.Invoke();
         }
 
-        private void HiddenView()
+        private void HiddenState()
+        {
+            state = SkillCheckInfoState.Hidden;
+            HandleState();
+        }
+
+        private void RollState(Branch branch)
+        {
+            if (!ArticyConversions.GetIsSkillCheck(branch.Target)) return;
+
+            RollDice();
+            state = SkillCheckInfoState.Rolling;
+            HandleState();
+
+            var coResetElement = CoResetElement();
+            StartCoroutine(coResetElement);
+        }
+
+        private IEnumerator CoResetElement()
+        {
+            yield return new WaitForSeconds(5f);
+
+            ResetAnimatorParameters();
+            SendResetSignal?.Invoke();
+        }
+
+        private void HandleState()
         {
             ResetAnimatorParameters();
-            animator.SetBool("Hidden", true);
+
+            switch (state)
+            {
+                case SkillCheckInfoState.Hidden:
+                    animator.SetBool("Hidden", true);
+                    break;
+                case SkillCheckInfoState.Hover:
+                    animator.SetBool("Peek", true);
+                    break;
+                case SkillCheckInfoState.Rolling:
+                    animator.SetBool("Rolling", true);
+                    break;
+                default: break;
+            }
         }
     }
 
