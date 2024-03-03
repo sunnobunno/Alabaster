@@ -18,6 +18,7 @@ namespace Alabaster.DialogueSystem
 
         public static DialogueUIController Instance { get; private set; }
 
+        [SerializeField] private Animator UIAnimator;
         [SerializeField] private float dialogueWidth;
         [SerializeField] private float screenHeight;
         [SerializeField] private float autoScrollBottomThreshhold = 200f;
@@ -67,7 +68,15 @@ namespace Alabaster.DialogueSystem
         }
 
 
+        public void ActivateDialogue()
+        {
+            UIAnimator.SetBool("Active", true);
+        }
 
+        public void HideDialogue()
+        {
+            UIAnimator.SetBool("Active", false);
+        }
 
         private void ListenSlideInEndSignal()
         {

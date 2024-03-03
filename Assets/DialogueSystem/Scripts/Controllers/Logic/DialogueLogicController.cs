@@ -41,12 +41,19 @@ namespace Alabaster.DialogueSystem
 
         public void StartDialogue(ArticyRef articyRef)
         {
+            DialogueUIController.Instance.ActivateDialogue();
+            
             var articyObject = articyRef.GetObject();
 
             //Debug.Log(articyObject.Id);
 
             flowPlayer.StartOn = articyObject;
             isPaused = false;
+        }
+
+        public void EndDialogue()
+        {
+            DialogueUIController.Instance.HideDialogue();
         }
 
         private void Awake()
