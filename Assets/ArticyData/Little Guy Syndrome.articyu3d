@@ -5,8 +5,8 @@
     "set_IncludedNodes": "Settings, Project, GlobalVariables, ObjectDefinitions, Packages, ScriptMethods, Hierarchy, Assets",
     "set_UseScriptSupport": "True",
     "ExportVersion": "1.2",
-    "ObjectDefinitionsHash": "87331E57E633DE74DF507C98E3E78B1B68DF23F69EB20C98AEA2EA9F23408A7D",
-    "ScriptFragmentsHash": "2046497401"
+    "ObjectDefinitionsHash": "27C3E222EBC804AFD295E1B80BD602F38DB318911BCAAA77A5BCCC0AC8FACF0B",
+    "ScriptFragmentsHash": "2439811711"
   },
   "Project": {
     "Name": "Little Guy Syndrome",
@@ -711,6 +711,11 @@
                 "Property": "SkillEnum",
                 "Type": "SkillEnum",
                 "DisplayName": "Skill"
+              },
+              {
+                "Property": "IsPassed",
+                "Type": "Bool",
+                "DisplayName": "CheckPassed"
               }
             ],
             "Constraints": [
@@ -740,6 +745,11 @@
                 "Type": "Enum",
                 "IsLocalized": "False",
                 "SortMode": "BySortIndex"
+              },
+              {
+                "Property": "IsPassed",
+                "Type": "Boolean",
+                "DisplayAsCombobox": "False"
               }
             ]
           }
@@ -9023,7 +9033,7 @@
             "ShortId": 2625070231,
             "InputPins": [
               {
-                "Text": "",
+                "Text": "SkillCheck.SkillCheckPassed == true",
                 "Id": "0x0100000000000A7C",
                 "Owner": "0x0100000000000A79"
               }
@@ -9079,7 +9089,7 @@
             "ShortId": 876382425,
             "InputPins": [
               {
-                "Text": "",
+                "Text": "SkillCheck.SkillCheckPassed == false;",
                 "Id": "0x0100000000000A83",
                 "Owner": "0x0100000000000A80"
               }
@@ -9222,10 +9232,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9289,10 +9300,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9359,7 +9371,8 @@
               "IsSkillCheck": true,
               "SkillCheckRequirement": 8.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9423,10 +9436,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9490,10 +9504,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9557,10 +9572,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9611,10 +9627,11 @@
               "IsDialogueEndPoint": true
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9678,10 +9695,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9745,10 +9763,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9799,10 +9818,11 @@
               "IsDialogueEndPoint": true
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9866,10 +9886,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -9933,10 +9954,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10000,10 +10022,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10067,10 +10090,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10134,10 +10158,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10201,10 +10226,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10255,10 +10281,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10309,10 +10336,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10376,10 +10404,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10430,10 +10459,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10484,10 +10514,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10551,10 +10582,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10618,10 +10650,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10685,10 +10718,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10739,10 +10773,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10793,10 +10828,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10860,10 +10896,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10927,10 +10964,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -10994,10 +11032,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11061,10 +11100,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11128,10 +11168,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11195,10 +11236,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11262,10 +11304,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11329,10 +11372,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11396,10 +11440,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11463,10 +11508,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11530,10 +11576,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11597,10 +11644,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11664,10 +11712,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11731,10 +11780,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11798,10 +11848,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11865,10 +11916,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11932,10 +11984,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -11999,10 +12052,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12066,10 +12120,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12133,10 +12188,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12200,10 +12256,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12267,10 +12324,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12345,10 +12403,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12412,10 +12471,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12479,10 +12539,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12546,10 +12607,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12613,10 +12675,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12680,10 +12743,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12747,10 +12811,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12814,10 +12879,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12881,10 +12947,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -12948,10 +13015,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -13015,10 +13083,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -13082,10 +13151,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -13149,10 +13219,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -13216,10 +13287,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -13270,10 +13342,11 @@
               "IsDialogueEndPoint": true
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -13313,7 +13386,7 @@
             ],
             "OutputPins": [
               {
-                "Text": "",
+                "Text": "SkillCheck.SkillCheckPassed = getProp(self, \"SkillCheckFeature.IsPassed\")",
                 "Id": "0x0100000000000A6F",
                 "Owner": "0x0100000000000A6B",
                 "Connections": [
@@ -13349,9 +13422,10 @@
             },
             "SkillCheckFeature": {
               "IsSkillCheck": true,
-              "SkillCheckRequirement": 3.0,
+              "SkillCheckRequirement": 7.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": 1
+              "SkillEnum": 1,
+              "IsPassed": false
             }
           }
         },
@@ -13415,10 +13489,11 @@
               "IsDialogueEndPoint": false
             },
             "SkillCheckFeature": {
-              "IsSkillCheck": null,
+              "IsSkillCheck": false,
               "SkillCheckRequirement": 1.0,
               "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null
+              "SkillEnum": null,
+              "IsPassed": false
             }
           }
         },
@@ -13900,6 +13975,52 @@
                     "Target": "0x01000000000003DE"
                   }
                 ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Condition",
+          "Properties": {
+            "TechnicalName": "Cnd_2953C70E",
+            "Id": "0x0100000000000B1B",
+            "Parent": "0x0100000000000A5E",
+            "DisplayName": "Untitled condition",
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 700.0,
+              "y": 0.0
+            },
+            "ZIndex": 16.0,
+            "Size": {
+              "w": 225.0,
+              "h": 100.0
+            },
+            "ShortId": 693356302,
+            "Expression": "",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000B1D",
+                "Owner": "0x0100000000000B1B"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000B1E",
+                "Owner": "0x0100000000000B1B"
+              },
+              {
+                "Text": "",
+                "Id": "0x0100000000000B1F",
+                "Owner": "0x0100000000000B1B"
               }
             ]
           }
@@ -16424,6 +16545,11 @@
                     "Id": "0x0100000000000A71",
                     "TechnicalName": "DFr_6275C920",
                     "Type": "DialogueFragment"
+                  },
+                  {
+                    "Id": "0x0100000000000B1B",
+                    "TechnicalName": "Cnd_2953C70E",
+                    "Type": "Condition"
                   },
                   {
                     "Id": "0x0100000000000A79",

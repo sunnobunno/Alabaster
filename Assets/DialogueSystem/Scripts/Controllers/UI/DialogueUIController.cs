@@ -1,5 +1,6 @@
 using Alabaster.DialogueSystem.Controllers;
 using Articy.Unity;
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Alabaster.DialogueSystem
     {
         public static event Action<Branch> SendResponseSignal;
         public static event Action<IFlowObject> SendContinueSignal;
+        public static event Action<bool, Branch> SendSkillCheckSignal;
 
         public static DialogueUIController Instance { get; private set; }
 
@@ -43,6 +45,7 @@ namespace Alabaster.DialogueSystem
             DialogueMainTimelineContainer.SendSlideInEndSignal += ListenSlideInEndSignal;
             DialogueMainTimelineContainer.SendResponseSignal += ListenResponseSignal;
             DialogueMainTimelineContainer.SendContinueSignal += ListenContinueSignal;
+            DialogueMainTimelineContainer.SendSkillCheckSignal += ListenSkillCheckSignal;
         }
 
         private void OnDisable()
@@ -50,6 +53,7 @@ namespace Alabaster.DialogueSystem
             DialogueMainTimelineContainer.SendSlideInEndSignal -= ListenSlideInEndSignal;
             DialogueMainTimelineContainer.SendResponseSignal -= ListenResponseSignal;
             DialogueMainTimelineContainer.SendContinueSignal -= ListenContinueSignal;
+            DialogueMainTimelineContainer.SendSkillCheckSignal -= ListenSkillCheckSignal;
         }
 
         private void SetReferences()
@@ -72,8 +76,16 @@ namespace Alabaster.DialogueSystem
 
         private void ListenResponseSignal(Branch branch)
         {
-            var coListenResponseSignal = CoListenResponseSignal(branch);
-            StartCoroutine(coListenResponseSignal);
+            SendResponseSignal(branch);
+            
+            //var coListenResponseSignal = CoListenResponseSignal(branch);
+            //StartCoroutine(coListenResponseSignal);
+        }
+
+        private void ListenSkillCheckSignal(bool isPassed, Branch branch)
+        {
+            Debug.Log("UI Controller: sending skill check signal");
+            SendSkillCheckSignal?.Invoke(isPassed, branch);
         }
 
         private IEnumerator CoListenResponseSignal(Branch branch)

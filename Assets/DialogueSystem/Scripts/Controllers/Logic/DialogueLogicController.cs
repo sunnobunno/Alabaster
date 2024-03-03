@@ -68,12 +68,14 @@ namespace Alabaster.DialogueSystem
         {
             DialogueUIController.SendContinueSignal += ListenContinueSignal;
             DialogueUIController.SendResponseSignal += ListenResponseSignal;
+            DialogueUIController.SendSkillCheckSignal += ListenSkillCheckSignal;
         }
 
         private void OnDisable()
         {
             DialogueUIController.SendContinueSignal -= ListenContinueSignal;
             DialogueUIController.SendResponseSignal -= ListenResponseSignal;
+            DialogueUIController.SendSkillCheckSignal -= ListenSkillCheckSignal;
         }
 
         private void ListenContinueSignal(IFlowObject aObject)
@@ -85,9 +87,21 @@ namespace Alabaster.DialogueSystem
         private void ListenResponseSignal(Branch branch)
         {
             isPaused = true;
-            var debug = ((ArticyObject)branch.Target).Id;
+            //var debug = ((ArticyObject)branch.Target).Id;
             //Debug.Log(debug);
             flowPlayer.Play(branch);
+        }
+
+        private void ListenSkillCheckSignal(bool isPassed, Branch branch)
+        {
+            Debug.Log("Logic controller: skill check signal recieved");
+            
+            var aObject = branch.Target;
+            var properties = ArticyConversions.GetDialogueChoiceProperties(aObject);
+
+            if (isPassed) properties.Template.SkillCheckFeature.setProp("IsPassed", true);
+            else properties.Template.SkillCheckFeature.setProp("IsPassed", false);
+            ListenResponseSignal(branch);
         }
 
         private void SetReferences()

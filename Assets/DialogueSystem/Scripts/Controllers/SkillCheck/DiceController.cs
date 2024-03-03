@@ -3,6 +3,7 @@ using Alabaster.DialogueSystem.Controllers;
 using Alabaster.DialogueSystem.Utilities;
 using Articy.Unity;
 using Newtonsoft.Json.Bson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,34 +14,35 @@ namespace Alabaster.DialogueSystem
 {
     public class DiceController : DialogueElement
     {
+        public static Action SendDiceAnimationEndSignal;
+        
         [SerializeField] private GameObject dice1;
 
-        [SerializeField] private Animator dice1Animator;
-        [SerializeField] private Animator dice2Animator;
         [SerializeField] private SimpleTextBoxController dice1Value;
         [SerializeField] private SimpleTextBoxController dice2Value;
+        [SerializeField] private Animator animator;
+        
 
         protected override void Start()
         {
             base.Start();
-
-            dice1Animator.Play("Dice01Idle", 0, 0f);
-            dice2Animator.Play("Dice01Idle", 0, 0.1f);
         }
 
         private void OnEnable()
         {
             SkillCheckInfoController.SendResetSignal += ResetDice;
+            Die.SendDiceAnimationEndSignal += InvokeDiceAnimationEndSignal;
         }
 
         private void OnDisable()
         {
             SkillCheckInfoController.SendResetSignal -= ResetDice;
+            Die.SendDiceAnimationEndSignal -= InvokeDiceAnimationEndSignal;
         }
 
         protected override void SetReferences()
         {
-            dice1Animator = dice1.GetComponent<Animator>();
+
         }
 
         protected override void SetFields()
@@ -63,27 +65,17 @@ namespace Alabaster.DialogueSystem
             dice1Value.Content = diceValues[0].ToString();
             dice2Value.Content = diceValues[1].ToString();
 
-            dice1Animator.SetBool("Rolling", true);
-            dice2Animator.SetBool("Rolling", true);
+            animator.SetBool("Rolling", true);
         }
 
-        private void DisableDice1()
+        private void InvokeDiceAnimationEndSignal()
         {
-
-        }
-
-        private void EnableDice1()
-        {
-
+            SendDiceAnimationEndSignal?.Invoke();
         }
 
         public void ResetDice()
         {
-            dice1Animator.SetBool("Rolling", false);
-            dice2Animator.SetBool("Rolling", false);
-
-            dice1Animator.Play("Dice01Idle", 0, 0f);
-            dice2Animator.Play("Dice01Idle", 0, 0.1f);
+            animator.SetBool("Rolling", false);
         }
 
 
