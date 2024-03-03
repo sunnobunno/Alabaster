@@ -19,6 +19,7 @@ namespace Alabaster.DialogueSystem.Controllers
         public static event Action<Branch> SendResponseSignal;
         public static event Action<IFlowObject> SendContinueSignal;
         public static event Action SendSlideInEndSignal;
+        public static event Action<bool, Branch> SendSkillCheckSignal;
 
         public static DialogueMainTimelineContainer Instance { get; private set; }
 
@@ -55,6 +56,7 @@ namespace Alabaster.DialogueSystem.Controllers
         private float easeInSpeed = 0.5f;
         private float autoScrollSpeed = 0.5f;
         private string lastTitle = "";
+        private Branch currentBranch;
 
 
 
@@ -93,6 +95,7 @@ namespace Alabaster.DialogueSystem.Controllers
             ContinueBoxController.SendClickedSignal += ListenContinueSignal;
             ChoiceListContainerController.SendClickedSignal += ListenResponseSignal;
             BoxContainer.SendSlideInEndSignal += ListenSlideInEndSignal;
+            SkillCheckInfoController.SendPassedSignal += ListenSkillCheckSignal;
         }
 
         private void OnDisable()
@@ -100,6 +103,7 @@ namespace Alabaster.DialogueSystem.Controllers
             ContinueBoxController.SendClickedSignal -= ListenContinueSignal;
             ChoiceListContainerController.SendClickedSignal -= ListenResponseSignal;
             BoxContainer.SendSlideInEndSignal -= ListenSlideInEndSignal;
+            SkillCheckInfoController.SendPassedSignal += ListenSkillCheckSignal;
         }
 
 
@@ -110,7 +114,51 @@ namespace Alabaster.DialogueSystem.Controllers
         private void ListenResponseSignal(Branch branch)
         {
             Debug.Log("Choice Clicked");
-            SendResponseSignal?.Invoke(branch);
+            //SendResponseSignal?.Invoke(branch);
+
+            var coListenResponseSignal = CoListenResponseSignal(branch);
+            StartCoroutine(coListenResponseSignal);
+        }
+
+        private IEnumerator CoListenResponseSignal(Branch branch)
+        {
+            currentBranch = branch;
+            
+            ElementList.Last().DestroySelf();
+            ElementList[^2]?.GreyOut(true);
+            Debug.Log("Destroyed choice list container");
+            Debug.Log("Replacing choice with Dialogue Box");
+            AddChoiceBoxCopy(branch);
+            LastElement.Child.GetComponent<ChoiceBoxController>().IsActive = false;
+
+            // Wait to send response signal until the last element is resized to avoid vertical layout group errors
+            while (ElementList.Last().IsResized == false)
+            {
+                yield return null;
+            }
+
+            Debug.Log($"Timeline: skill check {ArticyConversions.GetIsSkillCheck(branch.Target)}");
+
+            // If current branch is skill check let the skillcheck action handle the signal
+            if (!ArticyConversions.GetIsSkillCheck(branch.Target))
+            {
+                
+                SendResponseSignal?.Invoke(branch);
+                yield break;
+            }
+
+            //while (!SkillCheckInfoController.IsRollFinished)
+            //{
+            //    yield return null;
+            //}
+
+            //SendResponseSignal?.Invoke(branch);
+        }
+
+        private void ListenSkillCheckSignal(bool isPassed)
+        {
+            Debug.Log("Timeline: sending skill check signal");
+            SendSkillCheckSignal?.Invoke(isPassed, currentBranch);
         }
 
         private void ListenContinueSignal(IFlowObject aObject)
