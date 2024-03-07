@@ -10,11 +10,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Alabaster.DialogueSystem.Controllers;
 using Alabaster.DialogueSystem.Utilities;
+using System;
 
 namespace Alabaster.DialogueSystem.Controllers
 {
     public class DialogueBoxController : DialogueElement, IDialogueElementController<IFlowObject>
     {
+        public static Action SendInitializedSignal;
+
 
         [Header("Content")]
         [SerializeField] private string content;
@@ -61,6 +64,7 @@ namespace Alabaster.DialogueSystem.Controllers
         public void InitializeElement(IFlowObject aObject)
         {
             SetElementContent(aObject);
+            SendInitializedSignal?.Invoke();
         }
 
         public void SetElementContent(IFlowObject aObject)

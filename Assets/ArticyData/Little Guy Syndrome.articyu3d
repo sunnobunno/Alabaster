@@ -6,7 +6,7 @@
     "set_UseScriptSupport": "True",
     "ExportVersion": "1.2",
     "ObjectDefinitionsHash": "27C3E222EBC804AFD295E1B80BD602F38DB318911BCAAA77A5BCCC0AC8FACF0B",
-    "ScriptFragmentsHash": "2439811711"
+    "ScriptFragmentsHash": "1846798487"
   },
   "Project": {
     "Name": "Little Guy Syndrome",
@@ -2928,6 +2928,70 @@
         {
           "Type": "Dialogue",
           "Properties": {
+            "TechnicalName": "Dlg_D95425E8",
+            "Id": "0x0100000000000A5E",
+            "Parent": "0x0100000000000580",
+            "Attachments": [],
+            "DisplayName": "TESTING: SkillCheck",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 367.0,
+              "y": 400.0
+            },
+            "ZIndex": 0.0,
+            "Size": {
+              "w": 291.0,
+              "h": 200.0
+            },
+            "ShortId": 3646170600,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A61",
+                "Owner": "0x0100000000000A5E",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A67",
+                    "Target": "0x0100000000000A64"
+                  }
+                ]
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A62",
+                "Owner": "0x0100000000000A5E"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Dialogue",
+          "Properties": {
             "TechnicalName": "Dlg_6A8C0615",
             "Id": "0x010000000000058D",
             "Parent": "0x0100000000000586",
@@ -3177,70 +3241,6 @@
                 "Text": "",
                 "Id": "0x010000000000078B",
                 "Owner": "0x0100000000000787"
-              }
-            ]
-          }
-        },
-        {
-          "Type": "Dialogue",
-          "Properties": {
-            "TechnicalName": "Dlg_D95425E8",
-            "Id": "0x0100000000000A5E",
-            "Parent": "0x0100000000000580",
-            "Attachments": [],
-            "DisplayName": "TESTING: SkillCheck",
-            "PreviewImage": {
-              "ViewBox": {
-                "x": 0.0,
-                "y": 0.0,
-                "w": 0.0,
-                "h": 0.0
-              },
-              "Mode": "FromAsset",
-              "Asset": "0x0000000000000000"
-            },
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "",
-            "ExternalId": "",
-            "Position": {
-              "x": 367.0,
-              "y": 400.0
-            },
-            "ZIndex": 0.0,
-            "Size": {
-              "w": 291.0,
-              "h": 200.0
-            },
-            "ShortId": 3646170600,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A61",
-                "Owner": "0x0100000000000A5E",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000A67",
-                    "Target": "0x0100000000000A64"
-                  }
-                ]
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A62",
-                "Owner": "0x0100000000000A5E"
               }
             ]
           }
@@ -4968,6 +4968,241 @@
                     "Label": "",
                     "TargetPin": "0x01000000000004DE",
                     "Target": "0x01000000000004DB"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_F5E53306",
+            "Id": "0x0100000000000A64",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000618",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "<align=left>Hello, welcome to the skill check test. I will be your guide.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 325.0,
+              "y": 350.0
+            },
+            "ZIndex": 0.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 4125438726,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A67",
+                "Owner": "0x0100000000000A64"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A68",
+                "Owner": "0x0100000000000A64",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A6E",
+                    "Target": "0x0100000000000A6B"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A74",
+                    "Target": "0x0100000000000A71"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_9C776497",
+            "Id": "0x0100000000000A79",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000618",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "<align=left>You have passed the skill check.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 975.0,
+              "y": 0.0
+            },
+            "ZIndex": 6.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2625070231,
+            "InputPins": [
+              {
+                "Text": "SkillCheck.SkillCheckPassed == true",
+                "Id": "0x0100000000000A7C",
+                "Owner": "0x0100000000000A79"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A7D",
+                "Owner": "0x0100000000000A79",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A8A",
+                    "Target": "0x0100000000000A87"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_343C88D9",
+            "Id": "0x0100000000000A80",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000618",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "<align=left>You have failed the skill check.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 975.0,
+              "y": 225.0
+            },
+            "ZIndex": 8.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 876382425,
+            "InputPins": [
+              {
+                "Text": "SkillCheck.SkillCheckPassed == false;",
+                "Id": "0x0100000000000A83",
+                "Owner": "0x0100000000000A80"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A84",
+                "Owner": "0x0100000000000A80",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A8A",
+                    "Target": "0x0100000000000A87"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_A1926A43",
+            "Id": "0x0100000000000A8D",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000618",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "<align=left>Ok.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 975.0,
+              "y": 475.0
+            },
+            "ZIndex": 13.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2710727235,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A90",
+                "Owner": "0x0100000000000A8D"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A91",
+                "Owner": "0x0100000000000A8D",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A8A",
+                    "Target": "0x0100000000000A87"
                   }
                 ]
               }
@@ -8938,241 +9173,6 @@
           }
         },
         {
-          "Type": "DialogueFragment",
-          "Properties": {
-            "TechnicalName": "DFr_F5E53306",
-            "Id": "0x0100000000000A64",
-            "Parent": "0x0100000000000A5E",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x0100000000000618",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "<align=left>Hello, welcome to the skill check test. I will be your guide.</align>",
-            "ExternalId": "",
-            "Position": {
-              "x": 325.0,
-              "y": 350.0
-            },
-            "ZIndex": 0.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 4125438726,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A67",
-                "Owner": "0x0100000000000A64"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A68",
-                "Owner": "0x0100000000000A64",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000A6E",
-                    "Target": "0x0100000000000A6B"
-                  },
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000A74",
-                    "Target": "0x0100000000000A71"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "Type": "DialogueFragment",
-          "Properties": {
-            "TechnicalName": "DFr_9C776497",
-            "Id": "0x0100000000000A79",
-            "Parent": "0x0100000000000A5E",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x0100000000000618",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "<align=left>You have passed the skill check.</align>",
-            "ExternalId": "",
-            "Position": {
-              "x": 975.0,
-              "y": 0.0
-            },
-            "ZIndex": 6.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 2625070231,
-            "InputPins": [
-              {
-                "Text": "SkillCheck.SkillCheckPassed == true",
-                "Id": "0x0100000000000A7C",
-                "Owner": "0x0100000000000A79"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A7D",
-                "Owner": "0x0100000000000A79",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000A8A",
-                    "Target": "0x0100000000000A87"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "Type": "DialogueFragment",
-          "Properties": {
-            "TechnicalName": "DFr_343C88D9",
-            "Id": "0x0100000000000A80",
-            "Parent": "0x0100000000000A5E",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x0100000000000618",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "<align=left>You have failed the skill check.</align>",
-            "ExternalId": "",
-            "Position": {
-              "x": 975.0,
-              "y": 225.0
-            },
-            "ZIndex": 8.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 876382425,
-            "InputPins": [
-              {
-                "Text": "SkillCheck.SkillCheckPassed == false;",
-                "Id": "0x0100000000000A83",
-                "Owner": "0x0100000000000A80"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A84",
-                "Owner": "0x0100000000000A80",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000A8A",
-                    "Target": "0x0100000000000A87"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "Type": "DialogueFragment",
-          "Properties": {
-            "TechnicalName": "DFr_A1926A43",
-            "Id": "0x0100000000000A8D",
-            "Parent": "0x0100000000000A5E",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x0100000000000618",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "<align=left>Ok.</align>",
-            "ExternalId": "",
-            "Position": {
-              "x": 975.0,
-              "y": 475.0
-            },
-            "ZIndex": 13.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 2710727235,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A90",
-                "Owner": "0x0100000000000A8D"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A91",
-                "Owner": "0x0100000000000A8D",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000A8A",
-                    "Target": "0x0100000000000A87"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
           "Type": "Dialogue_Choice_Properties",
           "Properties": {
             "TechnicalName": "DFr_497EF722",
@@ -10593,6 +10593,153 @@
         {
           "Type": "Dialogue_Choice_Properties",
           "Properties": {
+            "TechnicalName": "DFr_0221F96C",
+            "Id": "0x0100000000000A6B",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000010F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.768151164,
+              "g": 0.149959788,
+              "b": 0.002731743
+            },
+            "Text": "<align=left>I am a skill check.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 650.0,
+              "y": 225.0
+            },
+            "ZIndex": 2.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 35780972,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A6E",
+                "Owner": "0x0100000000000A6B"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "SkillCheck.SkillCheckPassed = getProp(self, \"SkillCheckFeature.IsPassed\")",
+                "Id": "0x0100000000000A6F",
+                "Owner": "0x0100000000000A6B",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A7C",
+                    "Target": "0x0100000000000A79"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A83",
+                    "Target": "0x0100000000000A80"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "End_Dialougue_Properties": {
+              "IsDialogueEndPoint": false
+            },
+            "SkillCheckFeature": {
+              "IsSkillCheck": true,
+              "SkillCheckRequirement": 7.0,
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": 1,
+              "IsPassed": false
+            }
+          }
+        },
+        {
+          "Type": "Dialogue_Choice_Properties",
+          "Properties": {
+            "TechnicalName": "DFr_6275C920",
+            "Id": "0x0100000000000A71",
+            "Parent": "0x0100000000000A5E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000010F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.768151164,
+              "g": 0.149959788,
+              "b": 0.002731743
+            },
+            "Text": "<align=left>I am not a skill check.</align>",
+            "ExternalId": "",
+            "Position": {
+              "x": 650.0,
+              "y": 475.0
+            },
+            "ZIndex": 4.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 1651886368,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A74",
+                "Owner": "0x0100000000000A71"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A75",
+                "Owner": "0x0100000000000A71",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000A90",
+                    "Target": "0x0100000000000A8D"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "End_Dialougue_Properties": {
+              "IsDialogueEndPoint": false
+            },
+            "SkillCheckFeature": {
+              "IsSkillCheck": false,
+              "SkillCheckRequirement": 1.0,
+              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
+              "SkillEnum": null,
+              "IsPassed": false
+            }
+          }
+        },
+        {
+          "Type": "Dialogue_Choice_Properties",
+          "Properties": {
             "TechnicalName": "DFr_E919908A",
             "Id": "0x010000000000061D",
             "Parent": "0x010000000000058D",
@@ -10851,7 +10998,7 @@
               "g": 0.149959788,
               "b": 0.002731743
             },
-            "Text": "<align=left>Wait! Don't go! We have so much *nothing* to do! I'm making this longer for the sake of testing. I have a terrible bug in my code.</align>",
+            "Text": "<align=left>Wait! Don't go! We have so much *nothing* to do!</align>",
             "ExternalId": "",
             "Position": {
               "x": 375.0,
@@ -13351,153 +13498,6 @@
           }
         },
         {
-          "Type": "Dialogue_Choice_Properties",
-          "Properties": {
-            "TechnicalName": "DFr_0221F96C",
-            "Id": "0x0100000000000A6B",
-            "Parent": "0x0100000000000A5E",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x010000000000010F",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.768151164,
-              "g": 0.149959788,
-              "b": 0.002731743
-            },
-            "Text": "<align=left>I am a skill check.</align>",
-            "ExternalId": "",
-            "Position": {
-              "x": 650.0,
-              "y": 225.0
-            },
-            "ZIndex": 2.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 35780972,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A6E",
-                "Owner": "0x0100000000000A6B"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "SkillCheck.SkillCheckPassed = getProp(self, \"SkillCheckFeature.IsPassed\")",
-                "Id": "0x0100000000000A6F",
-                "Owner": "0x0100000000000A6B",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000A7C",
-                    "Target": "0x0100000000000A79"
-                  },
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000A83",
-                    "Target": "0x0100000000000A80"
-                  }
-                ]
-              }
-            ]
-          },
-          "Template": {
-            "End_Dialougue_Properties": {
-              "IsDialogueEndPoint": false
-            },
-            "SkillCheckFeature": {
-              "IsSkillCheck": true,
-              "SkillCheckRequirement": 7.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": 1,
-              "IsPassed": false
-            }
-          }
-        },
-        {
-          "Type": "Dialogue_Choice_Properties",
-          "Properties": {
-            "TechnicalName": "DFr_6275C920",
-            "Id": "0x0100000000000A71",
-            "Parent": "0x0100000000000A5E",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x0000000000000000",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.768151164,
-              "g": 0.149959788,
-              "b": 0.002731743
-            },
-            "Text": "<align=left>I am not a skill check.</align>",
-            "ExternalId": "",
-            "Position": {
-              "x": 650.0,
-              "y": 475.0
-            },
-            "ZIndex": 4.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 1651886368,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A74",
-                "Owner": "0x0100000000000A71"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A75",
-                "Owner": "0x0100000000000A71",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000A90",
-                    "Target": "0x0100000000000A8D"
-                  }
-                ]
-              }
-            ]
-          },
-          "Template": {
-            "End_Dialougue_Properties": {
-              "IsDialogueEndPoint": false
-            },
-            "SkillCheckFeature": {
-              "IsSkillCheck": false,
-              "SkillCheckRequirement": 1.0,
-              "SetGlobalSkillCheckVariable": "SkillCheck.CurrentSkillRequirement = getProp(self, \"SkillCheckFeature.SkillCheckRequirement\")",
-              "SkillEnum": null,
-              "IsPassed": false
-            }
-          }
-        },
-        {
           "Type": "Hub",
           "Properties": {
             "TechnicalName": "Hub_094F5069",
@@ -13763,6 +13763,40 @@
         {
           "Type": "Jump",
           "Properties": {
+            "TechnicalName": "Jmp_8C61FC5E",
+            "Id": "0x0100000000000A87",
+            "Parent": "0x0100000000000A5E",
+            "Target": "0x0100000000000A64",
+            "TargetPin": "0x0100000000000A67",
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 1350.0,
+              "y": 375.0
+            },
+            "ZIndex": 10.0,
+            "Size": {
+              "w": 175.0,
+              "h": 150.0
+            },
+            "ShortId": 2355231838,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000A8A",
+                "Owner": "0x0100000000000A87"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Jump",
+          "Properties": {
             "TechnicalName": "Jmp_F3B27E58",
             "Id": "0x01000000000006C1",
             "Parent": "0x0100000000000642",
@@ -13863,40 +13897,6 @@
           }
         },
         {
-          "Type": "Jump",
-          "Properties": {
-            "TechnicalName": "Jmp_8C61FC5E",
-            "Id": "0x0100000000000A87",
-            "Parent": "0x0100000000000A5E",
-            "Target": "0x0100000000000A64",
-            "TargetPin": "0x0100000000000A67",
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "",
-            "ExternalId": "",
-            "Position": {
-              "x": 1350.0,
-              "y": 375.0
-            },
-            "ZIndex": 10.0,
-            "Size": {
-              "w": 175.0,
-              "h": 150.0
-            },
-            "ShortId": 2355231838,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000A8A",
-                "Owner": "0x0100000000000A87"
-              }
-            ]
-          }
-        },
-        {
           "Type": "Condition",
           "Properties": {
             "TechnicalName": "Cnd_ACCD6576",
@@ -13975,52 +13975,6 @@
                     "Target": "0x01000000000003DE"
                   }
                 ]
-              }
-            ]
-          }
-        },
-        {
-          "Type": "Condition",
-          "Properties": {
-            "TechnicalName": "Cnd_2953C70E",
-            "Id": "0x0100000000000B1B",
-            "Parent": "0x0100000000000A5E",
-            "DisplayName": "Untitled condition",
-            "Text": "",
-            "ExternalId": "",
-            "Position": {
-              "x": 700.0,
-              "y": 0.0
-            },
-            "ZIndex": 16.0,
-            "Size": {
-              "w": 225.0,
-              "h": 100.0
-            },
-            "ShortId": 693356302,
-            "Expression": "",
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000B1D",
-                "Owner": "0x0100000000000B1B"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000B1E",
-                "Owner": "0x0100000000000B1B"
-              },
-              {
-                "Text": "",
-                "Id": "0x0100000000000B1F",
-                "Owner": "0x0100000000000B1B"
               }
             ]
           }
@@ -16545,11 +16499,6 @@
                     "Id": "0x0100000000000A71",
                     "TechnicalName": "DFr_6275C920",
                     "Type": "DialogueFragment"
-                  },
-                  {
-                    "Id": "0x0100000000000B1B",
-                    "TechnicalName": "Cnd_2953C70E",
-                    "Type": "Condition"
                   },
                   {
                     "Id": "0x0100000000000A79",

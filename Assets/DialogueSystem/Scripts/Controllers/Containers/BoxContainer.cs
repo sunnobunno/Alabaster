@@ -56,7 +56,7 @@ namespace Alabaster.DialogueSystem.Controllers
             childElement = DialogueElementUtilities.GetChildElement(gameObject);
             canvasGroup = GetComponent<CanvasGroup>();
             childDialogueElementController = DialogueElementUtilities.GetChildDialogueElementController(gameObject);
-            childElement.TryGetComponent<ParallaxElementUI>(out parallaxContainer);
+            //childElement.TryGetComponent<ParallaxElementUI>(out parallaxContainer);
             Debug.Log($"{gameObject.name}: child: {childDialogueElementController.gameObject.name}");
         }
 
@@ -65,6 +65,8 @@ namespace Alabaster.DialogueSystem.Controllers
             (childDialogueElementController as IDialogueElementController<T>).InitializeElement(data);
 
         }
+
+
 
         protected override void SetFields()
         {
@@ -135,6 +137,14 @@ namespace Alabaster.DialogueSystem.Controllers
             //Debug.Log($"{Child.name}: showing");
             canvasGroup.alpha = 1f;
             canvasGroup.blocksRaycasts = true;
+        }
+
+        public void StartTypewriter()
+        {
+            childElement.TryGetComponent<Typewriter>(out Typewriter typewriter);
+            if (typewriter == null) { return; }
+
+            typewriter.StartTypewriter();
         }
     }
 

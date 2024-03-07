@@ -18,6 +18,7 @@ namespace Alabaster.DialogueSystem
 
         public static DialogueUIController Instance { get; private set; }
 
+        [SerializeField] private Animator UIAnimator;
         [SerializeField] private float dialogueWidth;
         [SerializeField] private float screenHeight;
         [SerializeField] private float autoScrollBottomThreshhold = 200f;
@@ -67,7 +68,15 @@ namespace Alabaster.DialogueSystem
         }
 
 
+        public void ActivateDialogue()
+        {
+            UIAnimator.SetBool("Active", true);
+        }
 
+        public void HideDialogue()
+        {
+            UIAnimator.SetBool("Active", false);
+        }
 
         private void ListenSlideInEndSignal()
         {
@@ -136,6 +145,7 @@ namespace Alabaster.DialogueSystem
 
             timeLineContainer.LastElement.Show();
             timeLineContainer.LastElement.SlideInElement();
+            timeLineContainer.LastElement.StartTypewriter();
 
             timeLineContainer.AddContinueBox(aObject);
             timeLineContainer.LastElement.Hide();
@@ -148,6 +158,12 @@ namespace Alabaster.DialogueSystem
                 yield return null;
             }
             timeLineContainer.IsElementSlideDone = false;
+
+            while (!timeLineContainer.IsTypewriterDone)
+            {
+                yield return null;
+            }
+            timeLineContainer.IsTypewriterDone = false;
 
             timeLineContainer.LastElement.Show();
         }
@@ -175,6 +191,7 @@ namespace Alabaster.DialogueSystem
 
             timeLineContainer.LastElement.Show();
             timeLineContainer.LastElement.SlideInElement();
+            timeLineContainer.LastElement.StartTypewriter();
 
             timeLineContainer.AddChoiceList(aObject);
             timeLineContainer.LastElement.Hide();
@@ -187,6 +204,12 @@ namespace Alabaster.DialogueSystem
                 yield return null;
             }
             timeLineContainer.IsElementSlideDone = false;
+
+            while (!timeLineContainer.IsTypewriterDone)
+            {
+                yield return null;
+            }
+            timeLineContainer.IsTypewriterDone = false;
 
             timeLineContainer.LastElement.Show();
         }

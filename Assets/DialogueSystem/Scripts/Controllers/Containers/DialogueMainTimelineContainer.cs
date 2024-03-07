@@ -43,6 +43,7 @@ namespace Alabaster.DialogueSystem.Controllers
         public BoxContainer LastElement { get => dialogueElementList.Last(); }
         public float EaseInSpeed { get => easeInSpeed; }
         public float AutoScrollSpeed { get => autoScrollSpeed; }
+        public bool IsTypewriterDone { get => isTypewriterDone; set => isTypewriterDone = value; }
         #endregion
 
 
@@ -57,6 +58,7 @@ namespace Alabaster.DialogueSystem.Controllers
         private float autoScrollSpeed = 0.5f;
         private string lastTitle = "";
         private Branch currentBranch;
+        private bool isTypewriterDone = false;
 
 
 
@@ -96,6 +98,7 @@ namespace Alabaster.DialogueSystem.Controllers
             ChoiceListContainerController.SendClickedSignal += ListenResponseSignal;
             BoxContainer.SendSlideInEndSignal += ListenSlideInEndSignal;
             SkillCheckInfoController.SendPassedSignal += ListenSkillCheckSignal;
+            Typewriter.SendTypewriterEndSignal += ListenTypewriterEndSignal;
         }
 
         private void OnDisable()
@@ -104,6 +107,7 @@ namespace Alabaster.DialogueSystem.Controllers
             ChoiceListContainerController.SendClickedSignal -= ListenResponseSignal;
             BoxContainer.SendSlideInEndSignal -= ListenSlideInEndSignal;
             SkillCheckInfoController.SendPassedSignal += ListenSkillCheckSignal;
+            Typewriter.SendTypewriterEndSignal -= ListenTypewriterEndSignal;
         }
 
 
@@ -172,6 +176,12 @@ namespace Alabaster.DialogueSystem.Controllers
             //Debug.Log("SlideInEndSignal Recieved");
             slideInEndSignalRecieved = true;
             SendSlideInEndSignal?.Invoke();
+        }
+
+
+        private void ListenTypewriterEndSignal()
+        {
+            isTypewriterDone = true;
         }
 
 
