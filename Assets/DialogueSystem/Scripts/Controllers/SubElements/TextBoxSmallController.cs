@@ -4,9 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using Alabaster.DialogueSystem.Utilities;
-using UnityEditor.Build.Content;
-using Unity.VisualScripting;
 
 namespace Alabaster.DialogueSystem.Controllers
 {

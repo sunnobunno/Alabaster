@@ -31,7 +31,7 @@ namespace Alabaster.DialogueSystem
 
         public void InitializeVoicebox()
         {
-            Debug.Log(textMesh.GetParsedText());
+            //Debug.Log(textMesh.GetParsedText());
             phonemeScript = GeneratePhonemeScript(textMesh.GetParsedText());
         }
 
@@ -46,7 +46,7 @@ namespace Alabaster.DialogueSystem
         private void SpeakPhoneme(int index)
         {
             var phoneme = Char.ToLower(phonemeScript[index]);
-            Debug.Log(phoneme);
+            //Debug.Log(phoneme);
 
             var audioClip = GetAudioPhoneme(phoneme);
 
