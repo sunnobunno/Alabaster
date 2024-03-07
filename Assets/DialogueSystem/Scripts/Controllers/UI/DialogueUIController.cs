@@ -145,6 +145,7 @@ namespace Alabaster.DialogueSystem
 
             timeLineContainer.LastElement.Show();
             timeLineContainer.LastElement.SlideInElement();
+            timeLineContainer.LastElement.StartTypewriter();
 
             timeLineContainer.AddContinueBox(aObject);
             timeLineContainer.LastElement.Hide();
@@ -157,6 +158,12 @@ namespace Alabaster.DialogueSystem
                 yield return null;
             }
             timeLineContainer.IsElementSlideDone = false;
+
+            while (!timeLineContainer.IsTypewriterDone)
+            {
+                yield return null;
+            }
+            timeLineContainer.IsTypewriterDone = false;
 
             timeLineContainer.LastElement.Show();
         }
@@ -184,6 +191,7 @@ namespace Alabaster.DialogueSystem
 
             timeLineContainer.LastElement.Show();
             timeLineContainer.LastElement.SlideInElement();
+            timeLineContainer.LastElement.StartTypewriter();
 
             timeLineContainer.AddChoiceList(aObject);
             timeLineContainer.LastElement.Hide();
@@ -196,6 +204,12 @@ namespace Alabaster.DialogueSystem
                 yield return null;
             }
             timeLineContainer.IsElementSlideDone = false;
+
+            while (!timeLineContainer.IsTypewriterDone)
+            {
+                yield return null;
+            }
+            timeLineContainer.IsTypewriterDone = false;
 
             timeLineContainer.LastElement.Show();
         }
