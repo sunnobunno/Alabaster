@@ -204,24 +204,3 @@ namespace Alabaster.DialogueSystem.Controllers
         }
     }
 }
-
-
-[CustomEditor(typeof(ChoiceBoxController))]
-public class ResponseChoiceBoxController02Editor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        var selection = Selection.activeGameObject.GetComponent<ChoiceBoxController>();
-
-        if (GUILayout.Button("Resize Box"))
-        {
-            selection.ResizeElement();
-        }
-        if (GUILayout.Button("Initialize"))
-        {
-            selection.InitializeElement(selection.TestArticyRef.GetObject());
-        }
-    }
-}

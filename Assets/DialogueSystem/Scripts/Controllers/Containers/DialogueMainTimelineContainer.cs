@@ -358,40 +358,6 @@ namespace Alabaster.DialogueSystem.Controllers
             rectTransform.localPosition += scrollDelta;
         }
     }
-
-
-
-
-    [CustomEditor(typeof(DialogueMainTimelineContainer))]
-    public class DialogueContainerControllerEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            var selection = Selection.activeGameObject.GetComponent<DialogueMainTimelineContainer>();
-
-            DrawDefaultInspector();
-
-            if (GUILayout.Button("Add Dialogue Box"))
-            {
-                selection.AddDialogueElement(selection.DialogueBoxPrefab, selection.TestArticyRef.GetObject());
-            }
-
-            if (GUILayout.Button("Add Continue Box"))
-            {
-                selection.AddDialogueElement(selection.ContinueBoxPrefab, selection.TestArticyRef.GetObject());
-            }
-
-            if (GUILayout.Button("Add Response List"))
-            {
-                selection.AddDialogueElement(selection.ResponseListContainerPrefab, selection.TestArticyRef.GetObject());
-            }
-
-            //if (GUILayout.Button("Test"))
-            //{
-            //    Selection.activeGameObject.GetComponent<DialogueContainerController02>().AddDialogueElement(DialogueContainerController02.Instance.DialogueBoxPrefab, DialogueContainerController02.Instance.TestArticyRef.GetObject(), true);
-            //}
-        }
-    }
 }
 
 

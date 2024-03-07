@@ -208,19 +208,4 @@ namespace Alabaster.DialogueSystem
             return currentObjectIsChoice;
         }
     }
-
-    [CustomEditor(typeof(DialogueLogicController))]
-    public class DialogueLogicControllerEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-
-            if (GUILayout.Button("Start Dialogue"))
-            {
-                Selection.activeGameObject.GetComponent<DialogueLogicController>().StartDialogue(DialogueLogicController.Instance.TestArticyRef);
-            }
-        }
-    }
-
 }

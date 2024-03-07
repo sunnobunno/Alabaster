@@ -143,18 +143,6 @@ namespace Alabaster.EnvironmentSystem
         //}
     }
 
-    [CustomEditor(typeof(ParallaxElementUI))]
-    public class ParallaxElementUIEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
 
-            if (GUILayout.Button("Resize"))
-            {
-                Selection.activeGameObject.GetComponent<ParallaxElementUI>().ResizeElement();
-            }
-        }
-    }
 }
 

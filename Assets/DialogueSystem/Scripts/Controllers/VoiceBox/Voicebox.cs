@@ -91,7 +91,7 @@ namespace Alabaster.DialogueSystem
                 case 'p':
                     return voicePalette.p;
                 case 'q':
-                    return voicePalette.g;
+                    return voicePalette.q;
                 case 'r':
                     return voicePalette.r;
                 case 's':
@@ -148,21 +148,7 @@ namespace Alabaster.DialogueSystem
         }
     }
 
-    [CustomEditor(typeof(Voicebox))]
-    public class VoiceboxEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
 
-            var selection = Selection.activeGameObject.GetComponent<Voicebox>();
-
-            if (GUILayout.Button("Initialize Voicebox"))
-            {
-                selection.InitializeVoicebox();
-            }
-        }
-    }
 }
 
 

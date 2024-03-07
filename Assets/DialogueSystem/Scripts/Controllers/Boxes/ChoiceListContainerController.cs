@@ -146,23 +146,5 @@ namespace Alabaster.DialogueSystem.Controllers
             
         }
     }
-
-    [CustomEditor(typeof(ChoiceListContainerController))]
-    public class ResponseListContainerController02Editor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-
-            if (GUILayout.Button("Resize Box"))
-            {
-                Selection.activeGameObject.GetComponent<ChoiceListContainerController>().ResizeElement();
-            }
-            if (GUILayout.Button("Initialize Element"))
-            {
-                Selection.activeGameObject.GetComponent<ChoiceListContainerController>().InitializeElement(Selection.activeGameObject.GetComponent<ChoiceListContainerController>().TestArticyRef.GetObject());
-            }
-        }
-    }
 }
 

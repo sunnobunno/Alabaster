@@ -225,25 +225,6 @@ namespace Alabaster.DialogueSystem
         }
     }
 
-    [CustomEditor(typeof(SkillCheckInfoController))]
-    public class SkillCheckInfoControllerEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-
-            var selection = Selection.activeGameObject;
-            var controller = selection.GetComponent<SkillCheckInfoController>();
-
-            if (GUILayout.Button("Roll Dice"))
-            {
-                controller.RollDice();
-            }
-            if (GUILayout.Button("Initialize"))
-            {
-                controller.InitializeElement(controller.ArticyRef.GetObject());
-            }
-        }
-    }
+    
 }
 

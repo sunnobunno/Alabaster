@@ -79,21 +79,7 @@ namespace Alabaster.DialogueSystem.Controllers
         }
     }
 
-    [CustomEditor(typeof(SimpleTextBoxController))]
-    public class SimpleTextBoxControllerEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-
-            var selection = Selection.activeGameObject.GetComponent<ContentBoxController>();
-
-            if (GUILayout.Button("Resize Box"))
-            {
-                selection.ResizeElement();
-            }
-        }
-    }
+    
 }
 
 

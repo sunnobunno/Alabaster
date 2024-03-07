@@ -170,19 +170,7 @@ namespace Alabaster.DialogueSystem.Controllers
         }
     }
 
-    [CustomEditor(typeof(TextBoxLargeController))]
-    public class BoxBackgroundControllerEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
 
-            if (GUILayout.Button("Resize Box"))
-            {
-                Selection.activeGameObject.GetComponent<TextBoxLargeController>().ResizeElement();
-            }
-        }
-    }
 }
 
 
