@@ -16,7 +16,7 @@ TagManager:
   - Parallax0
   - Parallax1
   - Parallax2
-  - 
+  - Distort
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: DialogueSystem
     uniqueID: 2157428281
+    locked: 0
+  - name: DistortLayer
+    uniqueID: 3985505977
     locked: 0
