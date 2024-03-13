@@ -39,14 +39,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _Density: 2
-    - _Distort_Maximum: 0.9
+    - _Distort_Maximum: 0.8
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 500
+    - _Scale: 50
     m_Colors:
     - _Offset_Speed: {r: 0.1, g: 0.1, b: 0, a: 0}
-    - _Position_Adjustment: {r: 0, g: 0, b: 0, a: 0}
-    - _Scale_Adjustment: {r: 1, g: 1, b: 0, a: 0}
+    - _Position_Adjustment: {r: 0.02, g: -13.53, b: 0, a: 0}
+    - _Scale_Adjustment: {r: 1.1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1116573985873057576
 MonoBehaviour:
