@@ -27,6 +27,7 @@ namespace Alabaster.EnvironmentSystem
             if (Input.GetMouseButtonDown(0))
             {
                 UpdateCameraToScreenRay();
+                DebugCameraToScreenRay();
 
                 RaycastHit2D hit2D = GetHit();
                 if (hit2D.collider != null)
@@ -37,6 +38,18 @@ namespace Alabaster.EnvironmentSystem
 
                     if (objectController != null) objectController.Clicked();
                     else Debug.Log($"{gameObject.name}: No IClickableObject interface implemented");
+                }
+
+                RaycastHit hit3D;
+
+                if (Physics.Raycast(cameraToScreenRay, out hit3D))
+                {
+                    GameObject gameObject = hit3D.collider.gameObject;
+                    Debug.Log(gameObject.name);
+
+                    
+                    _ = gameObject.TryGetComponent(out Outline outline);
+                    if (outline != null) { outline.OutlineWidth = 10; }
                 }
             }
         }
@@ -52,7 +65,7 @@ namespace Alabaster.EnvironmentSystem
 
         private void DebugCameraToScreenRay()
         {
-            var direction = cameraToScreenRay.direction * 20f;
+            var direction = cameraToScreenRay.direction * 100f;
             Debug.DrawRay(cameraToScreenRay.origin, direction, Color.yellow, 1f);
         }
 
